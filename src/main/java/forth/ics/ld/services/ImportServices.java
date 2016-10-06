@@ -6,7 +6,6 @@
 package forth.ics.ld.services;
 
 import forth.ics.blazegraphutils.BlazegraphRepRestful;
-import forth.ics.blazegraphutils.Utils;
 import forth.ics.ld.utils.PropertiesManager;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,7 +63,6 @@ public class ImportServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response importFilePOSTJSON(String jsonInput) throws ParseException, IOException {
-
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
         String jsonResult;
@@ -78,11 +76,9 @@ public class ImportServices {
             String filename = (String) jsonObject.get("filename");
             String format = (String) jsonObject.get("format");
             String graph = (String) jsonObject.get("graph");
-            String tripleStoreUrl = propertiesManager.getTripleStoreUrl();
             String tripleStoreNamespace = propertiesManager.getTripleStoreNamespace();
-            BlazegraphRepRestful blaze = new BlazegraphRepRestful(tripleStoreUrl);
             System.out.println(jsonObject.toString());
-            Response result = blaze.importFile(filename, format, tripleStoreNamespace, graph);
+            Response result = blazegraphRepRestful.importFile(filename, format, tripleStoreNamespace, graph);
             status = result.getStatus();
             String resText = result.readEntity(String.class);
             String msg = "";
@@ -120,7 +116,7 @@ public class ImportServices {
                 contentType, // Content type (i.e. application/rdf+xml)
                 namespace, // Namespace
                 namegraph); // NameGraph
-        return Response.status(200).entity(tripleStoreResponse.readEntity(String.class)).build();
+        return Response.status(tripleStoreResponse.getStatus()).entity(tripleStoreResponse.readEntity(String.class)).build();
     }
 
 }
