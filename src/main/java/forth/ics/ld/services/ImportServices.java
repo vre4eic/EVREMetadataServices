@@ -8,15 +8,23 @@ package forth.ics.ld.services;
 import forth.ics.blazegraphutils.BlazegraphRepRestful;
 import forth.ics.blazegraphutils.Utils;
 import forth.ics.ld.utils.PropertiesManager;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.http.client.ClientProtocolException;
 import org.json.XML;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -33,11 +41,17 @@ public class ImportServices {
     @Context
     private UriInfo context;
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
+    private BlazegraphRepRestful blazegraphRepRestful;
 
     /**
      * Creates a new instance of ImportServices
      */
     public ImportServices() {
+    }
+
+    @PostConstruct
+    public void initialize() {
+        blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
     }
 
     /**
@@ -50,7 +64,7 @@ public class ImportServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response importFilePOSTJSON(String jsonInput) throws ParseException, IOException {
-        
+
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
         String jsonResult;
@@ -85,4 +99,28 @@ public class ImportServices {
         }
         return Response.status(status).entity(jsonResult).header("Access-Control-Allow-Origin", "*").build();
     }
+
+    @POST
+    @Path("/namespace/{namespace}")
+    //@Consumes("application/rdf+xml")//RDFFormat.RDFXML//{MediaType.MULTIPART_FORM_DATA //application/rdf+xml
+    public Response uploadFileWithData(InputStream incomingData,
+            @PathParam("namespace") String namespace,
+            @QueryParam("namegraph") String namegraph,
+            @HeaderParam("content-type") String contentType) throws ClientProtocolException, IOException {
+
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+        String line = null;
+        while ((line = in.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        // Triplestore Stuff
+        Response tripleStoreResponse = blazegraphRepRestful.importDataString(
+                stringBuilder.toString(), // String with RDF's content
+                contentType, // Content type (i.e. application/rdf+xml)
+                namespace, // Namespace
+                namegraph); // NameGraph
+        return Response.status(200).entity(tripleStoreResponse.readEntity(String.class)).build();
+    }
+
 }
