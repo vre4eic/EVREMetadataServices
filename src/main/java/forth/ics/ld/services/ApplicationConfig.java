@@ -32,6 +32,7 @@ public class ApplicationConfig extends Application {
         resources.add(forth.ics.ld.services.ExportServices.class);
         resources.add(forth.ics.ld.services.ImportServices.class);
         resources.add(forth.ics.ld.services.QueryServices.class);
+        resources.add(forth.ics.ld.services.UpdateServices.class);
     }
     
 }

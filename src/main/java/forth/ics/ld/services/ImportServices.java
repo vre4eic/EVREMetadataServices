@@ -32,7 +32,6 @@ public class ImportServices {
 
     @Context
     private UriInfo context;
-
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
 
     /**
