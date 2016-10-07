@@ -5,10 +5,11 @@
  */
 package forth.ics.ld.clients;
 
-import java.net.URLEncoder;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 
@@ -37,7 +38,7 @@ public class UpdateTest {
     }
 
     public Response updateExecPOSTJSON(String requestEntity) throws ClientErrorException {
-        return webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON), Response.class);
+        return webTarget.request(MediaType.TEXT_HTML).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
 
     public void close() {
@@ -48,10 +49,10 @@ public class UpdateTest {
         String baseURI = "http://localhost:8181/ld-services";
 
         UpdateTest test = new UpdateTest(baseURI);
-        String query = "insert data {graph <http://test> {<http://a2> <http://p2> <http://b2>.} }";
+        String query = "insert data {graph <http://test> {<http://a3> <http://p3> <http://b3>.} }";
         JSONObject json = new JSONObject();
         json.put("query", query);
-        Response resp = test.updateExecPOSTJSON(query);
+        Response resp = test.updateExecPOSTJSON(json.toJSONString());
         System.out.println(resp.readEntity(String.class));
         System.out.println(resp.getStatus());
         test.close();

@@ -39,7 +39,7 @@ public class ImportServices {
 
     @Context
     private UriInfo context;
-    PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
+    private PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
     private BlazegraphRepRestful blazegraphRepRestful;
 
     /**

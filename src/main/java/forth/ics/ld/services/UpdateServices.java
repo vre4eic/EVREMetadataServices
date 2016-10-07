@@ -9,6 +9,7 @@ import forth.ics.blazegraphutils.BlazegraphRepRestful;
 import forth.ics.ld.utils.PropertiesManager;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -33,12 +34,18 @@ public class UpdateServices {
 
     @Context
     private UriInfo context;
-    PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
+    private PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
+    private BlazegraphRepRestful blazegraphRepRestful;
 
     /**
      * Creates a new instance of UpdateClasses
      */
     public UpdateServices() {
+    }
+
+    @PostConstruct
+    public void initialize() {
+        blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
     }
 
     @POST
@@ -59,10 +66,8 @@ public class UpdateServices {
     }
 
     private Response updateExecBlazegraph(String q) throws IOException, UnsupportedEncodingException {
-        String tripleStoreUrl = propertiesManager.getTripleStoreUrl();
         String tripleStoreNamespace = propertiesManager.getTripleStoreNamespace();
-        BlazegraphRepRestful blaze = new BlazegraphRepRestful(tripleStoreUrl);
-        Response resp = blaze.executeUpdateSparqlQuery(q, tripleStoreNamespace);
+        Response resp = blazegraphRepRestful.executeUpdateSparqlQuery(q, tripleStoreNamespace);
         return Response.status(resp.getStatus()).entity(resp.readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
     }
 }
