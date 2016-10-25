@@ -41,6 +41,7 @@ public class ImportServices {
     private UriInfo context;
     private PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
     private BlazegraphRepRestful blazegraphRepRestful;
+    String namespace = propertiesManager.getTripleStoreNamespace();
 
     /**
      * Creates a new instance of ImportServices
@@ -96,14 +97,83 @@ public class ImportServices {
         return Response.status(status).entity(jsonResult).header("Access-Control-Allow-Origin", "*").build();
     }
 
+    /**
+     * <b>POST</b> service which imports an RDF data String with a given format
+     * in a specific namedgraph. The namedgraph will be created in a default
+     * namespace which is defined in a configuration file. <br>
+     * <b>URL:</b>
+     * /ld-services/import?graph={graph}
+     *
+     * @param incomingData The String object which contains the RDF data to be
+     * imported.
+     * @param graph The named graph URI in which the data will be inserted.
+     * @param contentType The mimetype of the data contained in the data String.
+     * Supported formats are:
+     * <ul>
+     * <li><b>application/rdf+xml</b>: rdf, rdfs, owl, xml data</li>
+     * <li><b>text/plain</b>: nt triples</li>
+     * <li><b>application/x-turtle</b>: ttl triples </li>
+     * <li>etc.</li>
+     * </ul>
+     * The complete list with the accepted mimetypes can be found in
+     * <a href="https://wiki.blazegraph.com/wiki/index.php/REST_API#MIME_Types">https://wiki.blazegraph.com/wiki/index.php/REST_API#MIME_Types</a>.
+     * @return A response from the service which denotes whether the data were
+     * imported or not.
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
+    @POST
+    public Response importFileContentsPOSTJSON(InputStream incomingData,
+            @QueryParam("graph") String graph,
+            @HeaderParam("content-type") String contentType) throws ClientProtocolException, IOException {
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
+        String line = null;
+        while ((line = in.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        // Triplestore Stuff
+        Response tripleStoreResponse = blazegraphRepRestful.importDataString(
+                stringBuilder.toString(), // String with RDF's content
+                contentType, // Content type (i.e. application/rdf+xml)
+                this.namespace, // Namespace
+                graph); // NameGraph
+        return tripleStoreResponse;
+    }
+
+    /**
+     * <b>POST</b> service which imports an RDF data String with a given format
+     * in a specific namedgraph. The namedgraph will be created in an
+     * <b>existing</b> namespace which is given as a path parameter. <br>
+     * <b>URL:</b>
+     * /ld-services/import?graph={graph}
+     *
+     * @param namespace Path parameter which denotes the namespace in which the
+     * namedgraph with the inserted data will be created.
+     * @param incomingData The String object which contains the RDF data to be
+     * imported.
+     * @param graph The named graph URI in which the data will be inserted.
+     * @param contentType The mimetype of the data contained in the data String.
+     * Supported formats are:
+     * <ul>
+     * <li><b>application/rdf+xml</b>: rdf, rdfs, owl, xml data</li>
+     * <li><b>text/plain</b>: nt triples</li>
+     * <li><b>application/x-turtle</b>: ttl triples </li>
+     * <li>etc.</li>
+     * </ul>
+     * The complete list with the accepted mimetypes can be found in
+     * <a href="https://wiki.blazegraph.com/wiki/index.php/REST_API#MIME_Types">https://wiki.blazegraph.com/wiki/index.php/REST_API#MIME_Types</a>.
+     * @return A response from the service which denotes whether the data were
+     * imported or not.
+     * @throws ClientProtocolException
+     * @throws IOException
+     */
     @POST
     @Path("/namespace/{namespace}")
-    //@Consumes("application/rdf+xml")//RDFFormat.RDFXML//{MediaType.MULTIPART_FORM_DATA //application/rdf+xml
-    public Response uploadFileWithData(InputStream incomingData,
+    public Response importFileContentsPOSTJSONWithNS(InputStream incomingData,
             @PathParam("namespace") String namespace,
-            @QueryParam("namegraph") String namegraph,
+            @QueryParam("graph") String graph,
             @HeaderParam("content-type") String contentType) throws ClientProtocolException, IOException {
-
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
         String line = null;
@@ -115,8 +185,8 @@ public class ImportServices {
                 stringBuilder.toString(), // String with RDF's content
                 contentType, // Content type (i.e. application/rdf+xml)
                 namespace, // Namespace
-                namegraph); // NameGraph
-        return Response.status(tripleStoreResponse.getStatus()).entity(tripleStoreResponse.readEntity(String.class)).build();
+                graph); // NameGraph
+        return tripleStoreResponse;
     }
 
 }

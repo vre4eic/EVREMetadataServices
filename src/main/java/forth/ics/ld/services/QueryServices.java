@@ -53,38 +53,83 @@ public class QueryServices {
     }
 
     /**
-     * Retrieves representation of an instance of
-     * forth.ics.ld.services.QueryServices
+     * <b>GET</b> service which executes a SPARQL query and returns the results
+     * in various formats. The query is applied on a default namespace defined
+     * in the configuration file. <br>
+     * <b>URL:</b> /ld-services/query?query={query1}&format={format1}
      *
-     * @param q
-     * @return an instance of java.lang.String
+     * @param query Query parameter which has a string value representing the
+     * SPARQL query which will be applied.
+     * @param format Query parameter which refers on the requested
+     * mimetype-format of the results. The formats which are supported are:
+     * <b>text/csv</b>,
+     * <b>application/json</b>, <b>text/tab-separated-values</b>,
+     * <b>application/sparql-results+xml.</b>
+     * @return A Response instance which has an entity content with the query
+     * results and the required format. <br>
      */
     @GET
     public Response queryExecGETJSON(
-            @QueryParam("query") String q,
-            @DefaultValue("application/json") @QueryParam("format") String f) throws IOException {
-        String jsonMessage;
-        if (f == null) {
-            String message = "Error in the provided format.";
-            jsonMessage = "{ \"success\" : false, "
-                    + "\"result\" : \"" + message + "\" }";
-            return Response.status(500).entity(jsonMessage).header("Access-Control-Allow-Origin", "*").build();
-        } else {
-            return queryExecBlazegraph(f, q);
-        }
+            @DefaultValue("application/json") @QueryParam("format") String f,
+            @QueryParam("query") String q) throws IOException {
+        return queryExecBlazegraph(f, q, this.namespace);
     }
 
+    /**
+     * <b>GET</b> service which executes a SPARQL query and returns the results
+     * in various formats. The query is applied on a namespace provided as a
+     * path parameter. <br>
+     * <b>URL:</b>
+     * /ld-services/query/namespace/{namespace}?query={query1}&format={format1}
+     *
+     * @param namespace Path parameter which denotes the namespace in which the
+     * query will be applied.
+     * @param format Query parameter which refers on the requested
+     * mimetype-format of the results. The formats which are supported are:
+     * <b>text/csv</b>,
+     * <b>application/json</b>, <b>text/tab-separated-values</b>,
+     * <b>application/sparql-results+xml.</b>
+     * @param query Query parameter which has a string value representing the
+     * SPARQL query which will be applied.
+     * @return A Response instance which has an entity content with the query
+     * results and the required format. <br>
+     */
     @GET
     @Path("/namespace/{namespace}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getSparqlQueryResults(
+    public Response getSparqlQueryResults(
             @PathParam("namespace") String namespace,
             @DefaultValue("application/json") @QueryParam("format") String format,
             @QueryParam("query") String query) throws UnsupportedEncodingException {
-        String output = blazegraphRepRestful.executeSparqlQuery(query, namespace, format);
-        return output;
+        return blazegraphRepRestful.executeSparqlQuery(query, namespace, format);
     }
 
+    /**
+     * <b>POST</b> service which executes a SPARQL query and returns the results
+     * in various formats. The query is applied on a default namespace defined
+     * in the configuration file. <br>
+     * <b>URL:</b>
+     * /ld-services/query
+     *
+     * @param jsonInput A JSON-encoded string which has the following form: <br>
+     * { <br>
+     * "query" : "select ?s ?p ...", <br>
+     * "format" : "text/csv" <br>
+     * } <br>
+     * where
+     * <ul>
+     * <li>query - A string which represents the SPARQL query which will be
+     * applied.<br>
+     * <li>format - The format(MIME type) of the query results. <b>text/csv</b>,
+     * <b>application/json</b>, <b>text/tab-separated-values</b>,
+     * <b>application/sparql-results+xml.</b>
+     * </ul>
+     * @return A Response instance which has a JSON-encoded entity content with
+     * the query results in the requested format. We discriminate the following
+     * cases: <br>
+     * @return A Response instance which has an entity content with the query
+     * results and the required format. <br>
+     */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response queryExecPOSTJSON(String jsonInput) throws IOException, ParseException {
@@ -98,12 +143,58 @@ public class QueryServices {
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, q);
+            return queryExecBlazegraph(f, q, this.namespace);
         }
     }
 
-    private Response queryExecBlazegraph(String f, String q) throws IOException, UnsupportedEncodingException {
-        String tripleStoreNamespace = propertiesManager.getTripleStoreNamespace();
+    /**
+     * <b>POST</b> service which executes a SPARQL query and returns the results
+     * in various formats. The query is applied on a namespace provided as a
+     * path parameter. <br>
+     * <b>URL:</b>
+     * /ld-services/query/namespace/{namespace}
+     *
+     * @param namespace Path parameter which denotes the namespace in which the
+     * query will be applied.
+     * @param jsonInput A JSON-encoded string which has the following form: <br>
+     * { <br>
+     * "query" : "select ?s ?p ...", <br>
+     * "format" : "text/csv" <br>
+     * } <br>
+     * where
+     * <ul>
+     * <li>query - A string which represents the SPARQL query which will be
+     * applied.<br>
+     * <li>format - The format(MIME type) of the query results. <b>text/csv</b>,
+     * <b>application/json</b>, <b>text/tab-separated-values</b>,
+     * <b>application/sparql-results+xml.</b>
+     * </ul>
+     * @return A Response instance which has a JSON-encoded entity content with
+     * the query results in the requested format. We discriminate the following
+     * cases: <br>
+     * @return A Response instance which has an entity content with the query
+     * results and the required format. <br>
+     */
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/namespace/{namespace}")
+    public Response queryExecPOSTJSONWithNS(String jsonInput,
+            @PathParam("namespace") String namespace) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
+        if (jsonObject.size() != 2) {
+            String message = "JSON input message should have exactly 2 arguments.";
+            String json = "{ \"success\" : false, "
+                    + "\"message\" : \"" + message + "\" }";
+            return Response.status(400).entity(json).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            String q = (String) jsonObject.get("query");
+            String f = (String) jsonObject.get("format");
+            return queryExecBlazegraph(f, q, namespace);
+        }
+    }
+
+    private Response queryExecBlazegraph(String f, String q, String namespace) throws IOException, UnsupportedEncodingException {
         String jsonMessage;
         if (f == null) {
             String message = "Error in the provided format.";
@@ -111,7 +202,7 @@ public class QueryServices {
                     + "\"result\" : \"" + message + "\" }";
             return Response.status(500).entity(jsonMessage).header("Access-Control-Allow-Origin", "*").build();
         } else {
-            return Response.status(200).entity(blazegraphRepRestful.executeSparqlQuery(q, tripleStoreNamespace, f)).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(200).entity(blazegraphRepRestful.executeSparqlQuery(q, namespace, f)).header("Access-Control-Allow-Origin", "*").build();
         }
     }
 }
