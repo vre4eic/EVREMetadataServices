@@ -8,8 +8,10 @@ package eu.vre4eic.evre.metadata.services;
 import eu.vre4eic.evre.blazegraph.BlazegraphRepRestful;
 import eu.vre4eic.evre.core.Common.MetadataOperationType;
 import eu.vre4eic.evre.core.Common.ResponseStatus;
+import eu.vre4eic.evre.core.comm.Publisher;
+import eu.vre4eic.evre.core.comm.PublisherFactory;
+import eu.vre4eic.evre.core.messages.MetadataMessage;
 import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
-import eu.vre4eic.evre.metadata.utils.Authorization;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
 import java.io.IOException;
@@ -48,6 +50,7 @@ public class QueryServices {
     private HttpServletRequest requestContext;
     private BlazegraphRepRestful blazegraphRepRestful;
     private AuthModule module;
+    private Publisher<MetadataMessage> mdp;
 
     /**
      * Creates a new instance of QueryServices
@@ -59,6 +62,7 @@ public class QueryServices {
     public void initialize() {
         blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
         module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+        mdp = PublisherFactory.getMetatdaPublisher();
     }
 
     /**
@@ -80,8 +84,9 @@ public class QueryServices {
     @GET
     public Response queryExecGETJSON(
             @DefaultValue("application/json") @QueryParam("format") String f,
-            @QueryParam("query") String q) throws IOException {
-        return queryExecBlazegraph(q, namespace, f);
+            @QueryParam("query") String q,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException {
+        return queryExecBlazegraph(q, namespace, f, token);
     }
 
     /**
@@ -109,8 +114,9 @@ public class QueryServices {
     public Response queryExecGETJSONWithNS(
             @PathParam("namespace") String namespace,
             @DefaultValue("application/json") @QueryParam("format") String format,
-            @QueryParam("query") String query) throws UnsupportedEncodingException, IOException {
-        return queryExecBlazegraph(format, query, namespace);
+            @QueryParam("query") String query,
+            @DefaultValue("") @QueryParam("token") String token) throws UnsupportedEncodingException, IOException {
+        return queryExecBlazegraph(format, query, namespace, token);
     }
 
     /**
@@ -138,7 +144,8 @@ public class QueryServices {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response queryExecPOSTJSON(String jsonInput) throws IOException, ParseException {
+    public Response queryExecPOSTJSON(String jsonInput,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
         if (jsonObject.size() != 2) {
@@ -149,7 +156,7 @@ public class QueryServices {
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, q, this.namespace);
+            return queryExecBlazegraph(f, q, this.namespace, token);
         }
     }
 
@@ -182,7 +189,8 @@ public class QueryServices {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/namespace/{namespace}")
     public Response queryExecPOSTJSONWithNS(String jsonInput,
-            @PathParam("namespace") String namespace) throws IOException, ParseException {
+            @PathParam("namespace") String namespace,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
         if (jsonObject.size() != 2) {
@@ -193,21 +201,25 @@ public class QueryServices {
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, q, namespace);
+            return queryExecBlazegraph(f, q, namespace, token);
         }
     }
 
-    private Response queryExecBlazegraph(String f, String q, String namespace) throws IOException, UnsupportedEncodingException {
-        String token = requestContext.getHeader("Authorization");
-        Response resp = Authorization.checkAuthorization(module, token);
-        if (resp != null) {
-            return resp;
+    private Response queryExecBlazegraph(String f, String q, String namespace, String token) throws IOException, UnsupportedEncodingException {
+        String authToken = requestContext.getHeader("Authorization");
+        if (authToken == null) {
+            authToken = token;
         }
+        boolean isTokenValid = module.checkToken(authToken);
         int statusInt;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.QUERY);
-        message.setToken(token);
-        if (f == null) {
+        message.setToken(authToken);
+        if (!isTokenValid) {
+            message.setMessage("User not authenticated!");
+            message.setStatus(ResponseStatus.FAILED);
+            statusInt = 401;
+        } else if (f == null) {
             message.setMessage("Error in the provided format.");
             message.setStatus(ResponseStatus.FAILED);
             statusInt = 500;
@@ -217,6 +229,7 @@ public class QueryServices {
             message.setStatus(ResponseStatus.SUCCEED);
             statusInt = 200;
         }
-        return Response.status(statusInt).entity(message.toJSON().toString()).header("Access-Control-Allow-Origin", "*").build();
+        mdp.publish(message);
+        return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
     }
 }
