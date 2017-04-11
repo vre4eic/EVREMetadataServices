@@ -80,8 +80,8 @@ public class QueryTest {
     }
 
     public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
-        String baseURI = "http://83.212.97.61:8080/ld-services-2.0-SNAPSHOT";
-        baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+        String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         QueryTest test = new QueryTest(baseURI);
         String query = "select * where {?s ?p ?o} limit 10";
         String query2 = "SELECT * WHERE {{ ?s ?p ?o . ?s rdfs:label ?o. ?o bds:search 'Quadrelli' . }}";
@@ -95,10 +95,7 @@ public class QueryTest {
 //        System.out.println(test.queryExecGETJSON(query, "application/json"));
 //        System.out.println(test.queryExecPOSTJSON(json.toJSONString()));
         String namespace = "ekt-demo";
-
         String token = "rous";
-
-        //test query service by Vangelis
         Response queryResponse
                 = test.executeSparqlQuery(query2, namespace, "text/tab-separated-values", token);//QueryResultFormat.JSON);
         System.out.println(queryResponse.readEntity(String.class));

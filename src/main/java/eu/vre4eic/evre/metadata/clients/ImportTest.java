@@ -44,8 +44,8 @@ public class ImportTest {
         webTarget = client.target(baseURI).path("import");
     }
 
-    public Response importFilePOSTJSON(String requestEntity) throws ClientErrorException {
-        return webTarget.request(MediaType.APPLICATION_JSON).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+    public Response importFilePOSTJSON(String requestEntity, String token) throws ClientErrorException {
+        return webTarget.request(MediaType.APPLICATION_JSON).header("Authorization", token).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
 
     public void close() {
@@ -62,7 +62,7 @@ public class ImportTest {
      * @param namedGraph A String representation of the nameGraph
      * @return A response from the service.
      */
-    public Response importFile(String content, String format, String namespace, String namedGraph)
+    public Response importFile(String content, String format, String namespace, String namedGraph, String token)
             throws ClientProtocolException, IOException {
         String restURL = baseURI + "/import/namespace/" + namespace;
         // Taking into account nameSpace in the construction of the URL
@@ -78,7 +78,7 @@ public class ImportTest {
         String mimeType = format;
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(restURL).queryParam("graph", namedGraph);
-        Response response = webTarget.request().post(Entity.entity(content, mimeType));
+        Response response = webTarget.request().header("Authorization", token).post(Entity.entity(content, mimeType));
         return response;
     }
 
@@ -100,27 +100,26 @@ public class ImportTest {
     }
 
     public static void main(String[] args) throws IOException {
-        String baseURI = "http://83.212.97.61:8080/ld-services-1.0-SNAPSHOT";
-//        baseURI = "http://localhost:8181/ld-services";
+        String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         String folder = "C:/RdfData";
         ImportTest imp = new ImportTest(baseURI);
-        JSONObject request = new JSONObject();
-        ///
-        request.put("filename", folder + "/cidoc_v3.2.1.rdfs");
-        request.put("format", "application/rdf+xml");
-        request.put("graph", "http://cidoc_2");
-        Response importResponse = imp.importFilePOSTJSON(request.toString());
-        ///
-
-        //Vangelis service test
-//        String namespace = "test";
-//        Response importResponse = imp.importFile(readFileData(
-//                folder + "/cidoc_v3.2.1.rdfs"), // file
-//                "application/rdf+xml", // content type
-//                namespace, // namespace
-//                "http://cidoc_3"); // nameGraph
-//        System.out.println("--- Trying to import from file ---");
-//        System.out.println("Status: " + importResponse.getStatus() + " " + importResponse.getStatusInfo());
+        ////////
+        String token = "rous";
+        //this service works only if the file to be imported is in the same machine with the tomcat
+//        JSONObject request = new JSONObject();
+//        request.put("filename", folder + "/cidoc_v3.2.1.rdfs");
+//        request.put("format", "application/rdf+xml");
+//        request.put("graph", "http://cidoc_1");
+//        Response importResponse = imp.importFilePOSTJSON(request.toString(), token);
+        ///////
+        //this service works in all cases 
+        String namespace = "ekt-demo";
+        Response importResponse = imp.importFile(readFileData(folder + "/cidoc_v3.2.1.rdfs"), // file
+                "application/rdf+xml", // content type
+                namespace, // namespace
+                "http://cidoc_2", // nameGraph
+                token);
         System.out.println(importResponse.readEntity(String.class));
         imp.close();
     }

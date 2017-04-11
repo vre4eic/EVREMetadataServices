@@ -37,8 +37,9 @@ public class UpdateTest {
         webTarget = client.target(baseURI).path("update");
     }
 
-    public Response updateExecPOSTJSON(String requestEntity) throws ClientErrorException {
-        return webTarget.request(MediaType.TEXT_HTML).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+    public Response updateExecPOSTJSON(String requestEntity, String token) throws ClientErrorException {
+        return webTarget.request(MediaType.TEXT_HTML).
+                header("Authorization", token).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
 
     public void close() {
@@ -46,13 +47,14 @@ public class UpdateTest {
     }
 
     public static void main(String[] args) {
-        String baseURI = "http://localhost:8181/ld-services";
-
+        String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         UpdateTest test = new UpdateTest(baseURI);
-        String query = "insert data {graph <http://test> {<http://a3> <http://p3> <http://b3>.} }";
+        String query = "insert data {graph <http://test2> {<http://a3> <http://p3> <http://b3>.} }";
         JSONObject json = new JSONObject();
         json.put("query", query);
-        Response resp = test.updateExecPOSTJSON(json.toJSONString());
+        String token = "rous";
+        Response resp = test.updateExecPOSTJSON(json.toJSONString(), token);
         System.out.println(resp.readEntity(String.class));
         System.out.println(resp.getStatus());
         test.close();

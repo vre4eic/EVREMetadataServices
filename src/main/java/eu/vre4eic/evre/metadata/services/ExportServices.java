@@ -63,11 +63,9 @@ public class ExportServices {
     }
 
     @GET
-    public Response exportFileGETJSON(@QueryParam("g") String g,
-            @QueryParam("f") String f,
+    public Response exportFileGETJSON(@QueryParam("g") String graph,
+            @QueryParam("f") String format,
             @DefaultValue("") @QueryParam("token") String token) throws ParseException, IOException {
-        String format = f;
-        String graph = g;
         int status;
         String authToken = requestContext.getHeader("Authorization");
         if (authToken == null) {

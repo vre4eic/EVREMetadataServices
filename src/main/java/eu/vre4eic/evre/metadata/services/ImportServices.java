@@ -91,7 +91,7 @@ public class ImportServices {
         boolean isTokenValid = module.checkToken(authToken);
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
-        message.setToken(token);
+        message.setToken(authToken);
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);

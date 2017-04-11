@@ -14,6 +14,7 @@ import eu.vre4eic.evre.core.messages.MetadataMessage;
 import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
+import io.swagger.annotations.Api;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import javax.annotation.PostConstruct;
@@ -40,6 +41,8 @@ import org.json.simple.parser.ParseException;
  * @author rousakis
  */
 @Path("query")
+@Produces(MediaType.APPLICATION_JSON)
+@Api(value = "/test", description = "test")
 public class QueryServices {
 
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
@@ -82,11 +85,19 @@ public class QueryServices {
      * results and the required format. <br>
      */
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response queryExecGETJSON(
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
             @DefaultValue("") @QueryParam("token") String token) throws IOException {
-        return queryExecBlazegraph(q, namespace, f, token);
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        return queryExecBlazegraph(q, namespace, f, authToken, message);
     }
 
     /**
@@ -116,7 +127,14 @@ public class QueryServices {
             @DefaultValue("application/json") @QueryParam("format") String format,
             @QueryParam("query") String query,
             @DefaultValue("") @QueryParam("token") String token) throws UnsupportedEncodingException, IOException {
-        return queryExecBlazegraph(format, query, namespace, token);
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        return queryExecBlazegraph(format, query, namespace, authToken, message);
     }
 
     /**
@@ -148,15 +166,21 @@ public class QueryServices {
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
         if (jsonObject.size() != 2) {
-            String message = "JSON input message should have exactly 2 arguments.";
-            String json = "{ \"success\" : false, "
-                    + "\"message\" : \"" + message + "\" }";
-            return Response.status(400).entity(json).header("Access-Control-Allow-Origin", "*").build();
+            message.setMessage("JSON input message should have exactly 2 arguments.");
+            message.setStatus(ResponseStatus.FAILED);
+            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, q, this.namespace, token);
+            return queryExecBlazegraph(f, q, namespace, authToken, message);
         }
     }
 
@@ -193,28 +217,27 @@ public class QueryServices {
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
-        if (jsonObject.size() != 2) {
-            String message = "JSON input message should have exactly 2 arguments.";
-            String json = "{ \"success\" : false, "
-                    + "\"message\" : \"" + message + "\" }";
-            return Response.status(400).entity(json).header("Access-Control-Allow-Origin", "*").build();
-        } else {
-            String q = (String) jsonObject.get("query");
-            String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, q, namespace, token);
-        }
-    }
-
-    private Response queryExecBlazegraph(String f, String q, String namespace, String token) throws IOException, UnsupportedEncodingException {
         String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
         if (authToken == null) {
             authToken = token;
         }
+        message.setToken(authToken);
+        if (jsonObject.size() != 2) {
+            message.setMessage("JSON input message should have exactly 2 arguments.");
+            message.setStatus(ResponseStatus.FAILED);
+            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            String q = (String) jsonObject.get("query");
+            String f = (String) jsonObject.get("format");
+            return queryExecBlazegraph(f, q, namespace, authToken, message);
+        }
+    }
+
+    private Response queryExecBlazegraph(String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
         int statusInt;
-        MetadataMessageImpl message = new MetadataMessageImpl();
-        message.setOperation(MetadataOperationType.QUERY);
-        message.setToken(authToken);
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
