@@ -247,12 +247,16 @@ public class QueryServices {
             message.setStatus(ResponseStatus.FAILED);
             statusInt = 500;
         } else {
-            String result = blazegraphRepRestful.executeSparqlQuery(q, namespace, f);
-            message.setMessage(result);
+            message.setMessage("Query was executed successfully.");
             message.setStatus(ResponseStatus.SUCCEED);
             statusInt = 200;
         }
         mdp.publish(message);
-        return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        if (statusInt == 200) {
+            return Response.status(statusInt).entity(blazegraphRepRestful.executeSparqlQuery(q, namespace, f)).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        }
+
     }
 }

@@ -48,13 +48,13 @@ public class ExportTest {
 
     public static void main(String[] args) {
         String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
-        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
+//        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         ExportTest exp = new ExportTest(baseURI);
         JSONObject request = new JSONObject();
         ///
         request.put("format", "application/rdf+xml");
         request.put("graph", "http://cidoc_1");
-        String token = "rous";
+        String token = "e5cfffef-4218-4993-8238-e97aa09d92f8";
         Response resp = exp.exportFilePOSTJSON(request.toString(), token);
         System.out.println(resp.readEntity(String.class));
         System.out.println(resp.getStatus());

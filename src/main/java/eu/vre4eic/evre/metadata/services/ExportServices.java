@@ -86,10 +86,15 @@ public class ExportServices {
         } else {
             status = 200;
             message.setStatus(ResponseStatus.SUCCEED);
-            message.setMessage(blazegraphRepRestful.exportFile(format, namespace, graph).readEntity(String.class));
+            message.setMessage("Data were exported successfully. ");
         }
         mdp.publish(message);
-        return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        if (status == 200) {
+            return Response.status(status).entity(blazegraphRepRestful.exportFile(format, namespace, graph).readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        }
+
     }
 
     @POST
@@ -107,6 +112,8 @@ public class ExportServices {
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.READ);
         message.setToken(authToken);
+        String format = null;
+        String graph = null;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -116,8 +123,8 @@ public class ExportServices {
             message.setStatus(ResponseStatus.FAILED);
             status = 400;
         } else {
-            String format = (String) jsonObject.get("format");
-            String graph = (String) jsonObject.get("graph");
+            format = (String) jsonObject.get("format");
+            graph = (String) jsonObject.get("graph");
             if (format == null) {
                 message.setStatus(ResponseStatus.FAILED);
                 status = 400;
@@ -125,10 +132,14 @@ public class ExportServices {
             } else {
                 status = 200;
                 message.setStatus(ResponseStatus.SUCCEED);
-                message.setMessage(blazegraphRepRestful.exportFile(format, namespace, graph).readEntity(String.class));
+                message.setMessage("Data were exported successfully. ");
             }
         }
         mdp.publish(message);
-        return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        if (status == 200) {
+            return Response.status(status).entity(blazegraphRepRestful.exportFile(format, namespace, graph).readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        }
     }
 }

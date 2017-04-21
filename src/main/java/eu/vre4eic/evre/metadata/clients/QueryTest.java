@@ -81,7 +81,7 @@ public class QueryTest {
 
     public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
         String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
-        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
+//        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         QueryTest test = new QueryTest(baseURI);
         String query = "select * where {?s ?p ?o} limit 10";
         String query2 = "SELECT * WHERE {{ ?s ?p ?o . ?s rdfs:label ?o. ?o bds:search 'Quadrelli' . }}";

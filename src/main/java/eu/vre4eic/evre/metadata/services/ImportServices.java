@@ -274,9 +274,16 @@ public class ImportServices {
                     contentType, // Content type (i.e. application/rdf+xml)
                     namespace, // Namespace
                     graph); // NameGraph
-            message.setMessage(tripleStoreResponse);
-            message.setStatus(ResponseStatus.SUCCEED);
-            status = 200;
+
+            if (tripleStoreResponse == null) {
+                message.setMessage(".......");
+                message.setStatus(ResponseStatus.FAILED);
+                status = 400;
+            } else {
+                message.setMessage(tripleStoreResponse);
+                message.setStatus(ResponseStatus.SUCCEED);
+                status = 200;
+            }
         }
         mdp.publish(message);
         return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
