@@ -15,6 +15,10 @@ import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import javax.annotation.PostConstruct;
@@ -41,8 +45,8 @@ import org.json.simple.parser.ParseException;
  * @author rousakis
  */
 @Path("query")
+@Api(value = "query", description = "Operations about queries")
 @Produces(MediaType.APPLICATION_JSON)
-@Api(value = "/test", description = "test")
 public class QueryServices {
 
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
@@ -86,10 +90,19 @@ public class QueryServices {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation(value = "Executes a SPARQL query and returns the results in various formats",
+            notes = "The query is applied on a default namespace defined in the configuration file",
+            response = Response.class,
+            produces = MediaType.APPLICATION_JSON)
+    @ApiResponses(value = {
+        @ApiResponse(code = 401, message = "User not authenticated!"),
+        @ApiResponse(code = 500, message = "Error in the provided format."),
+        @ApiResponse(code = 200, message = "Query was executed successfully."),}
+    )
     public Response queryExecGETJSON(
-            @DefaultValue("application/json") @QueryParam("format") String f,
-            @QueryParam("query") String q,
-            @DefaultValue("") @QueryParam("token") String token) throws IOException {
+            @ApiParam(name = "format", value = "Alphanumeric string", required = false) @DefaultValue("application/json") @QueryParam("format") String f,
+            @ApiParam(name = "query", value = "Alphanumeric string", required = true) @QueryParam("query") String q,
+            @ApiParam(name = "token", value = "Alphanumeric string", required = false) @DefaultValue("") @QueryParam("token") String token) throws IOException {
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.QUERY);
