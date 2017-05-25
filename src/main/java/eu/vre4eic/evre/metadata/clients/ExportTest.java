@@ -5,9 +5,12 @@
  */
 package eu.vre4eic.evre.metadata.clients;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -42,20 +45,31 @@ public class ExportTest {
                 header("Authorization", token).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
 
+    public Response exportFileGETJSON(String graph, String format, String token) throws ClientErrorException, UnsupportedEncodingException {
+        webTarget = webTarget.queryParam("format", format).//mimetype
+                queryParam("graph", graph);
+        Invocation.Builder invocationBuilder = webTarget.request().
+                header("Authorization", token);//.request(mimetype);
+        Response response = invocationBuilder.get();
+        return response;
+    }
+
     public void close() {
         client.close();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClientErrorException, UnsupportedEncodingException {
         String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
 //        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         ExportTest exp = new ExportTest(baseURI);
         JSONObject request = new JSONObject();
         ///
         request.put("format", "application/rdf+xml");
-        request.put("graph", "http://cidoc_1");
+        request.put("graph", "http://cidoc_2");
         String token = "e5cfffef-4218-4993-8238-e97aa09d92f8";
-        Response resp = exp.exportFilePOSTJSON(request.toString(), token);
+//        Response resp = exp.exportFilePOSTJSON(request.toString(), token);
+
+        Response resp = exp.exportFileGETJSON("http://cidoc_2", "application/rdf+xml", token);
         System.out.println(resp.readEntity(String.class));
         System.out.println(resp.getStatus());
 

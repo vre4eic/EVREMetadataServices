@@ -44,7 +44,7 @@ public class ImportTest {
         webTarget = client.target(baseURI).path("import");
     }
 
-    public Response importFilePOSTJSON(String requestEntity, String token) throws ClientErrorException {
+    public Response importFilePath(String requestEntity, String token) throws ClientErrorException {
         return webTarget.request(MediaType.APPLICATION_JSON).header("Authorization", token).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
 
@@ -62,9 +62,9 @@ public class ImportTest {
      * @param namedGraph A String representation of the nameGraph
      * @return A response from the service.
      */
-    public Response importFile(String content, String format, String namespace, String namedGraph, String token)
+    public Response importFileData(String content, String format, String namespace, String namedGraph, String token)
             throws ClientProtocolException, IOException {
-        String restURL = baseURI + "/import/namespace/" + namespace;
+        String restURL;
         // Taking into account nameSpace in the construction of the URL
         if (namespace != null) {
             restURL = baseURI + "/import/namespace/" + namespace;
@@ -101,25 +101,27 @@ public class ImportTest {
 
     public static void main(String[] args) throws IOException {
         String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
-        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
+        baseURI = "http://139.91.183.70:8080/EVREMetadataServices";
+//        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         String folder = "C:/RdfData";
+        folder = "/home/rousakis/RdfData";   //seistro 2 path
         ImportTest imp = new ImportTest(baseURI);
         ////////
         String token = "rous";
         //this service works only if the file to be imported is in the same machine with the tomcat
-//        JSONObject request = new JSONObject();
-//        request.put("filename", folder + "/cidoc_v3.2.1.rdfs");
-//        request.put("format", "application/rdf+xml");
-//        request.put("graph", "http://cidoc_1");
-//        Response importResponse = imp.importFilePOSTJSON(request.toString(), token);
+        JSONObject request = new JSONObject();
+        request.put("filename", folder + "/cidoc_v3.2.1.rdfs");
+        request.put("format", "application/rdf+xml");
+        request.put("graph", "http://cidoc_1");
+        Response importResponse = imp.importFilePath(request.toString(), token);
         ///////
         //this service works in all cases 
-        String namespace = "ekt-demo";
-        Response importResponse = imp.importFile(readFileData(folder + "/cidoc_v3.2.1.rdfs"), // file
-                "application/rdf+xml", // content type
-                namespace, // namespace
-                "http://cidoc_2", // nameGraph
-                token);
+//        String namespace = "ekt-demo";
+//        Response importResponse = imp.importFileData(readFileData(folder + "/cidoc_v3.2.1.rdfs"), // file
+//                "application/rdf+xml", // content type
+//                namespace, // namespace
+//                "http://cidoc_2", // nameGraph
+//                token);
         System.out.println(importResponse.readEntity(String.class));
         imp.close();
     }

@@ -14,11 +14,6 @@ import eu.vre4eic.evre.core.messages.MetadataMessage;
 import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import javax.annotation.PostConstruct;
@@ -45,7 +40,6 @@ import org.json.simple.parser.ParseException;
  * @author rousakis
  */
 @Path("query")
-@Api(value = "query", description = "Operations about queries")
 @Produces(MediaType.APPLICATION_JSON)
 public class QueryServices {
 
@@ -90,19 +84,10 @@ public class QueryServices {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation(value = "Executes a SPARQL query and returns the results in various formats",
-            notes = "The query is applied on a default namespace defined in the configuration file",
-            response = Response.class,
-            produces = MediaType.APPLICATION_JSON)
-    @ApiResponses(value = {
-        @ApiResponse(code = 401, message = "User not authenticated!"),
-        @ApiResponse(code = 500, message = "Error in the provided format."),
-        @ApiResponse(code = 200, message = "Query was executed successfully."),}
-    )
     public Response queryExecGETJSON(
-            @ApiParam(name = "format", value = "Alphanumeric string", required = false) @DefaultValue("application/json") @QueryParam("format") String f,
-            @ApiParam(name = "query", value = "Alphanumeric string", required = true) @QueryParam("query") String q,
-            @ApiParam(name = "token", value = "Alphanumeric string", required = false) @DefaultValue("") @QueryParam("token") String token) throws IOException {
+            @DefaultValue("application/json") @QueryParam("format") String f,
+            @QueryParam("query") String q,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException {
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.QUERY);
@@ -110,7 +95,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(q, namespace, f, authToken, message);
+        return queryExecBlazegraph(f, q, namespace, authToken, message);
     }
 
     /**
@@ -122,13 +107,13 @@ public class QueryServices {
      *
      * @param namespace Path parameter which denotes the namespace in which the
      * query will be applied.
-     * @param format Query parameter which refers on the requested
-     * mimetype-format of the results. The formats which are supported are:
+     * @param f Query parameter which refers on the requested mimetype-format of
+     * the results. The formats which are supported are:
      * <b>text/csv</b>,
      * <b>application/json</b>, <b>text/tab-separated-values</b>,
      * <b>application/sparql-results+xml.</b>
-     * @param query Query parameter which has a string value representing the
-     * SPARQL query which will be applied.
+     * @param q Query parameter which has a string value representing the SPARQL
+     * query which will be applied.
      * @return A Response instance which has an entity content with the query
      * results and the required format. <br>
      */
@@ -137,8 +122,8 @@ public class QueryServices {
     @Produces(MediaType.APPLICATION_JSON)
     public Response queryExecGETJSONWithNS(
             @PathParam("namespace") String namespace,
-            @DefaultValue("application/json") @QueryParam("format") String format,
-            @QueryParam("query") String query,
+            @DefaultValue("application/json") @QueryParam("format") String f,
+            @QueryParam("query") String q,
             @DefaultValue("") @QueryParam("token") String token) throws UnsupportedEncodingException, IOException {
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
@@ -147,7 +132,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(format, query, namespace, authToken, message);
+        return queryExecBlazegraph(f, q, namespace, authToken, message);
     }
 
     /**
@@ -250,7 +235,9 @@ public class QueryServices {
 
     private Response queryExecBlazegraph(String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
+//        isTokenValid = true;
         int statusInt;
+        Response response = null;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -260,13 +247,19 @@ public class QueryServices {
             message.setStatus(ResponseStatus.FAILED);
             statusInt = 500;
         } else {
-            message.setMessage("Query was executed successfully.");
-            message.setStatus(ResponseStatus.SUCCEED);
-            statusInt = 200;
+            response = blazegraphRepRestful.executeSparqlQuery(q, namespace, f);
+            statusInt = response.getStatus();
+            if (statusInt == 200) {
+                message.setStatus(ResponseStatus.SUCCEED);
+                message.setMessage("Query was executed successfully.");
+            } else {
+                message.setStatus(ResponseStatus.FAILED);
+                message.setMessage(response.readEntity(String.class));
+            }
         }
         mdp.publish(message);
         if (statusInt == 200) {
-            return Response.status(statusInt).entity(blazegraphRepRestful.executeSparqlQuery(q, namespace, f)).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(statusInt).entity(response.readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
         } else {
             return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
         }

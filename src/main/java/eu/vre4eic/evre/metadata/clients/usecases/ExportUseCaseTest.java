@@ -5,6 +5,7 @@
  */
 package eu.vre4eic.evre.metadata.clients.usecases;
 
+import eu.vre4eic.evre.blazegraph.Utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.ws.rs.ClientErrorException;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 
 import org.json.simple.parser.ParseException;
+import org.openrdf.rio.RDFFormat;
 
 public class ExportUseCaseTest {
 
@@ -34,10 +36,14 @@ public class ExportUseCaseTest {
         client.close();
     }
 
-    public Response exportFilePOSTJSON(String requestEntity, String token) throws ClientErrorException {
+    public Response exportFileGETJSON(String graph, String format, String token) throws ClientErrorException, UnsupportedEncodingException {
         WebTarget MSwebTarget = client.target(baseURI).path("export");
-        return MSwebTarget.request(MediaType.APPLICATION_JSON).
-                header("Authorization", token).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+        MSwebTarget = MSwebTarget.queryParam("format", format).//mimetype
+                queryParam("graph", graph);
+        Invocation.Builder invocationBuilder = MSwebTarget.request().
+                header("Authorization", token);//.request(mimetype);
+        Response response = invocationBuilder.get();
+        return response;
     }
 
     /*
@@ -61,14 +67,15 @@ public class ExportUseCaseTest {
         String token = ns.createUserAndLogin();
 
         //3- Export data
-        String graph = "http://cidoc_1";
+        String graph = "http://cidoc_2";
         System.out.println();
         System.out.println("3) Exporting data from graph: " + graph);
         JSONObject request = new JSONObject();
         ///
-        request.put("format", "application/rdf+xml");
+        String format = Utils.fetchDataImportMimeType(RDFFormat.TURTLE);
+        request.put("format", format);
         request.put("graph", graph);
-        Response resp = test.exportFilePOSTJSON(request.toString(), token);
+        Response resp = test.exportFileGETJSON(graph, format, token);
         System.out.println("Export executed, return message is: " + resp.readEntity(String.class));
 
         //4- Remove the profile from e-VRE

@@ -65,42 +65,41 @@ public class UpdateServices {
         mdp = PublisherFactory.getMetatdaPublisher();
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response queryExecGETJSON(
-            @DefaultValue("application/json") @QueryParam("format") String f,
-            @QueryParam("query") String query,
-            @DefaultValue("") @QueryParam("token") String token) throws IOException {
-        String authToken = requestContext.getHeader("Authorization");
-        MetadataMessageImpl message = new MetadataMessageImpl();
-        message.setOperation(Common.MetadataOperationType.QUERY);
-        if (authToken == null) {
-            authToken = token;
-        }
-        message.setToken(authToken);
-        return updateExecBlazegraph(query, namespace, authToken, message);
-    }
-
-    @GET
-    @Path("/namespace/{namespace}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response updateExecGETJSONWithNS(
-            @PathParam("namespace") String namespace,
-            @QueryParam("query") String query,
-            @DefaultValue("") @QueryParam("token") String token) throws UnsupportedEncodingException, IOException {
-        String authToken = requestContext.getHeader("Authorization");
-        MetadataMessageImpl message = new MetadataMessageImpl();
-        message.setOperation(Common.MetadataOperationType.UPDATE);
-        if (authToken == null) {
-            authToken = token;
-        }
-        message.setToken(authToken);
-        return updateExecBlazegraph(query, namespace, authToken, message);
-    }
-
+//    @GET
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response queryExecGETJSON(
+//            @DefaultValue("application/json") @QueryParam("format") String f,
+//            @QueryParam("query") String query,
+//            @DefaultValue("") @QueryParam("token") String token) throws IOException {
+//        String authToken = requestContext.getHeader("Authorization");
+//        MetadataMessageImpl message = new MetadataMessageImpl();
+//        message.setOperation(Common.MetadataOperationType.QUERY);
+//        if (authToken == null) {
+//            authToken = token;
+//        }
+//        message.setToken(authToken);
+//        return updateExecBlazegraph(query, namespace, authToken, message);
+//    }
+//
+//    @GET
+//    @Path("/namespace/{namespace}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response updateExecGETJSONWithNS(
+//            @PathParam("namespace") String namespace,
+//            @QueryParam("query") String query,
+//            @DefaultValue("") @QueryParam("token") String token) throws UnsupportedEncodingException, IOException {
+//        String authToken = requestContext.getHeader("Authorization");
+//        MetadataMessageImpl message = new MetadataMessageImpl();
+//        message.setOperation(Common.MetadataOperationType.UPDATE);
+//        if (authToken == null) {
+//            authToken = token;
+//        }
+//        message.setToken(authToken);
+//        return updateExecBlazegraph(query, namespace, authToken, message);
+//    }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateExecPOSTJSON(String jsonInput,
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
@@ -124,7 +123,7 @@ public class UpdateServices {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_HTML)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/namespace/{namespace}")
     public Response updateExecPOSTJSONWithNS(String jsonInput,
             @PathParam("namespace") String namespace,
@@ -151,6 +150,7 @@ public class UpdateServices {
     private Response updateExecBlazegraph(String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
         int statusInt;
+//        isTokenValid = true;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);

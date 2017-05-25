@@ -78,6 +78,7 @@ public class ImportServices {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/path")
     public Response importFilePathPOSTJSON(String jsonInput,
             @DefaultValue("") @QueryParam("token") String token) throws ParseException, IOException {
         JSONParser jsonParser = new JSONParser();
@@ -89,6 +90,7 @@ public class ImportServices {
             authToken = token;
         }
         boolean isTokenValid = module.checkToken(authToken);
+//        isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -103,9 +105,16 @@ public class ImportServices {
         } else {
             String tripleStoreNamespace = this.namespace;
             result = importFile(jsonObject, tripleStoreNamespace);
+            if (result == null) {
+                message.setMessage("Error in parsing file w.r.t. the given format.");
+                message.setStatus(ResponseStatus.FAILED);
+                status = 500;
+            } else {
+                message.setMessage(result);
+                message.setStatus(ResponseStatus.SUCCEED);
+                status = 200;
+            }
             message.setMessage(result);
-            message.setStatus(ResponseStatus.SUCCEED);
-            status = 200;
         }
         mdp.publish(message);
         return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
@@ -114,7 +123,7 @@ public class ImportServices {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/namespace/{namespace}")
+    @Path("/path/namespace/{namespace}")
     public Response importFilePathPOSTJSONWithNS(String jsonInput,
             @PathParam("namespace") String namespace,
             @DefaultValue("") @QueryParam("token") String token) throws ParseException, IOException {
@@ -127,6 +136,7 @@ public class ImportServices {
             authToken = token;
         }
         boolean isTokenValid = module.checkToken(authToken);
+//        isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -141,9 +151,16 @@ public class ImportServices {
         } else {
             String tripleStoreNamespace = namespace;
             result = importFile(jsonObject, tripleStoreNamespace);
+            if (result == null) {
+                message.setMessage("Error in parsing file w.r.t. the given format.");
+                message.setStatus(ResponseStatus.FAILED);
+                status = 500;
+            } else {
+                message.setMessage(result);
+                message.setStatus(ResponseStatus.SUCCEED);
+                status = 200;
+            }
             message.setMessage(result);
-            message.setStatus(ResponseStatus.SUCCEED);
-            status = 200;
         }
         mdp.publish(message);
         return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
@@ -184,6 +201,7 @@ public class ImportServices {
             authToken = token;
         }
         boolean isTokenValid = module.checkToken(authToken);
+//        isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -205,11 +223,17 @@ public class ImportServices {
                     contentType, // Content type (i.e. application/rdf+xml)
                     this.namespace, // Namespace
                     graph); // NameGraph
-            message.setMessage(tripleStoreResponse);
-            message.setStatus(ResponseStatus.SUCCEED);
-            status = 200;
-            mdp.publish(message);
+            if (tripleStoreResponse == null) {
+                message.setMessage("Error in parsing file w.r.t. the given format.");
+                message.setStatus(ResponseStatus.FAILED);
+                status = 500;
+            } else {
+                message.setMessage(tripleStoreResponse);
+                message.setStatus(ResponseStatus.SUCCEED);
+                status = 200;
+            }
         }
+        mdp.publish(message);
         return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
     }
 
@@ -254,6 +278,7 @@ public class ImportServices {
             authToken = token;
         }
         boolean isTokenValid = module.checkToken(authToken);
+//        isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -274,9 +299,8 @@ public class ImportServices {
                     contentType, // Content type (i.e. application/rdf+xml)
                     namespace, // Namespace
                     graph); // NameGraph
-
             if (tripleStoreResponse == null) {
-                message.setMessage(".......");
+                message.setMessage("Data to be imported are not valid. ");
                 message.setStatus(ResponseStatus.FAILED);
                 status = 400;
             } else {
@@ -297,13 +321,10 @@ public class ImportServices {
         int status = result.getStatus();
         String resText = result.readEntity(String.class);
         String msg = "";
-        boolean success = false;
         if (status == 200) {
-            success = true;
             msg = XML.toJSONObject(resText).toString();
         } else {
-            success = false;
-            msg = "Error in parsing file w.r.t. the given format.";
+            msg = null;
         }
         return msg;
     }

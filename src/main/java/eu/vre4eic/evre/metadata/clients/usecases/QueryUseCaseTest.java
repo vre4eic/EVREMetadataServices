@@ -13,6 +13,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
+import org.json.simple.JSONObject;
 
 import org.json.simple.parser.ParseException;
 
@@ -56,10 +57,12 @@ public class QueryUseCaseTest {
     public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
-        baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+//        baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+        baseURI = "http://83.212.97.61:8080/EVREMetadataServices-1.0-SNAPSHOT";
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI);
         String query = "select * where {?s ?p ?o} limit 5";
+        query = "select distinct ?g where {{graph ?g {?s ?p ?o}}}";
 //        query = "SELECT * WHERE {{ ?s ?p ?o . ?s rdfs:label ?o. ?o bds:search 'Quadrelli' . }}";
 
         //String queryEnc = URLEncoder.encode(query2, "UTF-8").replaceAll("\\+", "%20");
@@ -70,9 +73,9 @@ public class QueryUseCaseTest {
         //3- Execute a query
         System.out.println();
         System.out.println("3) Executing the query: " + query);
-        String namespace = "ekt-demo";
+        String namespace = "ekt-data";
         Response queryResponse
-                = test.executeSparqlQuery(query, namespace, "text/tab-separated-values", token);//QueryResultFormat.JSON);
+                = test.executeSparqlQuery(query, namespace, "application/json", token);//QueryResultFormat.JSON);
         System.out.println("Query executed, return message is: " + queryResponse.readEntity(String.class));
 
         //4- Remove the profile from e-VRE
