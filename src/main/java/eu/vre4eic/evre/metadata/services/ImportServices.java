@@ -105,11 +105,12 @@ public class ImportServices {
             String tripleStoreNamespace = this.namespace;
             result = importFile(jsonObject, tripleStoreNamespace);
             if (result == null) {
-                message.setMessage("Error in parsing file w.r.t. the given format.");
+                result = "Error in parsing file w.r.t. the given format.";
                 message.setStatus(ResponseStatus.FAILED);
                 status = 500;
             } else {
-                message.setMessage(result);
+                org.json.JSONObject jsonMessage = new org.json.JSONObject(result);
+                message.setJsonMessage(jsonMessage);
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
             }
@@ -151,11 +152,12 @@ public class ImportServices {
             String tripleStoreNamespace = namespace;
             result = importFile(jsonObject, tripleStoreNamespace);
             if (result == null) {
-                message.setMessage("Error in parsing file w.r.t. the given format.");
+                result = "Error in parsing file w.r.t. the given format.";
                 message.setStatus(ResponseStatus.FAILED);
                 status = 500;
             } else {
-                message.setMessage(result);
+                org.json.JSONObject jsonMessage = new org.json.JSONObject(result);
+                message.setJsonMessage(jsonMessage);
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
             }
@@ -228,6 +230,8 @@ public class ImportServices {
                 status = 500;
             } else {
                 message.setMessage(tripleStoreResponse);
+                org.json.JSONObject jsonMessage = new org.json.JSONObject(tripleStoreResponse);
+                message.setJsonMessage(jsonMessage);
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
             }
@@ -303,11 +307,14 @@ public class ImportServices {
                 status = 400;
             } else {
                 message.setMessage(tripleStoreResponse);
+                org.json.JSONObject jsonMessage = new org.json.JSONObject(tripleStoreResponse);
+                message.setJsonMessage(jsonMessage);
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
             }
         }
-        mdp.publish(message);
+
+//        mdp.publish(message);
         return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
     }
 
