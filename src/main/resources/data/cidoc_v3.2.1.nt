@@ -1,0 +1,952 @@
+<http://83.212.97.61:8090/root#/E1.CRM_Entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P1F.is_identified_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P1B.identifies> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P2F.has_type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P2B.is_type_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P3F.has_note> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E2.Temporal_Entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P4F.has_time-span> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P4B.is_time-span_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E3.Condition_State> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P5F.consists_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P5B.forms_part_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P6F.falls_within> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P6B.contains> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E4.Period> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P7F.took_place_at> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P7B.witnessed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P8F.took_place_on_or_within> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P8B.witnessed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P9F.consists_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P9B.forms_part_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P10F.falls_within> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P10B.contains> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E5.Event> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P11F.had_participants> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P11B.participated_in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P12B.was_present_at> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E6.Destruction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P13F.destroyed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P13B.was_destroyed_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E7.Activity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P14F.carried_out_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P14B.performed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P15F.took_into_account> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P15B.was_taken_into_account_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P16F.used_object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P16B.was_used_for> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P17F.was_motivation_for> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P17B.motivated> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P18F.motivated_the_creation_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P18B.was_created_for> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P19F.was_intended_use_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P19B.was_made_for> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P20F.had_specific_purpose> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P20B.was_purpose_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P21F.had_as_general_purpose> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P21B.was_purpose_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E8.Acquisition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P22F.transferred_title_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P22B.acquired_title_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P23F.transferred_title_from> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P23B.surrendered_title_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P24F.transferred_title_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P24B.changed_ownership_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E9.Move> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P25F.moved> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P25B.moved_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P26F.moved_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P26B.occupied> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P27F.moved_from> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P27B.vacated> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P28F.custody_surrendered_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P28B.surrendered_custody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P29F.custody_received_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P29B.received_custody> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P30F.transferred_custody_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P30B.custody_changed_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E11.Modification> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P31F.has_modified> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P31B.was_modified_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P32F.used_general_technique> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P32B.was_technique_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P33F.used_specific_technique> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P33B.was_used_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E12.Production> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P108F.has_produced> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P108B.was_produced_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E13.Attribute_Assignment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E14.Condition_Assessment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P34F.concerned> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P34B.was_assessed_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P35F.has_identified> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P35B.identified_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E15.Identifier_Assignment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P36F.registered> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P36B.registered_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P37F.assigns> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P37B.is_assigned_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P38F.deassigns> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P38B.is_deassigned_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E16.Measurement> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P39F.measured> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P39B.was_measured> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P40F.observed_dimension> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P40B.was_observed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E17.Type_Assignment> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P41F.classified> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P41B.was_classified_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P42F.assigned> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P42B.was_assigned_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E18.Physical_Stuff> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P43F.has_dimension> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P43B.is_dimension_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P44F.has_condition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P44B.condition_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P45F.consists_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P45B.is_incorporated_in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P46F.is_composed_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P46B.forms_part_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E19.Physical_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P47F.is_identified_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P47B.identifies> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P48F.preferred_identifier_is> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P48B.is_preffered_identifier_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P49F.has_former_or_current_keeper> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P49B.is_former_or_current_keeper_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P50F.has_current_keeper> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P50B.is_current_keeper_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P51F.has_former_or_current_owner> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P51B.is_former_or_current_owner_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P52F.has_current_owner> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P52B.is_current_owner_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P53F.has_former_or_current_location> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P53B.is_former_or_current_location_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P54F.has_current_permanent_location> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P54B.is_current_permanent_location_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P55F.has_current_location> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P55B.currently_holds> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P56F.bears_feature> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P56B.is_found_on> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P57F.has_number_of_parts> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P58F.has_section_definition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P58B.defines_section> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P59F.has_section> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P59B.is_located_on_or_within> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E20.Biological_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E21.Person> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P60F.is_member_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P60B.has_members> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P61F.has_gender> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P61B.is_gender_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E22.Man-Made_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E23.Iconographic_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P62F.depicts_object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P62B.is_depicted_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P63F.depicts_event> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P63B.is_depicted_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P64F.depicts_concept> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P64B.is_depicted_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P65F.shows_visual_item> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P65B.is_shown_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E25.Man-Made_Feature> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E26.Physical_Feature> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E27.Site> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E28.Conceptual_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P66F.refers_to_concept> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P66B.is_refered_to_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P67F.referrs_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P67B.is_referred_to_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E29.Design_or_Procedure> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P68F.usually_employs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P68B.is_usually_employed_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P69F.associated_with> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E30.Right> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E31.Document> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P70F.documents> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P70B.is_documented_in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E32.Authority_Document> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P71F.contains> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P71B.is_part_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E33.Linguistic_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P72F.has_language> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P72B.is_language_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P73F.has_translation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P73B.is_translation_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E34.Inscription> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E35.Title> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E36.Visual_Item> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E37.Mark> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E38.Image> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E39.Actor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P74F.has_current_or_former_residence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P74B.is_current_or_former_residence_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P75F.possesses> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P75B.is_possessed_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P76F.has_contact_points> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P76B.provides_access_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E40.Legal_Body> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P77F.consists_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P77B.belongs_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E41.Appellation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E42.Object_Identifier> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E44.Place_Appellation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E45.Address> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E46.Section_Definition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E47.Spatial_Coordinates> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E48.Place_Name> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E49.Time_Appellation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E50.Date> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E51.Contact_Point> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E52.Time-Span> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P78F.is_identified_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P78B.identifies> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P79F.begins_at_qualify> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P80F.ends_at_qualify> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P81F.at_least_covering> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P82F.at_most_within> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P83F.had_at_least_duration> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P84F.had_at_most_duration> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P85F.consists_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P85B.forms_part_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P86F.falls_within> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P86B.contains> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E53.Place> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P87F.is_identified_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P87B.identifies> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P88F.consists_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P88B.forms_part_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P89F.falls_within> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P89B.contains> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E54.Dimension> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P90F.value> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P91F.unit> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E55.Type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E56.Language> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E57.Material> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E58.Measurement_Unit> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E59.Primitive_Value> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E61.Time_Primitive> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P92F.brought_into_existence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P92B.was_brought_into_existence_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E64.End_of_Existence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P93F.took_out_of_existence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P93B.was_taken_out_of_existence_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E65.Conceptual_Creation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P94F.has_created> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P94B.was_created_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E66.Formation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P95F.has_formed> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P95B.was_formed_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E67.Birth> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P96F.by_mother> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P96B.gave_birth> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P97F.from_father> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P97B.was_father_for> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P98F.brought_into_life> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P98B.was_born> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E68.Dissolution> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P99F.dissolved> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P99B.was_dissolved_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E69.Death> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P100F.was_death_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P100B.died_in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E70.Stuff> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P101F.had_as_general_use> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P101B.was_use_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P102F.has_title> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P102B.is_title_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P103F.was_intended_for> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P103B.was_intention_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E72.Legal_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P104F.is_subject_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P104B.applies_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P105F.right_held_by> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P105B.owns_rights_to> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E73.Information_Object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P106F.is_composed_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P106B.forms_part_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E74.Group> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P107F.had_member> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/P107B.was_member_of> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+<http://83.212.97.61:8090/root#/E75.Conceptual_Object_Appellation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E76.Gender> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/E77.Existence> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<http://83.212.97.61:8090/root#/P13F.destroyed> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P13F.destroyed> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P93F.took_out_of_existence> .
+<http://83.212.97.61:8090/root#/P13B.was_destroyed_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P13B.was_destroyed_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P93B.was_taken_out_of_existence_by> .
+<http://83.212.97.61:8090/root#/P14F.carried_out_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11F.had_participants> .
+<http://83.212.97.61:8090/root#/P14B.performed> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11B.participated_in> .
+<http://83.212.97.61:8090/root#/P16F.used_object> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P16B.was_used_for> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P22F.transferred_title_to> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14F.carried_out_by> .
+<http://83.212.97.61:8090/root#/P22B.acquired_title_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14B.performed> .
+<http://83.212.97.61:8090/root#/P23F.transferred_title_from> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14F.carried_out_by> .
+<http://83.212.97.61:8090/root#/P23B.surrendered_title_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14B.performed> .
+<http://83.212.97.61:8090/root#/P24F.transferred_title_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P24B.changed_ownership_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P25F.moved> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P25B.moved_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P26F.moved_to> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P7F.took_place_at> .
+<http://83.212.97.61:8090/root#/P26B.occupied> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P7B.witnessed> .
+<http://83.212.97.61:8090/root#/P27F.moved_from> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P7F.took_place_at> .
+<http://83.212.97.61:8090/root#/P27B.vacated> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P7B.witnessed> .
+<http://83.212.97.61:8090/root#/P28F.custody_surrendered_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14F.carried_out_by> .
+<http://83.212.97.61:8090/root#/P28B.surrendered_custody> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14B.performed> .
+<http://83.212.97.61:8090/root#/P29F.custody_received_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14F.carried_out_by> .
+<http://83.212.97.61:8090/root#/P29B.received_custody> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P14B.performed> .
+<http://83.212.97.61:8090/root#/P30F.transferred_custody_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P30B.custody_changed_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P31F.has_modified> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P31B.was_modified_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P108F.has_produced> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P31F.has_modified> .
+<http://83.212.97.61:8090/root#/P108F.has_produced> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92F.brought_into_existence> .
+<http://83.212.97.61:8090/root#/P108B.was_produced_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P31B.was_modified_by> .
+<http://83.212.97.61:8090/root#/P108B.was_produced_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92B.was_brought_into_existence_by> .
+<http://83.212.97.61:8090/root#/P34F.concerned> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P34B.was_assessed_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P36F.registered> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P36B.registered_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P39F.measured> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P39B.was_measured> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P47F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1F.is_identified_by> .
+<http://83.212.97.61:8090/root#/P47B.identifies> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1B.identifies> .
+<http://83.212.97.61:8090/root#/P48F.preferred_identifier_is> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P47F.is_identified_by> .
+<http://83.212.97.61:8090/root#/P48B.is_preffered_identifier_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P47B.identifies> .
+<http://83.212.97.61:8090/root#/P50F.has_current_keeper> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P49F.has_former_or_current_keeper> .
+<http://83.212.97.61:8090/root#/P50B.is_current_keeper_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P49B.is_former_or_current_keeper_of> .
+<http://83.212.97.61:8090/root#/P52F.has_current_owner> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P51F.has_former_or_current_owner> .
+<http://83.212.97.61:8090/root#/P52B.is_current_owner_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P51B.is_former_or_current_owner_of> .
+<http://83.212.97.61:8090/root#/P54F.has_current_permanent_location> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P53F.has_former_or_current_location> .
+<http://83.212.97.61:8090/root#/P54B.is_current_permanent_location_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P53B.is_former_or_current_location_of> .
+<http://83.212.97.61:8090/root#/P55F.has_current_location> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P53F.has_former_or_current_location> .
+<http://83.212.97.61:8090/root#/P55B.currently_holds> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P53B.is_former_or_current_location_of> .
+<http://83.212.97.61:8090/root#/P70F.documents> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P67F.referrs_to> .
+<http://83.212.97.61:8090/root#/P70B.is_documented_in> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P67B.is_referred_to_by> .
+<http://83.212.97.61:8090/root#/P78F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1F.is_identified_by> .
+<http://83.212.97.61:8090/root#/P78B.identifies> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1B.identifies> .
+<http://83.212.97.61:8090/root#/P87F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1F.is_identified_by> .
+<http://83.212.97.61:8090/root#/P87B.identifies> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1B.identifies> .
+<http://83.212.97.61:8090/root#/P94F.has_created> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> .
+<http://83.212.97.61:8090/root#/P94F.has_created> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92F.brought_into_existence> .
+<http://83.212.97.61:8090/root#/P94B.was_created_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P12B.was_present_at> .
+<http://83.212.97.61:8090/root#/P94B.was_created_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92B.was_brought_into_existence_by> .
+<http://83.212.97.61:8090/root#/P95F.has_formed> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11F.had_participants> .
+<http://83.212.97.61:8090/root#/P95F.has_formed> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92F.brought_into_existence> .
+<http://83.212.97.61:8090/root#/P95B.was_formed_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11B.participated_in> .
+<http://83.212.97.61:8090/root#/P95B.was_formed_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92B.was_brought_into_existence_by> .
+<http://83.212.97.61:8090/root#/P96F.by_mother> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11F.had_participants> .
+<http://83.212.97.61:8090/root#/P96B.gave_birth> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11B.participated_in> .
+<http://83.212.97.61:8090/root#/P98F.brought_into_life> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11F.had_participants> .
+<http://83.212.97.61:8090/root#/P98F.brought_into_life> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92F.brought_into_existence> .
+<http://83.212.97.61:8090/root#/P98B.was_born> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11B.participated_in> .
+<http://83.212.97.61:8090/root#/P98B.was_born> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P92B.was_brought_into_existence_by> .
+<http://83.212.97.61:8090/root#/P99F.dissolved> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11F.had_participants> .
+<http://83.212.97.61:8090/root#/P99F.dissolved> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P93F.took_out_of_existence> .
+<http://83.212.97.61:8090/root#/P99B.was_dissolved_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11B.participated_in> .
+<http://83.212.97.61:8090/root#/P99B.was_dissolved_by> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P93B.was_taken_out_of_existence_by> .
+<http://83.212.97.61:8090/root#/P100F.was_death_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11F.had_participants> .
+<http://83.212.97.61:8090/root#/P100F.was_death_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P93F.took_out_of_existence> .
+<http://83.212.97.61:8090/root#/P100B.died_in> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P11B.participated_in> .
+<http://83.212.97.61:8090/root#/P100B.died_in> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P93B.was_taken_out_of_existence_by> .
+<http://83.212.97.61:8090/root#/P102F.has_title> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1F.is_identified_by> .
+<http://83.212.97.61:8090/root#/P102B.is_title_of> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://83.212.97.61:8090/root#/P1B.identifies> .
+<http://83.212.97.61:8090/root#/P1F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P1B.identifies> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E41.Appellation> .
+<http://83.212.97.61:8090/root#/P2F.has_type> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P2B.is_type_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P3F.has_note> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P4F.has_time-span> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E2.Temporal_Entity> .
+<http://83.212.97.61:8090/root#/P4B.is_time-span_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P5F.consists_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P5B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P6F.falls_within> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P6B.contains> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P7F.took_place_at> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P7B.witnessed> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P8F.took_place_on_or_within> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P8B.witnessed> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P9F.consists_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P9B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P10F.falls_within> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P10B.contains> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P11F.had_participants> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/P11B.participated_in> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/P12B.was_present_at> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E70.Stuff> .
+<http://83.212.97.61:8090/root#/P13F.destroyed> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E6.Destruction> .
+<http://83.212.97.61:8090/root#/P13B.was_destroyed_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P14F.carried_out_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P14B.performed> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P15F.took_into_account> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P15B.was_taken_into_account_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P16F.used_object> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P16B.was_used_for> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P17F.was_motivation_for> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P17B.motivated> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P18F.motivated_the_creation_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P18B.was_created_for> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P19F.was_intended_use_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P19B.was_made_for> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E22.Man-Made_Object> .
+<http://83.212.97.61:8090/root#/P20F.had_specific_purpose> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P20B.was_purpose_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P21F.had_as_general_purpose> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P21B.was_purpose_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P22F.transferred_title_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E8.Acquisition> .
+<http://83.212.97.61:8090/root#/P22B.acquired_title_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P23F.transferred_title_from> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E8.Acquisition> .
+<http://83.212.97.61:8090/root#/P23B.surrendered_title_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P24F.transferred_title_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E8.Acquisition> .
+<http://83.212.97.61:8090/root#/P24B.changed_ownership_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P25F.moved> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E9.Move> .
+<http://83.212.97.61:8090/root#/P25B.moved_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P26F.moved_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E9.Move> .
+<http://83.212.97.61:8090/root#/P26B.occupied> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P27F.moved_from> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E9.Move> .
+<http://83.212.97.61:8090/root#/P27B.vacated> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P28F.custody_surrendered_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> .
+<http://83.212.97.61:8090/root#/P28B.surrendered_custody> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P29F.custody_received_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> .
+<http://83.212.97.61:8090/root#/P29B.received_custody> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P30F.transferred_custody_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> .
+<http://83.212.97.61:8090/root#/P30B.custody_changed_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P31F.has_modified> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E11.Modification> .
+<http://83.212.97.61:8090/root#/P31B.was_modified_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P32F.used_general_technique> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E11.Modification> .
+<http://83.212.97.61:8090/root#/P32B.was_technique_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P33F.used_specific_technique> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E11.Modification> .
+<http://83.212.97.61:8090/root#/P33B.was_used_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E29.Design_or_Procedure> .
+<http://83.212.97.61:8090/root#/P108F.has_produced> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E12.Production> .
+<http://83.212.97.61:8090/root#/P108B.was_produced_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P34F.concerned> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E14.Condition_Assessment> .
+<http://83.212.97.61:8090/root#/P34B.was_assessed_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P35F.has_identified> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E14.Condition_Assessment> .
+<http://83.212.97.61:8090/root#/P35B.identified_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P36F.registered> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E15.Identifier_Assignment> .
+<http://83.212.97.61:8090/root#/P36B.registered_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P37F.assigns> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E15.Identifier_Assignment> .
+<http://83.212.97.61:8090/root#/P37B.is_assigned_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P38F.deassigns> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E15.Identifier_Assignment> .
+<http://83.212.97.61:8090/root#/P38B.is_deassigned_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P39F.measured> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E16.Measurement> .
+<http://83.212.97.61:8090/root#/P39B.was_measured> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P40F.observed_dimension> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E16.Measurement> .
+<http://83.212.97.61:8090/root#/P40B.was_observed> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P41F.classified> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E17.Type_Assignment> .
+<http://83.212.97.61:8090/root#/P41B.was_classified_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P42F.assigned> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E17.Type_Assignment> .
+<http://83.212.97.61:8090/root#/P42B.was_assigned_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P43F.has_dimension> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P43B.is_dimension_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P44F.has_condition> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P44B.condition_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P45F.consists_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P45B.is_incorporated_in> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E57.Material> .
+<http://83.212.97.61:8090/root#/P46F.is_composed_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P46B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P47F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P47B.identifies> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P48F.preferred_identifier_is> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P48B.is_preffered_identifier_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P49F.has_former_or_current_keeper> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P49B.is_former_or_current_keeper_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P50F.has_current_keeper> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P50B.is_current_keeper_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P51F.has_former_or_current_owner> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P51B.is_former_or_current_owner_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P52F.has_current_owner> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P52B.is_current_owner_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P53F.has_former_or_current_location> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P53B.is_former_or_current_location_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P54F.has_current_permanent_location> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P54B.is_current_permanent_location_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P55F.has_current_location> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P55B.currently_holds> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P56F.bears_feature> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P56B.is_found_on> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E26.Physical_Feature> .
+<http://83.212.97.61:8090/root#/P57F.has_number_of_parts> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P58F.has_section_definition> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P58B.defines_section> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E46.Section_Definition> .
+<http://83.212.97.61:8090/root#/P59F.has_section> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P59B.is_located_on_or_within> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P60F.is_member_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P60B.has_members> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E40.Legal_Body> .
+<http://83.212.97.61:8090/root#/P61F.has_gender> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P61B.is_gender_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E76.Gender> .
+<http://83.212.97.61:8090/root#/P62F.depicts_object> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P62B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P63F.depicts_event> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P63B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/P64F.depicts_concept> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P64B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P65F.shows_visual_item> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P65B.is_shown_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E36.Visual_Item> .
+<http://83.212.97.61:8090/root#/P66F.refers_to_concept> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P66B.is_refered_to_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P67F.referrs_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P67B.is_referred_to_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P68F.usually_employs> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E29.Design_or_Procedure> .
+<http://83.212.97.61:8090/root#/P68B.is_usually_employed_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E57.Material> .
+<http://83.212.97.61:8090/root#/P69F.associated_with> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E29.Design_or_Procedure> .
+<http://83.212.97.61:8090/root#/P70F.documents> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E31.Document> .
+<http://83.212.97.61:8090/root#/P70B.is_documented_in> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P71F.contains> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E32.Authority_Document> .
+<http://83.212.97.61:8090/root#/P71B.is_part_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P72F.has_language> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/P72B.is_language_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E56.Language> .
+<http://83.212.97.61:8090/root#/P73F.has_translation> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/P73B.is_translation_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/P74F.has_current_or_former_residence> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P74B.is_current_or_former_residence_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P75F.possesses> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P75B.is_possessed_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E30.Right> .
+<http://83.212.97.61:8090/root#/P76F.has_contact_points> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P76B.provides_access_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E51.Contact_Point> .
+<http://83.212.97.61:8090/root#/P77F.consists_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E40.Legal_Body> .
+<http://83.212.97.61:8090/root#/P77B.belongs_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E40.Legal_Body> .
+<http://83.212.97.61:8090/root#/P78F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P78B.identifies> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E49.Time_Appellation> .
+<http://83.212.97.61:8090/root#/P79F.begins_at_qualify> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P80F.ends_at_qualify> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P81F.at_least_covering> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P82F.at_most_within> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P83F.had_at_least_duration> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P84F.had_at_most_duration> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P85F.consists_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P85B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P86F.falls_within> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P86B.contains> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P87F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P87B.identifies> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E44.Place_Appellation> .
+<http://83.212.97.61:8090/root#/P88F.consists_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P88B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P89F.falls_within> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P89B.contains> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P90F.value> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P91F.unit> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P92F.brought_into_existence> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> .
+<http://83.212.97.61:8090/root#/P92B.was_brought_into_existence_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E77.Existence> .
+<http://83.212.97.61:8090/root#/P93F.took_out_of_existence> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E64.End_of_Existence> .
+<http://83.212.97.61:8090/root#/P93B.was_taken_out_of_existence_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E77.Existence> .
+<http://83.212.97.61:8090/root#/P94F.has_created> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E65.Conceptual_Creation> .
+<http://83.212.97.61:8090/root#/P94B.was_created_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P95F.has_formed> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E66.Formation> .
+<http://83.212.97.61:8090/root#/P95B.was_formed_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E74.Group> .
+<http://83.212.97.61:8090/root#/P96F.by_mother> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E67.Birth> .
+<http://83.212.97.61:8090/root#/P96B.gave_birth> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P97F.from_father> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E67.Birth> .
+<http://83.212.97.61:8090/root#/P97B.was_father_for> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P98F.brought_into_life> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E67.Birth> .
+<http://83.212.97.61:8090/root#/P98B.was_born> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P99F.dissolved> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E68.Dissolution> .
+<http://83.212.97.61:8090/root#/P99B.was_dissolved_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E74.Group> .
+<http://83.212.97.61:8090/root#/P100F.was_death_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E69.Death> .
+<http://83.212.97.61:8090/root#/P100B.died_in> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P101F.had_as_general_use> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E70.Stuff> .
+<http://83.212.97.61:8090/root#/P101B.was_use_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P102F.has_title> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P102B.is_title_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E35.Title> .
+<http://83.212.97.61:8090/root#/P103F.was_intended_for> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P103B.was_intention_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P104F.is_subject_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E72.Legal_Object> .
+<http://83.212.97.61:8090/root#/P104B.applies_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E30.Right> .
+<http://83.212.97.61:8090/root#/P105F.right_held_by> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E72.Legal_Object> .
+<http://83.212.97.61:8090/root#/P105B.owns_rights_to> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P106F.is_composed_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/P106B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/P107F.had_member> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E74.Group> .
+<http://83.212.97.61:8090/root#/P107B.was_member_of> <http://www.w3.org/2000/01/rdf-schema#domain> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P1F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E41.Appellation> .
+<http://83.212.97.61:8090/root#/P1B.identifies> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P2F.has_type> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P2B.is_type_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P3F.has_note> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2000/01/rdf-schema#Literal> .
+<http://83.212.97.61:8090/root#/P4F.has_time-span> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P4B.is_time-span_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E2.Temporal_Entity> .
+<http://83.212.97.61:8090/root#/P5F.consists_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P5B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P6F.falls_within> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P6B.contains> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P7F.took_place_at> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P7B.witnessed> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P8F.took_place_on_or_within> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P8B.witnessed> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P9F.consists_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P9B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P10F.falls_within> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P10B.contains> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/P11F.had_participants> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P11B.participated_in> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/P12F.ocurred_in_the_presence_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E70.Stuff> .
+<http://83.212.97.61:8090/root#/P12B.was_present_at> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/P13F.destroyed> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P13B.was_destroyed_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E6.Destruction> .
+<http://83.212.97.61:8090/root#/P14F.carried_out_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P14B.performed> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P15F.took_into_account> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P15B.was_taken_into_account_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P16F.used_object> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P16B.was_used_for> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P17F.was_motivation_for> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P17B.motivated> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P18F.motivated_the_creation_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P18B.was_created_for> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P19F.was_intended_use_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E22.Man-Made_Object> .
+<http://83.212.97.61:8090/root#/P19B.was_made_for> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P20F.had_specific_purpose> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P20B.was_purpose_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P21F.had_as_general_purpose> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P21B.was_purpose_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/P22F.transferred_title_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P22B.acquired_title_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E8.Acquisition> .
+<http://83.212.97.61:8090/root#/P23F.transferred_title_from> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P23B.surrendered_title_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E8.Acquisition> .
+<http://83.212.97.61:8090/root#/P24F.transferred_title_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P24B.changed_ownership_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E8.Acquisition> .
+<http://83.212.97.61:8090/root#/P25F.moved> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P25B.moved_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E9.Move> .
+<http://83.212.97.61:8090/root#/P26F.moved_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P26B.occupied> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E9.Move> .
+<http://83.212.97.61:8090/root#/P27F.moved_from> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P27B.vacated> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E9.Move> .
+<http://83.212.97.61:8090/root#/P28F.custody_surrendered_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P28B.surrendered_custody> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> .
+<http://83.212.97.61:8090/root#/P29F.custody_received_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P29B.received_custody> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> .
+<http://83.212.97.61:8090/root#/P30F.transferred_custody_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P30B.custody_changed_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> .
+<http://83.212.97.61:8090/root#/P31F.has_modified> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P31B.was_modified_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E11.Modification> .
+<http://83.212.97.61:8090/root#/P32F.used_general_technique> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P32B.was_technique_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E11.Modification> .
+<http://83.212.97.61:8090/root#/P33F.used_specific_technique> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E29.Design_or_Procedure> .
+<http://83.212.97.61:8090/root#/P33B.was_used_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E11.Modification> .
+<http://83.212.97.61:8090/root#/P108F.has_produced> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P108B.was_produced_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E12.Production> .
+<http://83.212.97.61:8090/root#/P34F.concerned> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P34B.was_assessed_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E14.Condition_Assessment> .
+<http://83.212.97.61:8090/root#/P35F.has_identified> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P35B.identified_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E14.Condition_Assessment> .
+<http://83.212.97.61:8090/root#/P36F.registered> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P36B.registered_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E15.Identifier_Assignment> .
+<http://83.212.97.61:8090/root#/P37F.assigns> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P37B.is_assigned_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E15.Identifier_Assignment> .
+<http://83.212.97.61:8090/root#/P38F.deassigns> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P38B.is_deassigned_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E15.Identifier_Assignment> .
+<http://83.212.97.61:8090/root#/P39F.measured> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P39B.was_measured> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E16.Measurement> .
+<http://83.212.97.61:8090/root#/P40F.observed_dimension> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P40B.was_observed> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E16.Measurement> .
+<http://83.212.97.61:8090/root#/P41F.classified> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P41B.was_classified_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E17.Type_Assignment> .
+<http://83.212.97.61:8090/root#/P42F.assigned> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P42B.was_assigned_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E17.Type_Assignment> .
+<http://83.212.97.61:8090/root#/P43F.has_dimension> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P43B.is_dimension_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P44F.has_condition> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E3.Condition_State> .
+<http://83.212.97.61:8090/root#/P44B.condition_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P45F.consists_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E57.Material> .
+<http://83.212.97.61:8090/root#/P45B.is_incorporated_in> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P46F.is_composed_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P46B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P47F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P47B.identifies> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P48F.preferred_identifier_is> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E42.Object_Identifier> .
+<http://83.212.97.61:8090/root#/P48B.is_preffered_identifier_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P49F.has_former_or_current_keeper> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P49B.is_former_or_current_keeper_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P50F.has_current_keeper> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P50B.is_current_keeper_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P51F.has_former_or_current_owner> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P51B.is_former_or_current_owner_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P52F.has_current_owner> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P52B.is_current_owner_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P53F.has_former_or_current_location> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P53B.is_former_or_current_location_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P54F.has_current_permanent_location> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P54B.is_current_permanent_location_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P55F.has_current_location> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P55B.currently_holds> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P56F.bears_feature> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E26.Physical_Feature> .
+<http://83.212.97.61:8090/root#/P56B.is_found_on> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P57F.has_number_of_parts> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2000/01/rdf-schema#Literal> .
+<http://83.212.97.61:8090/root#/P58F.has_section_definition> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E46.Section_Definition> .
+<http://83.212.97.61:8090/root#/P58B.defines_section> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P59F.has_section> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P59B.is_located_on_or_within> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/P60F.is_member_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E40.Legal_Body> .
+<http://83.212.97.61:8090/root#/P60B.has_members> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P61F.has_gender> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E76.Gender> .
+<http://83.212.97.61:8090/root#/P61B.is_gender_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P62F.depicts_object> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/P62B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P63F.depicts_event> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/P63B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P64F.depicts_concept> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P64B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P65F.shows_visual_item> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E36.Visual_Item> .
+<http://83.212.97.61:8090/root#/P65B.is_shown_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P66F.refers_to_concept> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P66B.is_refered_to_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P67F.referrs_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P67B.is_referred_to_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P68F.usually_employs> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E57.Material> .
+<http://83.212.97.61:8090/root#/P68B.is_usually_employed_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E29.Design_or_Procedure> .
+<http://83.212.97.61:8090/root#/P69F.associated_with> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E29.Design_or_Procedure> .
+<http://83.212.97.61:8090/root#/P70F.documents> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/P70B.is_documented_in> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E31.Document> .
+<http://83.212.97.61:8090/root#/P71F.contains> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P71B.is_part_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E32.Authority_Document> .
+<http://83.212.97.61:8090/root#/P72F.has_language> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E56.Language> .
+<http://83.212.97.61:8090/root#/P72B.is_language_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/P73F.has_translation> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/P73B.is_translation_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/P74F.has_current_or_former_residence> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P74B.is_current_or_former_residence_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P75F.possesses> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E30.Right> .
+<http://83.212.97.61:8090/root#/P75B.is_possessed_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P76F.has_contact_points> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E51.Contact_Point> .
+<http://83.212.97.61:8090/root#/P76B.provides_access_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P77F.consists_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E40.Legal_Body> .
+<http://83.212.97.61:8090/root#/P77B.belongs_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E40.Legal_Body> .
+<http://83.212.97.61:8090/root#/P78F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E49.Time_Appellation> .
+<http://83.212.97.61:8090/root#/P78B.identifies> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P79F.begins_at_qualify> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2000/01/rdf-schema#Literal> .
+<http://83.212.97.61:8090/root#/P80F.ends_at_qualify> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2000/01/rdf-schema#Literal> .
+<http://83.212.97.61:8090/root#/P81F.at_least_covering> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E61.Time_Primitive> .
+<http://83.212.97.61:8090/root#/P82F.at_most_within> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E61.Time_Primitive> .
+<http://83.212.97.61:8090/root#/P83F.had_at_least_duration> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P84F.had_at_most_duration> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E54.Dimension> .
+<http://83.212.97.61:8090/root#/P85F.consists_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P85B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P86F.falls_within> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P86B.contains> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P87F.is_identified_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E44.Place_Appellation> .
+<http://83.212.97.61:8090/root#/P87B.identifies> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E52.Time-Span> .
+<http://83.212.97.61:8090/root#/P88F.consists_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P88B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P89F.falls_within> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P89B.contains> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E53.Place> .
+<http://83.212.97.61:8090/root#/P90F.value> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2000/01/rdf-schema#Literal> .
+<http://83.212.97.61:8090/root#/P91F.unit> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E58.Measurement_Unit> .
+<http://83.212.97.61:8090/root#/P92F.brought_into_existence> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E77.Existence> .
+<http://83.212.97.61:8090/root#/P92B.was_brought_into_existence_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> .
+<http://83.212.97.61:8090/root#/P93F.took_out_of_existence> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E77.Existence> .
+<http://83.212.97.61:8090/root#/P93B.was_taken_out_of_existence_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E64.End_of_Existence> .
+<http://83.212.97.61:8090/root#/P94F.has_created> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/P94B.was_created_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E65.Conceptual_Creation> .
+<http://83.212.97.61:8090/root#/P95F.has_formed> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E74.Group> .
+<http://83.212.97.61:8090/root#/P95B.was_formed_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E66.Formation> .
+<http://83.212.97.61:8090/root#/P96F.by_mother> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P96B.gave_birth> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E67.Birth> .
+<http://83.212.97.61:8090/root#/P97F.from_father> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P97B.was_father_for> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E67.Birth> .
+<http://83.212.97.61:8090/root#/P98F.brought_into_life> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P98B.was_born> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E67.Birth> .
+<http://83.212.97.61:8090/root#/P99F.dissolved> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E74.Group> .
+<http://83.212.97.61:8090/root#/P99B.was_dissolved_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E68.Dissolution> .
+<http://83.212.97.61:8090/root#/P100F.was_death_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E21.Person> .
+<http://83.212.97.61:8090/root#/P100B.died_in> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E69.Death> .
+<http://83.212.97.61:8090/root#/P101F.had_as_general_use> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P101B.was_use_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E70.Stuff> .
+<http://83.212.97.61:8090/root#/P102F.has_title> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E35.Title> .
+<http://83.212.97.61:8090/root#/P102B.is_title_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P103F.was_intended_for> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/P103B.was_intention_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/P104F.is_subject_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E30.Right> .
+<http://83.212.97.61:8090/root#/P104B.applies_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E72.Legal_Object> .
+<http://83.212.97.61:8090/root#/P105F.right_held_by> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P105B.owns_rights_to> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E72.Legal_Object> .
+<http://83.212.97.61:8090/root#/P106F.is_composed_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/P106B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/P107F.had_member> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/P107B.was_member_of> <http://www.w3.org/2000/01/rdf-schema#range> <http://83.212.97.61:8090/root#/E74.Group> .
+<http://83.212.97.61:8090/root#/E1.CRM_Entity> <http://www.w3.org/2000/01/rdf-schema#comment> "This is the abstract concept of the entities of our\n\n     universe of discourse. It carries the rule that all entities can\n\n     be classified by a type, which further refines the specific\n\n     subclass an instance belongs to, and a free text field for\n\n     anything we want to express and that is not captured by formal\n\n     links."@en .
+<http://83.212.97.61:8090/root#/E2.Temporal_Entity> <http://www.w3.org/2000/01/rdf-schema#comment> "This is an abstract entity and has no examples. It\n\n     groups together things such as events, states and other phenomena\n\n     which are limited in time. It is specialized into Period,\n\n     which holds on some geographic area, and Condition State,\n\n     which holds for, on, or over a certain object."@en .
+<http://83.212.97.61:8090/root#/P4F.has_time-span> <http://www.w3.org/2000/01/rdf-schema#comment> "Outer bounds for the real time span things\n\n     happened in."@en .
+<http://83.212.97.61:8090/root#/P4B.is_time-span_of> <http://www.w3.org/2000/01/rdf-schema#comment> "Outer bounds for the real time span things\n\n     happened in."@en .
+<http://83.212.97.61:8090/root#/E3.Condition_State> <http://www.w3.org/2000/01/rdf-schema#comment> "The state of an object characterized by a certain\n\n     condition and a time-span, e.g. \"In ruins from 1695 until 1952\",\n\n     where the qualifier \"in ruins\" is represented as the condition\n\n     state type."@en .
+<http://83.212.97.61:8090/root#/E4.Period> <http://www.w3.org/2000/01/rdf-schema#comment> "A period is characterized by a coherent set of\n\n     phenomena and or manifestations .explicitly intended or not.,\n\n     which are assumed to have taken place over a certain space\n\n     and time.\n\n\n\n     Examples: Glacial period, bronze period, Ming Dynasty,\n\n     Impressionism, Neolithic Period, Mc Carthy Era, The Sixties,\n\n     Niniveh, 'Sturm und Drang'.\n\n\n\n     There are different opinions as to whether a ?style? is\n\n     defined by physical features or by the historical\n\n     context."@en .
+<http://83.212.97.61:8090/root#/P7F.took_place_at> <http://www.w3.org/2000/01/rdf-schema#comment> "Denotes eventually a wider region than the real spot\n\n     things happened on.May be took place at would be a better name\n\n     for this link."@en .
+<http://83.212.97.61:8090/root#/P7B.witnessed> <http://www.w3.org/2000/01/rdf-schema#comment> "Denotes eventually a wider region than the real spot\n\n     things happened on.May be took place at would be a better name\n\n     for this link."@en .
+<http://83.212.97.61:8090/root#/P9F.consists_of> <http://www.w3.org/2000/01/rdf-schema#comment> "Aggregation of subperiods, the total of which\n\n     completely cover the places and times there things really\n\n     happened, used if time spans are different for different\n\n     places .better name \"composed of\"?."@en .
+<http://83.212.97.61:8090/root#/P9B.forms_part_of> <http://www.w3.org/2000/01/rdf-schema#comment> "Aggregation of subperiods, the total of which\n\n     completely cover the places and times there things really\n\n     happened, used if time spans are different for different\n\n     places .better name \"composed of\"?."@en .
+<http://83.212.97.61:8090/root#/E5.Event> <http://www.w3.org/2000/01/rdf-schema#comment> "A change of state in cultural, social, physical\n\n     systems, regardless of scale, brought about by a series or group\n\n     of coherent physical, cultural, technological or legal phenomena.\n\n\n\n     Examples : World War II, Battle of Stalingrad, Earthquake in\n\n     Lisbon, birth of Cleopatra, my birthday celebration 28-6-1995,\n\n     the Yal ta Conference, \"a tile fell from my roof\", the CIDOC\n\n     Conference 2005.\n\n\n\n     The distinction between and event and a period is partly a\n\n     question of scale.Viewed at a broad scale, an event is an\n\n     \"instantaneous\" change of state. At a fine scale, the event\n\n     can be analysed into its component phenomena within a space and\n\n     time frame,i.e., a period. The reverse is not necessarily\n\n     the case, not all periods give rise to a noteworthy change of\n\n     state."@en .
+<http://83.212.97.61:8090/root#/E6.Destruction> <http://www.w3.org/2000/01/rdf-schema#comment> "An event which causes one or more objects to lose\n\n     their identity as the current subjects of documentation.\n\n     Some destructions are intentional, others are independent of\n\n     human activity. The decision as to the point at which an object\n\n     is destroyed rather than modified may be arbitrary in some cases.\n\n     The same event may, in some cases, be documented both as a\n\n     destruction of one or more objects and as the creation of others\n\n     using parts or material from the original, or, alternatively,\n\n     as a modification.  In the former case, the object\n\n     record would close, in the latter, it would continue.\n\n\n\n     For living beings, death is usually more clearly defined.\n\n\n\n     Examples: The Lisbon Earthquake, the destruction of Nineveh,\n\n     I broke a champagne glass yesterday, the shooting of the last\n\n     wolf in Germany in 1729."@en .
+<http://83.212.97.61:8090/root#/E7.Activity> <http://www.w3.org/2000/01/rdf-schema#comment> "An action or a series of actions, carried out by\n\n     actors .people, groups or organisations. which follow a certain\n\n     explicit or implicit intention and result as a collective effect\n\n     in some change of state in the cultural, social, physical systems\n\n     we are interested in. This notion includes both complex\n\n     and long lasting actions such as the building of a settlement, or\n\n     a war, as well as simple, short-lived actions such as the opening\n\n     of a door. It does not include the notion of activity in the\n\n     sense of professions and other non-targeted\n\n     notions. These are seen rather as belonging to a part\n\n     in the hierarchy above Event."@en .
+<http://83.212.97.61:8090/root#/P20F.had_specific_purpose> <http://www.w3.org/2000/01/rdf-schema#comment> "E.g. making of a gift for the wedding of king\n\n     George"@en .
+<http://83.212.97.61:8090/root#/P20B.was_purpose_of> <http://www.w3.org/2000/01/rdf-schema#comment> "E.g. making of a gift for the wedding of king\n\n     George"@en .
+<http://83.212.97.61:8090/root#/P21F.had_as_general_purpose> <http://www.w3.org/2000/01/rdf-schema#comment> "E.g. making of a dress for wedding."@en .
+<http://83.212.97.61:8090/root#/P21B.was_purpose_of> <http://www.w3.org/2000/01/rdf-schema#comment> "E.g. making of a dress for wedding."@en .
+<http://83.212.97.61:8090/root#/E8.Acquisition> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes the transfer of the legal\n\n     ownership from one legal person to another. Either one of the\n\n     actors may be omitted, unknown or not existing. The entity\n\n     describes the beginning, the end or the transfer of an ownership,\n\n     acquisition from unknown source or loss of title, depending\n\n     on the circumstances. It takes a neutral position with respect to\n\n     the actors involved. The museum notion of \"accession\" seems to\n\n     differ between institutions.\n\n     We preferred therefore to model the notions of legal ownership\n\n     and physical custody instead, which are well defined in\n\n     international business. Institutions can choose to model their\n\n     specific notions as combinations of these.\n\n\n\n     Annexation, donation, purchase, field collection - where legal\n\n     title is appropriated by the collector, are types of acquisition.\n\n     Examples: a fish collected in international waters, a painting\n\n     bequeathed to a museum."@en .
+<http://83.212.97.61:8090/root#/E9.Move> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity captures the change of physical location\n\n     of a museum object for exhibitions, conservation, reorganization,\n\n     loans, study etc.\n\n\n\n     e.g. Taking objects from storage and putting them on display is\n\n     a type of move."@en .
+<http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes the transfer of physical custody\n\n     from one legal person to another. Either one of the actors may be\n\n     omitted, unknown or not existing. The entity may describe the\n\n     beginning, the end or the transfer of custody, field collection\n\n     or declared loss of an object, depending on the circumstances.\n\n     It takes a neutral position with respect to the actors involved.\n\n\n\n     The distinction between legal and physical custody can be\n\n     modelled as types.\n\n\n\n     Some events can simultaneously be considered as acquisition,\n\n     transfer of custody and move. For example, purchase of a\n\n     Polynesian feather hat at a market. In other cases, separate\n\n     events are involved,\n\n     e.g. purchase by telephone of an object on auction, physical\n\n     transportation, and reception by the new owner."@en .
+<http://83.212.97.61:8090/root#/E11.Modification> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises all activities which\n\n     intentionally alter physical objects, regardless of the degree\n\n     of intervention: creation of some item from raw material,\n\n     restorations, use of ancient objects in jewelry, etc..\n\n     Since many cases the distinction between modification and creation\n\n     is not clear, and the actions implied are basically the same,\n\n     modification is regarded as the more general .and less ambiguous.\n\n     concept. This implies that some items may be consumed or\n\n     destroyed in a modification process, and others emerge from it.\n\n     Typically, objects involved in the process, such as tools,\n\n     materials, etc., which are foreseen by the applied technique are\n\n     modeled as attributes of the Design or Procedure, for reasons of\n\n     efficient data representation.\n\n     Nevertheless, unusual and remarkable items used for a specific\n\n     instance of aprocess should be referred to here.\n\n\n\n     This entity is thought to be collective, e.g. the printing of a\n\n     thousand books should be one event. Conservation actions can be\n\n     modeled as a type of modification."@en .
+<http://83.212.97.61:8090/root#/E12.Production> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity specializes the notion of modification\n\n     into production, i.e. activities which are designed to and\n\n     succeed in creating one or a series of new items, new in the\n\n     sense that there is no obvious similarity to the consumed items\n\n     and material.\n\n     Examples: painting a watercolour, printing an etching, producing\n\n     a series of household forks, the recasting of the mermaid in\n\n     Copenhagen."@en .
+<http://83.212.97.61:8090/root#/E13.Attribute_Assignment> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises the actions of making assertions\n\n     about properties of an object. It serves the documentation of how\n\n     the respective assessment came about, and whose opinion it was.\n\n     All the attributes or properties assigned in such an action can\n\n     also be seen as directly attached to the respective object,\n\n     possibly as a collection of contradictory values. All cases of\n\n     direct links from objects to values which are, in this model,\n\n     also referred to indirectly through an action, are characterized\n\n     as \"short cuts\" of this action. This redundant modeling of two\n\n     alternative views is preferred because many implementations may\n\n     have good reasons to model either the action or the short cut,\n\n     and the relation between both alternatives can be captured by\n\n     simple rules.\n\n\n\n     In addition, the entity describes the actions of people making\n\n     propositions and statements during certain museum procedures,\n\n     e.g. the person and date when a condition statement was made, an\n\n     identifier was assigned, the museum object was measured, etc..\n\n     Which kinds of such assignments and statements need to be\n\n     documented explicitly in schema structures rather than free text,\n\n     depends on a museum=B4s practice. In the latter case shortcuts may\n\n     be used which refer directly to the museum object."@en .
+<http://83.212.97.61:8090/root#/E14.Condition_Assessment> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes the action of assessing the\n\n     condition of preservation of an object over a particular period,\n\n     either by inspection, measurement or historical\n\n     studies."@en .
+<http://83.212.97.61:8090/root#/E15.Identifier_Assignment> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes the action of assigning an\n\n     identifier, such as a museum number, to an object. The interest\n\n     in this action arises when objects are exchanged, and multiple\n\n     identifiers are used, or the identification system of an\n\n     organization is changed. In order to cover these cases, it is\n\n     important to document by whom, when and for what purpose an\n\n     identifier is assigned to a museum object."@en .
+<http://83.212.97.61:8090/root#/E16.Measurement> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes actions of measuring physical\n\n     properties by counting or use of some tool, whether by simple\n\n     yardstick or complex radiation detection device. The interest\n\n     is in the method and care applied, in order to decide afterwards\n\n     on the reliability of the result. For properties which may change\n\n     value over time, such as length, due to shrinkage, the date is\n\n     of direct relevance as well. Details of methods and devices are\n\n     best handled as free text, whereas basic methods such as \"C14\"\n\n     should be encoded in the type field."@en .
+<http://83.212.97.61:8090/root#/P39F.measured> <http://www.w3.org/2000/01/rdf-schema#comment> "This link has to be specialized further in\n\n     subclasses."@en .
+<http://83.212.97.61:8090/root#/P39B.was_measured> <http://www.w3.org/2000/01/rdf-schema#comment> "This link has to be specialized further in\n\n     subclasses."@en .
+<http://83.212.97.61:8090/root#/P40F.observed_dimension> <http://www.w3.org/2000/01/rdf-schema#comment> "This link has to be specialized further in subclasses.\n\n     Examples: hight, length, diameter of base,\n\n     major hight etc."@en .
+<http://83.212.97.61:8090/root#/P40B.was_observed> <http://www.w3.org/2000/01/rdf-schema#comment> "This link has to be specialized further in subclasses.\n\n     Examples: hight, length, diameter of base,\n\n     major hight etc."@en .
+<http://83.212.97.61:8090/root#/E17.Type_Assignment> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes the act of scientifically\n\n     classifying some entity, an object, a work, an action or whatever.\n\n     The value of classification depends critically on general and\n\n     personal knowledge and the scientific system used. Therefore the\n\n     interest lies in the author and date."@en .
+<http://83.212.97.61:8090/root#/E18.Physical_Stuff> <http://www.w3.org/2000/01/rdf-schema#comment> "Physical Stuff is an abstract notion that groups\n\n     all physical objects, man made and natural, as well as physical\n\n     features of objects, such as holes. We use the term 'feature'\n\n     to refer to anything of a material nature, such as scratches,\n\n     holes, rivers, and stains, which it would be strange to refer\n\n     to as ?objects?."@en .
+<http://83.212.97.61:8090/root#/E19.Physical_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "An discrete, real item of material nature which\n\n     constitutes a unit for documentation. The decision as to what\n\n     constitutes a complete item, rather than parts or components,\n\n     may be purely administrative.\n\n\n\n     Examples : John Smith, Aphrodite of Milos, the Palace of Knossos,\n\n     the Cullinan diamond, Apollo 13 a the time\n\n     of launch."@en .
+<http://83.212.97.61:8090/root#/E20.Biological_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "An individual, real item of material nature,\n\n     which lives, has lived, or is a natural products of living\n\n     organisms. Artificial objects which incorporate biological\n\n     elements, such as Victorian butterfly frames, can be classified\n\n     as both natural and man-made objects.\n\n\n\n     Examples : Me, Tut-Ankh-Amun, Boukephalas."@en .
+<http://83.212.97.61:8090/root#/E21.Person> <http://www.w3.org/2000/01/rdf-schema#comment> "A real person, who lives or is assumed to have lived.\n\n\n\n     Examples : John Smith, Tut-Ankh-Amun.\n\n\n\n     Legendary figures, such as Ulysses and King Arthur, who may have\n\n     existed, fall into this class if the documentation refers to them\n\n     as historical figures. In cases where doubt exists as to whether\n\n     several persons are in fact identical, multiple instances can be\n\n     created and linked to indicate their relationship."@en .
+<http://83.212.97.61:8090/root#/E22.Man-Made_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "An discrete real item of material nature, which\n\n     is an artifact of technological actions.\n\n\n\n     Example : My car, chassis no. AMT-9566-XXX9384,\n\n                  The Portland Vase,\n\n        The Colloseum, The Parthenon."@en .
+<http://83.212.97.61:8090/root#/E23.Iconographic_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises objects which are designed\n\n     primarily or in addition to another functionality to represent\n\n     or depict something in an optical manner, be it concrete or\n\n     abstract. Examples: Paintings, Sculpture, a vase in form of\n\n     a head, a decoration on a medieval gun.\n\n\n\n     This entity has a certain pragmatic value in the fine arts\n\n     since it conveniently groups together objects such as paintings,\n\n     drawings, watercolours and other similar objects. From a\n\n     philosophical point of view, representation is an 'intentional'\n\n     act. Natural objects may resemble other objects by chance but\n\n     they can represent only as a result of intervention by some fairly\n\n     sophisticated semiotic arrangements."@en .
+<http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> <http://www.w3.org/2000/01/rdf-schema#comment> "Man-made entity is a general class that groups man\n\n     made objects and features. The distinction between 'objects'\n\n     and 'features' is useful since it avoids referring to things\n\n     like holes and texture as objects. Features and objects share\n\n     many common characteristics however, hence the need for a\n\n     general class of man-made things."@en .
+<http://83.212.97.61:8090/root#/P62F.depicts_object> <http://www.w3.org/2000/01/rdf-schema#comment> "This link serves particularly to trace\n\n       cross-references to objects in collections, especially in the\n\n       same museum.  Else, a simple textual note would be enough.\n\n       The qualifier mode of depiction captures view, angle, part,\n\n       salience, quality etc.\n\n       If the iconography depicts an existing real object,\n\n       e.g. real person, building, place, or another museum object\n\n       .like it usually happens with photos., the link depicts object\n\n       should be used, pointing to an instance of the Physical Stuff\n\n       class or of any of its subclasses.\n\n       Mode of depiction examples: sketch, caricature,\n\n       animation."@en .
+<http://83.212.97.61:8090/root#/P62B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#comment> "This link serves particularly to trace\n\n       cross-references to objects in collections, especially in the\n\n       same museum.  Else, a simple textual note would be enough.\n\n       The qualifier mode of depiction captures view, angle, part,\n\n       salience, quality etc.\n\n       If the iconography depicts an existing real object,\n\n       e.g. real person, building, place, or another museum object\n\n       .like it usually happens with photos., the link depicts object\n\n       should be used, pointing to an instance of the Physical Stuff\n\n       class or of any of its subclasses.\n\n       Mode of depiction examples: sketch, caricature,\n\n       animation."@en .
+<http://83.212.97.61:8090/root#/P63F.depicts_event> <http://www.w3.org/2000/01/rdf-schema#comment> "This link serves particularly for cross-references\n\n       to archives and history, as above.\n\n       If the iconography depicts a real Event, e.g. the battle of\n\n       Bankerhill, the link depicts Event should be used, pointing to\n\n       an instance of the class Event. Depicted events of which the\n\n       time or place are out of interest, e.g. mythological &\n\n       religious events, should by regarded as\n\n       Event Types."@en .
+<http://83.212.97.61:8090/root#/P63B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#comment> "This link serves particularly for cross-references\n\n       to archives and history, as above.\n\n       If the iconography depicts a real Event, e.g. the battle of\n\n       Bankerhill, the link depicts Event should be used, pointing to\n\n       an instance of the class Event. Depicted events of which the\n\n       time or place are out of interest, e.g. mythological &\n\n       religious events, should by regarded as\n\n       Event Types."@en .
+<http://83.212.97.61:8090/root#/P64F.depicts_concept> <http://www.w3.org/2000/01/rdf-schema#comment> "This link replaces the usual subject. If the links\n\n       above are used, it is recommended to conclude on the subject\n\n       from the type of the referred object, if the subject  is not\n\n       different from that. This avoids redundancy and inconsistencies.\n\n       If the iconography depicts a non-specifically identified image,\n\n       e.g. a child, a house, a landscape, a symbol, a motive, the link\n\n       depicts concept should be used, pointing\n\n       to a Type."@en .
+<http://83.212.97.61:8090/root#/P64B.is_depicted_by> <http://www.w3.org/2000/01/rdf-schema#comment> "This link replaces the usual subject. If the links\n\n       above are used, it is recommended to conclude on the subject\n\n       from the type of the referred object, if the subject  is not\n\n       different from that. This avoids redundancy and inconsistencies.\n\n       If the iconography depicts a non-specifically identified image,\n\n       e.g. a child, a house, a landscape, a symbol, a motive, the link\n\n       depicts concept should be used, pointing\n\n       to a Type."@en .
+<http://83.212.97.61:8090/root#/E25.Man-Made_Feature> <http://www.w3.org/2000/01/rdf-schema#comment> "Man made features are those physical features\n\n     which result from human intervention. Cf.E27 Physical\n\n     Feature."@en .
+<http://83.212.97.61:8090/root#/E26.Physical_Feature> <http://www.w3.org/2000/01/rdf-schema#comment> "This class was introduced in order to avoid the\n\n     counter-intuitive sense of referring to holes and similar features\n\n     of objects as physical objects. Features are logically or\n\n     physically attached to a particular physical object, and they\n\n     share many of the attributes of physical objects - they can be\n\n     measured and dated, and we can sometimes say who was responsible\n\n     for them. However, you can't pick up a hole and put it in your\n\n     pocket - Yellow Submarine not withstanding. Physical feature\n\n     groups together all features of physical objects. Cf. Man-made\n\n     features for the results of human intervention."@en .
+<http://83.212.97.61:8090/root#/E27.Site> <http://www.w3.org/2000/01/rdf-schema#comment> "A site is a recognisable place that can be represented\n\n     by an Iconographic object, such as a photograph, painting or map.\n\n     A site is composed of relatively immobile material items and\n\n     features in a particular configuration at a particular\n\n     location."@en .
+<http://83.212.97.61:8090/root#/E28.Conceptual_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity is the attempt to group the non-material\n\n     products of our minds, and specifically to allow for reasoning\n\n     about their identity, circumstances of creation and historical\n\n     implications. Characteristically, these things are created,\n\n     invented or thought, and somehow documented or communicated\n\n     between persons.\n\n     Conceptual objects need not have a particular carrier, but may be\n\n     found on several different carriers, such as paper, electronic\n\n     signals, marks, audio media, paintings, photos, human memory, etc.\n\n     They cannot be destroyed as long as they exist on at least one\n\n     carrier or in memory. Examples include texts, maps, photos, music,\n\n     sounds, fairy tales, signs, patterns, symbols, plans, rights,\n\n     and rules. A greater distinction could be made between products\n\n     having a clear identity, such as a specific text, or photographs,\n\n     and the ideas and concepts shared and traded by\n\n     groups of people."@en .
+<http://83.212.97.61:8090/root#/E29.Design_or_Procedure> <http://www.w3.org/2000/01/rdf-schema#comment> "An established plan for execution of a series or group\n\n     of technological actions, which result in a physical change of\n\n     state in certain pieces of material and/or any physical object.\n\n\n\n     Examples: All elements of the AAT \"processes and techniques\"\n\n     facets., a plan for a building, conservation procedures,\n\n     complex editing techniques, flint napping, etc.."@en .
+<http://83.212.97.61:8090/root#/P68F.usually_employs> <http://www.w3.org/2000/01/rdf-schema#comment> "This link is used to avoid repetition of materials for\n\n     each object in case it is already mandatory for the\n\n     technique."@en .
+<http://83.212.97.61:8090/root#/P68B.is_usually_employed_by> <http://www.w3.org/2000/01/rdf-schema#comment> "This link is used to avoid repetition of materials for\n\n     each object in case it is already mandatory for the\n\n     technique."@en .
+<http://83.212.97.61:8090/root#/P69F.associated_with> <http://www.w3.org/2000/01/rdf-schema#comment> "This link allows to model sequences and complex\n\n     composite procedures. To be further specialized down."@en .
+<http://83.212.97.61:8090/root#/E30.Right> <http://www.w3.org/2000/01/rdf-schema#comment> "Rights are used in the sense of legal privileges such\n\n     as the right of property, reproduction rights, etc."@en .
+<http://83.212.97.61:8090/root#/E31.Document> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises items which make propositions\n\n     about reality, whether intentionally or by chance. The means\n\n     may be text, graphics, images, sound, video. Examples: Books\n\n     on history, maps, photos."@en .
+<http://83.212.97.61:8090/root#/P70F.documents> <http://www.w3.org/2000/01/rdf-schema#comment> "The specific interest is to capture cross-references\n\n     to objects in collections.\n\n     A document might also refer to an event, a type or a\n\n     site."@en .
+<http://83.212.97.61:8090/root#/P70B.is_documented_in> <http://www.w3.org/2000/01/rdf-schema#comment> "The specific interest is to capture cross-references\n\n     to objects in collections.\n\n     A document might also refer to an event, a type or a\n\n     site."@en .
+<http://83.212.97.61:8090/root#/E32.Authority_Document> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes encyclopedia, thesauri,\n\n     authority lists: all documents which define terminology or\n\n     conceptual systems for consistent use.\n\n     e.g. Webster's, Getty Art and Architecture Thesaurus, MDA\n\n     Archaeological Objects Thesaurus,\n\n     This Document, etc."@en .
+<http://83.212.97.61:8090/root#/E33.Linguistic_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises texts of all kind,\n\n     be they written or recorded speech,\n\n     in any physical language."@en .
+<http://83.212.97.61:8090/root#/E34.Inscription> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises texts attached to a physical\n\n     object. The attributes of the entity could be extended to include\n\n     alphabet used, rather than documenting these features in the note.\n\n     NB The entity does not describe idiosyncratic characteristics of\n\n     individual physical embodiments of an inscription but the\n\n     underlying prototype, e.g. Duerer=B4s signature."@en .
+<http://83.212.97.61:8090/root#/E35.Title> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises the short pieces of texts that\n\n     are used, by the creator or tradition, to characterize or identify\n\n     a work, often alluding to its subject. The work may be linguistic,\n\n     musical, iconographic or other.\n\n     Examples: Giaconda, La Joconde, Mona Lisa, Die Dreigroschenoper,\n\n     La Pie, La Marseillaise."@en .
+<http://83.212.97.61:8090/root#/E36.Visual_Item> <http://www.w3.org/2000/01/rdf-schema#comment> "Visual Items refers to the intellectual or conceptual\n\n     aspect of recognizable marks and images. When we identify a trade\n\n     mark, say the ICOM logo, we are generally prepared to say that\n\n     the same logo is used on any number of publications. The size,\n\n     orientation and colour may change, but something uniquely\n\n     identifiable remains. The same can be said of images which are\n\n     reproduced many times. What these examples highlight is that\n\n     visual items are independent of their physical support. The visual\n\n     items class provides a means of identifying and linking together\n\n     objects which carry the same visual symbols, marks, images\n\n     or whatever."@en .
+<http://83.212.97.61:8090/root#/E37.Mark> <http://www.w3.org/2000/01/rdf-schema#comment> "Martin Doerr: Symbols, signs, signatures or short texts\n\n     applied to physical objects by arbitrary techniques in order to\n\n     indicate the creator, owner, dedications, purpose, etc.\n\n     Examples: Minoan double axe mark, =A9, STOP! .\n\n    \n\n     This entity specifically does not included marks such as\n\n     scratches, which have no semantic significance. These case be\n\n     documented as physical features."@en .
+<http://83.212.97.61:8090/root#/E38.Image> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity refers to distributions of form and colour\n\n     which may be found on surfaces such as photos, paintings, prints,\n\n     and sculptures etc. or directly on electronic media. The degree\n\n     to which variations in the distribution of form and colour are\n\n     tolerated depends on a given purpose.\n\n    \n\n     The \"depiction\" links between objects and depicted subjects\n\n     may be regarded as short cuts of an intermediate image node\n\n     capturing the optical features of the depiction. Cf E25.\n\n\n\n     Examples: The front side of all 20 Frs notes."@en .
+<http://83.212.97.61:8090/root#/E39.Actor> <http://www.w3.org/2000/01/rdf-schema#comment> "People, either individuals or a groups of persons,\n\n     or organisations, under the aspect of their role in activities.\n\n     E.g. The ISO central committe, the Benaki Museum in Athens,\n\n     Greece, the Bauhaus in Weimar, Germany, Monet, Me.\n\n    \n\n     An informal group, such as a school of artists, may acquire an\n\n     identity and perform actions without ever becoming an officially\n\n     established legal entity. Such cases should be documented as\n\n     instances of Actors, using an appropriate\n\n     sub type."@en .
+<http://83.212.97.61:8090/root#/E40.Legal_Body> <http://www.w3.org/2000/01/rdf-schema#comment> "A legal body is any institution or group of people\n\n     which can act collectively as an agent i.e. it can perform\n\n     actions, own property, create or destroy and be held responsible\n\n     for its actions. The term 'personne morale' is often used in\n\n     French.\n\n    \n\n     Examples: MDA .Europe. Ltd., GreenPeace."@en .
+<http://83.212.97.61:8090/root#/E41.Appellation> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises all names in the proper sense.\n\n     Codes or words, meaningless or meaningful, in the script of\n\n     some group or encoding of an electronic system, used solely to\n\n     identify a specific instance of some category within a certain\n\n     context. These words do not identify the object by their meaning\n\n     but by convention, tradition or agreement."@en .
+<http://83.212.97.61:8090/root#/E42.Object_Identifier> <http://www.w3.org/2000/01/rdf-schema#comment> "Unique codes assigned to objects in order to identify\n\n     them uniquely within the context of one or more organizations.\n\n     Typically alphanumeric sequences.\n\n    \n\n     examples: MM.GE.195, 13.45.1976, etc."@en .
+<http://83.212.97.61:8090/root#/E44.Place_Appellation> <http://www.w3.org/2000/01/rdf-schema#comment> "A place appellation is any sort of identifier used to\n\n     refer to a place. Place appellations may vary over time, and the\n\n     same appellation may be used to refer to several places, either\n\n     because of cultural shifts, or because things move around.\n\n     These unstable aspects of place appellations are dealt with in\n\n     the more general Appellation class. Place appellations can be\n\n     extremely varied in form, postal addresses and spatial coordinates\n\n     and parts of buildings can all be considered as place appellations.\n\n\n\n     Examples: Vienna, Wien, Aquae Sulis Minerva, Bath, Cambridge,\n\n               The Other Place. The City."@en .
+<http://83.212.97.61:8090/root#/E45.Address> <http://www.w3.org/2000/01/rdf-schema#comment> "An address is generally a postal address used for\n\n     mailing. An address can be considered both as the name of a place\n\n     and as a contact point for an actor. This dual aspect is reflected\n\n     in the multiple inheritance.\n\n    \n\n     Example :       1-29-3 Otsuka, Bunkyo-ku,\n\n                     Tokyo, 121, Japan."@en .
+<http://83.212.97.61:8090/root#/E46.Section_Definition> <http://www.w3.org/2000/01/rdf-schema#comment> "section definition groups together names used to refer\n\n     to parts of objects. The 'prow' of a boat, the 'frame' of the\n\n     picture, the 'basement' of the building are all section\n\n     definitions. The entity highlights the fact that parts of objects\n\n     can be treated as locations. .cf. E53 Place. In answer to the\n\n     question 'where is the signature?' one might reply 'on the lower\n\n     left corner'.\n\n    \n\n     Example: The entrance lobby to MDA House, Matthew?s bedroom,\n\n     the poop deck of H.M.S. Victory, the Venus de Milo?s left buttock,\n\n     left inner side of the box."@en .
+<http://83.212.97.61:8090/root#/E47.Spatial_Coordinates> <http://www.w3.org/2000/01/rdf-schema#comment> "Coordinates are a specific form of place appellation,\n\n     that is, a means of referring to a particular place.\n\n     .cf E53 place.\n\n     Coordinates are not restricted to longitude, latitude and altitude.\n\n\n\n     Any regular system of reference that maps onto a physical object\n\n     can be considered as coordinates.\n\n     Examples: 6=B05?29N 45=B012?13W,\n\n                        Black queen?s bishop 4."@en .
+<http://83.212.97.61:8090/root#/E48.Place_Name> <http://www.w3.org/2000/01/rdf-schema#comment> "A place name is a particular and common form of\n\n     place appellation. 'Greece', 'Athens', 'Geneva', are all\n\n     place names. Place names may shift their meaning over time.\n\n     Cf Place appellations."@en .
+<http://83.212.97.61:8090/root#/E49.Time_Appellation> <http://www.w3.org/2000/01/rdf-schema#comment> "Time appellation groups all forms of names or codes,\n\n     such as historical periods, and dates, which are used to refer\n\n     to specific time frames. Time appellations may vary in their\n\n     degree of precision, and they may be relative to other time\n\n     frames, 'prehistoric' for example. These aspects of time\n\n     appellations are dealt with in the more general 'appellations'\n\n     class.\n\n\n\n     In contrast to cultural periods, proper names are seldom given\n\n     to particular Time-spans, hence it was decided to exclude a\n\n     specific entity ?Time-spans name?. Time-spans are often referred\n\n     to in association with cultural periods, and events\n\n     e.g. ?the duration of Ming Dynasty?. cf. E52 Time span.\n\n\n\n     Examples: Meiji, 1st half of the XX century, Quaternary,\n\n     1215 Hegira. Last century."@en .
+<http://83.212.97.61:8090/root#/E50.Date> <http://www.w3.org/2000/01/rdf-schema#comment> "Dates are a specific form of time appellation.\n\n     Dates may vary in their degree of precision.\n\n     E.g. 1900, 4-4-1959, 19640604."@en .
+<http://83.212.97.61:8090/root#/E51.Contact_Point> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises identifiers used to communicate\n\n     with Actors. Examples: E-mail addresses, telephone numbers, post\n\n     office boxes, Fax numbers, etc. NB postal addresses can be\n\n     considered both as place appellations and\n\n     Contact Points."@en .
+<http://83.212.97.61:8090/root#/E52.Time-Span> <http://www.w3.org/2000/01/rdf-schema#comment> "A determination of a range of dates or duration without\n\n     any further connotations, to be used to confine periods, events,\n\n     and any other phenomena valid for a certain time. A time\n\n     appellation is a verbal form which refers to a time-span.\n\n     The time-span itself is a temporal extent in the sense of Galilean\n\n     physics. Different time-appellations may express the same\n\n     time-span.\n\n\n\n     Examples : from 12-17-1993 to 12-8-1996,\n\n     14h30 - 16h22 4th July 1945, 9.30 am 1.1.1999 to 2.OO pm 1.1.1999,\n\n     Duration of the Ming Dynasty."@en .
+<http://83.212.97.61:8090/root#/E53.Place> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity describes extents in space, in particular\n\n     on the surface of the earth, in the pure sense of physics:\n\n     independent from temporal phenomena and matter. Places are usually\n\n     determined by reference to the position of immobile objects\n\n     such as buildings, cities, mountains, and rivers. On a large\n\n     time-scale however, these things are either not persistent or may\n\n     actually move, with respect to each other. This motivates the\n\n     search for a global or absolute system of reference.\n\n\n\n     However, relative references are more relevant in the context of\n\n     cultural documentation and records of relative places tend to be\n\n     more precise. In particular, we are often interested in position\n\n     in relation to large objects, such as ships, which move. Any\n\n     object can serve as a reference for place determination;\n\n     therefore the model foresees the notion of a \"section\" of a\n\n     physical object as a place determination of equal validity.\n\n\n\n     Matching between multiple reference systems is in principle\n\n     possible for a given moment in time, but depends on the precision\n\n     and completeness of the information available. However, the\n\n     resolution of places to absolute coordinates is not, in =\n\ngeneral,\n\n     necessary in cultural documentation systems, and absolute\n\n     referencing may be dependent on the present state of\n\n     global knowledge.\n\n\n\n     Example: the place at which Nelson died is known with reference\n\n     to a large mobile object - H.M.S Victory. A resolution of this\n\n     place in terms of absolute coordinates requires knowledge about\n\n     the position of the vessel and the precise time of his death,\n\n     either of which may be revised. Hence, documenting only an\n\n     absolute reference effectively removes the possibility of\n\n     recalculating.\n\n     It is more relevant to preserve the reasoning behind an assumption\n\n     than the result.\n\n\n\n     Hence a place can be determined by combining, one or more times,\n\n     a frame of reference and a location with respect to this frame.\n\n     These combinations are modelled by Place Appellation.\n\n     .Instance of place are themselves nameless..\n\n\n\n     Example: The place referred to by the Fish collected at three\n\n     miles north of the confluence of the Arve and the Rhone,\n\n     or N W. .GPS., Here."@en .
+<http://83.212.97.61:8090/root#/E54.Dimension> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity is an abstract class for properties that\n\n     are measured by some calibrated means and result in numerical\n\n     values.\n\n\n\n     Examples: currency: =A326.00, length: 4 cm, diameter 26 mm,\n\n     weight 150 lbs, density : 0.85 gm/cc, luminescence :\n\n     56 ISO lumens, tin content: 0.46 %, taille au garot :\n\n     5 hands, C14 date : 2460 years, etc."@en .
+<http://83.212.97.61:8090/root#/E55.Type> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity captures the names of all entities in the\n\n     model and any refinements of these entities which do not require\n\n     further analysis of their formal properties, but which represent\n\n     typological distinctions important to a given user group. The\n\n     semantic interpretation of these subtypes is based on the\n\n     agreement of specific groups. Instances of the Type entity have\n\n     to be formally organized in thesauri, with scope notes,\n\n     illustrations, etc. to clarify their meaning.\n\n     In general, it is expected that different domains and cultural\n\n     groups develop different thesauri in parallel. Consistent\n\n     reasoning on the expansion of sub terms used in a thesaurus is\n\n     possible insofar as it conforms to both the entities and the\n\n     hierarchies of this Model.\n\n\n\n     Examples: Weight, length, depth are types of measurement.\n\n     Portrait, sketch, animation could be types of depiction. Oral,\n\n     written could be types of language. Excellent, good, poor could\n\n     be types of condition state."@en .
+<http://83.212.97.61:8090/root#/E56.Language> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises the names identifying natural\n\n     languages.Internationally used codes are recommended .ISO.....\n\n     This type does not correspond to another explicit entity in the\n\n     Model.\n\n     Example:   ISO language codes."@en .
+<http://83.212.97.61:8090/root#/E57.Material> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity comprises the names used to identify\n\n     materials. Internationally used codes and terminology are\n\n     recommended. This type does not correspond to any other explicit\n\n     entity in the Model, because materials do not have well-defined\n\n     instances, especially after they are used. Discrete pieces of\n\n     raw-materials kept in museums, such as bricks, sheets of fabric,\n\n     pieces of metal, should be modelled separately just as\n\n     other objects. Discrete used or processed pieces, such as the\n\n     stones from Nefer Titi's temple, should be modelled\n\n     as parts."@en .
+<http://83.212.97.61:8090/root#/E58.Measurement_Unit> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity provides the authority list for all types\n\n     of measurement units: feet, inches, centimeters, litres, lumens,\n\n     etc."@en .
+<http://83.212.97.61:8090/root#/E59.Primitive_Value> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity is a container for primitive values used\n\n     as documentation elements which are not further analysed. As such\n\n     they are not considered as elements within our universe of\n\n     discourse. No specific implementation\n\n     recommendations are made."@en .
+<http://83.212.97.61:8090/root#/E61.Time_Primitive> <http://www.w3.org/2000/01/rdf-schema#comment> "This entity is a primitive value that should implement\n\n     appropriate validation and interval logic for date ranges and\n\n     precision relevant to cultural documentation. It is not further\n\n     analysed in this model."@en .
+<http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> <http://www.w3.org/2000/01/rdf-schema#comment> "Entity for temporal reasoning about things beginning to exist -\n\n     Intellectual products, physical items, groups of people, living beings , periods-\n\n     A hook for termini postquem and antequem. It may turn out useful to define more \n\n     specializations of this entity for Natural History."@en .
+<http://83.212.97.61:8090/root#/E64.End_of_Existence> <http://www.w3.org/2000/01/rdf-schema#comment> "Entity for temporal reasoning about things  stopping to exist-\n\n     physical items, groups of people, living beings-\n\n     A hook for termini postquem and antequem."@en .
+<http://83.212.97.61:8090/root#/E65.Conceptual_Creation> <http://www.w3.org/2000/01/rdf-schema#comment> "The creation of an inmaterial product - Text,\n\n     music, image, movie, Law, etc."@en .
+<http://83.212.97.61:8090/root#/E66.Formation> <http://www.w3.org/2000/01/rdf-schema#comment> "The formation or foundation of a formal or informal\n\n     group of people."@en .
+<http://83.212.97.61:8090/root#/E67.Birth> <http://www.w3.org/2000/01/rdf-schema#comment> "The birth of a human being."@en .
+<http://83.212.97.61:8090/root#/E68.Dissolution> <http://www.w3.org/2000/01/rdf-schema#comment> "The formal or informal end of a group of people. If it was\n\n     a deliberate act, the instance should also be instantiated as an activity."@en .
+<http://83.212.97.61:8090/root#/E69.Death> <http://www.w3.org/2000/01/rdf-schema#comment> "The death of a human being. If the person was killed,\n\n     the instance should also be instantiated as an activity."@en .
+<http://83.212.97.61:8090/root#/E70.Stuff> <http://www.w3.org/2000/01/rdf-schema#comment> "An identifiable, discrete, persistent item which constitutes a unit for \n\n     documentation, be it an intellectual product or a physical thing. Such items\n\n     are characterized by a relative stability, i.e. either a solid physical form, an electronic\n\n     encoding, a reproducible pattern, a logical concept or structure. It introduces the concept \n\n     of being used.\n\n     Excluded are liquids flowing, gases moving around etc. A packaged liquid however fits \n\n     this entity."@en .
+<http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> <http://www.w3.org/2000/01/rdf-schema#comment> "An identifiable,discrete, persistent, item deliberately produced,\n\n     invented or created by humans which constitutes a unit for \n   \n     documentation, be an intellectual product, idea or a physical thing."@en .
+<http://83.212.97.61:8090/root#/E72.Legal_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "An identifiable item which can be owned or people can have a right\n\n     on. It is not restricted to Stuff. May also be Legal Bodies should be\n     \n     included."@en .
+<http://83.212.97.61:8090/root#/E73.Information_Object> <http://www.w3.org/2000/01/rdf-schema#comment> "An identifiable inmaterial item which constitutes a unit for \n\n     documentation and has an objectively recognizable structure.\n\n     Examples are data sets, images, texts, procedure prescriptions. It does\n\n     not include types, ideas, etc."@en .
+<http://83.212.97.61:8090/root#/E74.Group> <http://www.w3.org/2000/01/rdf-schema#comment> "A group is any gathering of people that acts collectively or in a  \n\n     similar way due to any kind of social bounds or contact. \n\n     Nationality can be handled as a link to a group of appropriate type. \n\n     Note the distinction between citizenship and ethnic group and other subtleties \n \n     not easily expressible by nationality adjectives. \n\n     Examples: A group of people painting together at some happening,\n\n     A tribe of indigenous people, an artist workshop, a museum, \"Those at the Bastille\", \n\n     a nation, a government, a company."@en .
+<http://83.212.97.61:8090/root#/E75.Conceptual_Object_Appellation> <http://www.w3.org/2000/01/rdf-schema#comment> "Specific Identifiers of an intellectual product or standarized\n\n     pattern.\n\n     Examples: ISBN 3-7913-1418-1, ISO2788-1986(E)"@en .
+<http://83.212.97.61:8090/root#/E76.Gender> <http://www.w3.org/2000/01/rdf-schema#comment> ""@en .
+<http://83.212.97.61:8090/root#/E77.Existence> <http://www.w3.org/2000/01/rdf-schema#comment> "This is an abstract entity, which comprises the kinds of things that have the potenctial to exist\n\n     for a relevant time-span preserving their identity. It comprises physical items and intellectual\n\n     products, groups of people, living beings, etc. Types are included in yheir nature as intellectual\n\n     product, in particular in natural history, where types are based on the findings of a prototypical \n\n     specimen. Appellations are included in their nature as creations of the people using them.\n\n     Examples: ISBN 3-00-007556-9, me, Arethusa ophioglossoides, Shakespeare's Hamlet,\n\n     Aphrodite of Milos."@en .
+<http://83.212.97.61:8090/root#/E2.Temporal_Entity> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/E3.Condition_State> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E2.Temporal_Entity> .
+<http://83.212.97.61:8090/root#/E4.Period> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E2.Temporal_Entity> .
+<http://83.212.97.61:8090/root#/E5.Event> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E4.Period> .
+<http://83.212.97.61:8090/root#/E6.Destruction> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E64.End_of_Existence> .
+<http://83.212.97.61:8090/root#/E7.Activity> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/E8.Acquisition> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/E9.Move> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/E10.Transfer_of_Custody> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/E11.Modification> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/E12.Production> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E11.Modification> .
+<http://83.212.97.61:8090/root#/E12.Production> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> .
+<http://83.212.97.61:8090/root#/E13.Attribute_Assignment> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/E14.Condition_Assessment> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E13.Attribute_Assignment> .
+<http://83.212.97.61:8090/root#/E15.Identifier_Assignment> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E13.Attribute_Assignment> .
+<http://83.212.97.61:8090/root#/E16.Measurement> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E13.Attribute_Assignment> .
+<http://83.212.97.61:8090/root#/E17.Type_Assignment> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E13.Attribute_Assignment> .
+<http://83.212.97.61:8090/root#/E18.Physical_Stuff> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E70.Stuff> .
+<http://83.212.97.61:8090/root#/E18.Physical_Stuff> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E72.Legal_Object> .
+<http://83.212.97.61:8090/root#/E19.Physical_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/E20.Biological_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/E21.Person> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E20.Biological_Object> .
+<http://83.212.97.61:8090/root#/E21.Person> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/E22.Man-Made_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E19.Physical_Object> .
+<http://83.212.97.61:8090/root#/E22.Man-Made_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/E23.Iconographic_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E22.Man-Made_Object> .
+<http://83.212.97.61:8090/root#/E23.Iconographic_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/E25.Man-Made_Feature> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E24.Physical_Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/E25.Man-Made_Feature> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E26.Physical_Feature> .
+<http://83.212.97.61:8090/root#/E26.Physical_Feature> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E18.Physical_Stuff> .
+<http://83.212.97.61:8090/root#/E27.Site> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E26.Physical_Feature> .
+<http://83.212.97.61:8090/root#/E28.Conceptual_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> .
+<http://83.212.97.61:8090/root#/E29.Design_or_Procedure> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/E30.Right> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/E31.Document> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/E32.Authority_Document> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E31.Document> .
+<http://83.212.97.61:8090/root#/E33.Linguistic_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/E34.Inscription> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/E34.Inscription> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E37.Mark> .
+<http://83.212.97.61:8090/root#/E35.Title> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E33.Linguistic_Object> .
+<http://83.212.97.61:8090/root#/E35.Title> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E41.Appellation> .
+<http://83.212.97.61:8090/root#/E36.Visual_Item> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E73.Information_Object> .
+<http://83.212.97.61:8090/root#/E37.Mark> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E36.Visual_Item> .
+<http://83.212.97.61:8090/root#/E38.Image> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E36.Visual_Item> .
+<http://83.212.97.61:8090/root#/E39.Actor> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E77.Existence> .
+<http://83.212.97.61:8090/root#/E40.Legal_Body> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E74.Group> .
+<http://83.212.97.61:8090/root#/E41.Appellation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E77.Existence> .
+<http://83.212.97.61:8090/root#/E42.Object_Identifier> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E41.Appellation> .
+<http://83.212.97.61:8090/root#/E44.Place_Appellation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E41.Appellation> .
+<http://83.212.97.61:8090/root#/E45.Address> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E44.Place_Appellation> .
+<http://83.212.97.61:8090/root#/E45.Address> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E51.Contact_Point> .
+<http://83.212.97.61:8090/root#/E46.Section_Definition> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E44.Place_Appellation> .
+<http://83.212.97.61:8090/root#/E47.Spatial_Coordinates> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E44.Place_Appellation> .
+<http://83.212.97.61:8090/root#/E48.Place_Name> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E44.Place_Appellation> .
+<http://83.212.97.61:8090/root#/E49.Time_Appellation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E41.Appellation> .
+<http://83.212.97.61:8090/root#/E50.Date> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E49.Time_Appellation> .
+<http://83.212.97.61:8090/root#/E51.Contact_Point> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/E52.Time-Span> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/E53.Place> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/E54.Dimension> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/E56.Language> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/E57.Material> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/E58.Measurement_Unit> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/E61.Time_Primitive> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E59.Primitive_Value> .
+<http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/E64.End_of_Existence> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E5.Event> .
+<http://83.212.97.61:8090/root#/E65.Conceptual_Creation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/E65.Conceptual_Creation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> .
+<http://83.212.97.61:8090/root#/E66.Formation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E7.Activity> .
+<http://83.212.97.61:8090/root#/E66.Formation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> .
+<http://83.212.97.61:8090/root#/E67.Birth> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E63.Beginning_of_Existence> .
+<http://83.212.97.61:8090/root#/E68.Dissolution> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E64.End_of_Existence> .
+<http://83.212.97.61:8090/root#/E69.Death> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E64.End_of_Existence> .
+<http://83.212.97.61:8090/root#/E70.Stuff> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E77.Existence> .
+<http://83.212.97.61:8090/root#/E71.Man-Made_Stuff> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E70.Stuff> .
+<http://83.212.97.61:8090/root#/E72.Legal_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .
+<http://83.212.97.61:8090/root#/E73.Information_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E28.Conceptual_Object> .
+<http://83.212.97.61:8090/root#/E73.Information_Object> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E72.Legal_Object> .
+<http://83.212.97.61:8090/root#/E74.Group> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E39.Actor> .
+<http://83.212.97.61:8090/root#/E75.Conceptual_Object_Appellation> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E41.Appellation> .
+<http://83.212.97.61:8090/root#/E76.Gender> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E55.Type> .
+<http://83.212.97.61:8090/root#/E77.Existence> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://83.212.97.61:8090/root#/E1.CRM_Entity> .

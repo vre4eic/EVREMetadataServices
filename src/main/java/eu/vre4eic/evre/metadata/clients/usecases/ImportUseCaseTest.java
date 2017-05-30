@@ -20,6 +20,9 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.http.client.ClientProtocolException;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openrdf.rio.RDFFormat;
 
 /**
@@ -118,7 +121,7 @@ public class ImportUseCaseTest {
         return sb.toString();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
@@ -139,8 +142,8 @@ public class ImportUseCaseTest {
 //        Response importResponse = imp.importFilePOSTJSON(request.toString(), token);
         ///////
         //this service works in all cases 
-        String namespace = "ekt-demo";
-        Response importResponse = test.importFile(readFileFromResources("/data/cidoc_v3.2.1.rdfs"), //small dataset
+        String namespace = "ekt-data";
+        Response importResponse = test.importFile(readFileData("C:\\RdfData\\res-cidoc_v3.2.1.rdfs"), //small dataset
                 Utils.fetchDataImportMimeType(RDFFormat.RDFXML), // content type
                 namespace, // namespace
                 "http://cidoc_2", // namedGraph
@@ -151,7 +154,13 @@ public class ImportUseCaseTest {
 //                "http://lifewatch", // namedGraph
 //                token);
 
-        System.out.println(importResponse.readEntity(String.class));
+        String responseString = importResponse.readEntity(String.class);
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObj = (JSONObject) parser.parse(responseString);
+        String messageString = (String) jsonObj.get("message");
+        JSONObject messageObj = (JSONObject) parser.parse(messageString);
+        jsonObj.put("message", messageObj);
+        System.out.println(jsonObj.toJSONString());
         test.close();
 
         //4- Remove the profile from e-VRE

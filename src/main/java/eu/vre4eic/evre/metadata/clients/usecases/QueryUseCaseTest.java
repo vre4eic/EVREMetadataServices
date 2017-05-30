@@ -57,7 +57,7 @@ public class QueryUseCaseTest {
     public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
-//        baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+        baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
         baseURI = "http://83.212.97.61:8080/EVREMetadataServices-1.0-SNAPSHOT";
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI);

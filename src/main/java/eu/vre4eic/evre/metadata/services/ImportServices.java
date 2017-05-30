@@ -33,7 +33,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.http.client.ClientProtocolException;
-import org.json.XML;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -271,7 +270,6 @@ public class ImportServices {
             @QueryParam("graph") String graph,
             @HeaderParam("content-type") String contentType,
             @DefaultValue("") @QueryParam("token") String token) throws ClientProtocolException, IOException {
-
         int status = 0;
         String authToken = requestContext.getHeader("Authorization");
         if (authToken == null) {
@@ -317,16 +315,8 @@ public class ImportServices {
         String filename = (String) jsonObject.get("filename");
         String format = (String) jsonObject.get("format");
         String graph = (String) jsonObject.get("graph");
-        Response result = blazegraphRepRestful.importFilePath(filename, format, tripleStoreNamespace, graph);
-        int status = result.getStatus();
-        String resText = result.readEntity(String.class);
-        String msg = "";
-        if (status == 200) {
-            msg = XML.toJSONObject(resText).toString();
-        } else {
-            msg = null;
-        }
-        return msg;
+        String result = blazegraphRepRestful.importFilePath(filename, format, tripleStoreNamespace, graph);
+        return result;
     }
 
 }
