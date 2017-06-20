@@ -155,13 +155,15 @@ public class ImportUseCaseTest {
 //                token);
 
         String responseString = importResponse.readEntity(String.class);
-        JSONParser parser = new JSONParser();
-        JSONObject jsonObj = (JSONObject) parser.parse(responseString);
-        String messageString = (String) jsonObj.get("message");
-        JSONObject messageObj = (JSONObject) parser.parse(messageString);
-        jsonObj.put("message", messageObj);
-        System.out.println(jsonObj.toJSONString());
-        test.close();
+        System.out.println(responseString);
+//        JSONParser parser = new JSONParser();
+//        JSONObject jsonObj = (JSONObject) parser.parse(responseString);
+//        System.out.println(jsonObj.get(token));
+//        String messageString = (String) jsonObj.get("message");
+//        JSONObject messageObj = (JSONObject) parser.parse(messageString);
+//        jsonObj.put("message", messageObj);
+//        System.out.println(jsonObj.toJSONString());
+//        test.close();
 
         //4- Remove the profile from e-VRE
         ns.removeUser(token, "id_of_user");

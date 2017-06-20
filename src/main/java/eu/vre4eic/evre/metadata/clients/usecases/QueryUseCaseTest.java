@@ -58,7 +58,8 @@ public class QueryUseCaseTest {
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
-        baseURI = "http://83.212.97.61:8080/EVREMetadataServices-1.0-SNAPSHOT";
+//        baseURI = "http://83.212.97.61:8080/EVREMetadataServices-2.0-SNAPSHOT";
+//        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT"; //seistro 2
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI);
         String query = "select * where {?s ?p ?o} limit 5";

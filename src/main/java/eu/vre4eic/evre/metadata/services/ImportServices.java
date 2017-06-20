@@ -306,15 +306,14 @@ public class ImportServices {
                 message.setStatus(ResponseStatus.FAILED);
                 status = 400;
             } else {
-                message.setMessage(tripleStoreResponse);
+//                message.setMessage(tripleStoreResponse);
                 org.json.JSONObject jsonMessage = new org.json.JSONObject(tripleStoreResponse);
                 message.setJsonMessage(jsonMessage);
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
             }
         }
-
-//        mdp.publish(message);
+        mdp.publish(message);
         return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
     }
 
