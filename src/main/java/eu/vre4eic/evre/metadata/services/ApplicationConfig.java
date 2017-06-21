@@ -31,6 +31,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(eu.vre4eic.evre.metadata.services.ExportServices.class);
         resources.add(eu.vre4eic.evre.metadata.services.ImportServices.class);
+        resources.add(eu.vre4eic.evre.metadata.services.InfoService.class);
         resources.add(eu.vre4eic.evre.metadata.services.QueryServices.class);
         resources.add(eu.vre4eic.evre.metadata.services.UpdateServices.class);
     }

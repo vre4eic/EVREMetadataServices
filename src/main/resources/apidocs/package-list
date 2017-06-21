@@ -1,0 +1,5 @@
+eu.vre4eic.evre.metadata.clients
+eu.vre4eic.evre.metadata.clients.usecases
+eu.vre4eic.evre.metadata.services
+eu.vre4eic.evre.metadata.utils
+eu.vre4eic.evre.nodeservice.tests

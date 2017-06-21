@@ -17,8 +17,8 @@
 	Meta Data Web Services.
 	</p>
 	<p>
-	The <a href="https://app.swaggerhub.com/apis/rousakis/ld-services/1.0.0"> Web Services documentation</a></p>
-	The <a href="doc/index.html">Javadocs</a>
+            The <a href="https://app.swaggerhub.com/apis/rousakis/ld-services/1.0.0" target="_blank"> Web Services documentation</a></p>
+        The <a href="doc/index.html"  target="_blank">Javadocs</a>
 	
 	
 </div>
