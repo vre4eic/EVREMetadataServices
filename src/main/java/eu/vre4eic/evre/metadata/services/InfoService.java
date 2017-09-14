@@ -60,7 +60,7 @@ public class InfoService {
                 + "</head>\n"
                 + "<body>\n"
                 + "<div class=\"colmask fullpage\">\n"
-                + "	<h2>Welcome to e-VRE Meta Data Services (release <i th:text=\"${session.release}\"></i>)</h2>\n"
+                + "	<h2>Welcome to e-VRE Meta Data Services (release <i>0.0.1</i>)</h2>\n"
                 + "	<p >If you can see this page the Meta Data Services have been correctly deployed and it should be possible to use the \n"
                 + "	Meta Data Web Services.\n"
                 + "	</p>\n"
