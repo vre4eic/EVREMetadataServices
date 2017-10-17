@@ -20,8 +20,10 @@ import java.net.URLEncoder;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 
@@ -41,9 +43,8 @@ public class QueryUseCaseTest {
         client.close();
     }
 
-    public Response executeSparqlQuery(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
+    public Response executeSparqlQueryGET(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
         //String mimetype = Utilities.fetchQueryResultMimeType(format);
-
         WebTarget webTarget = client.target(baseURI + "/query/count/namespace/" + namespace).
                 queryParam("format", format).//mimetype
                 queryParam("query", URLEncoder.encode(queryStr, "UTF-8").
@@ -53,6 +54,15 @@ public class QueryUseCaseTest {
                 header("Authorization", token);//.request(mimetype);
         Response response = invocationBuilder.get();
         return response;
+    }
+
+    public Response executeSparqlQueryPOST(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
+        //String mimetype = Utilities.fetchQueryResultMimeType(format);
+        WebTarget webTarget = client.target(baseURI).path("/query/count/namespace/" + namespace);
+        JSONObject json = new JSONObject();
+        json.put("query", queryStr);
+        json.put("format", "application/json");
+        return webTarget.request(MediaType.APPLICATION_JSON).header("Authorization", token).post(Entity.json(json.toJSONString()));
     }
 
     /*
@@ -72,7 +82,7 @@ public class QueryUseCaseTest {
 //        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT"; //seistro 2
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI);
-        String query = "select * from <http://ekt-data> {?s ?p ?o} ";
+        String query = "select * from <http://fris-data> {?s ?p ?o} ";
 //        query = "select distinct ?g where {{graph ?g {?s ?p ?o}}}";
 
 //        query = "PREFIX cerif:   <http://eurocris.org/ontology/cerif#>\n"
@@ -103,8 +113,9 @@ public class QueryUseCaseTest {
         System.out.println();
         System.out.println("3) Executing the query: " + query);
         String namespace = "vre4eic";
-        Response queryResponse
-                = test.executeSparqlQuery(query, namespace, "application/json", token);//QueryResultFormat.JSON);
+//        Response queryResponse = test.executeSparqlQueryGET(query, namespace, "application/json", token);//QueryResultFormat.JSON);
+        Response queryResponse = test.executeSparqlQueryPOST(query, namespace, "application/json", token);//QueryResultFormat.JSON);
+
         System.out.println("Query executed, return message is: " + queryResponse.readEntity(String.class));
 
         //4- Remove the profile from e-VRE
