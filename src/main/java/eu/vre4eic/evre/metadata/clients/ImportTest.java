@@ -27,8 +27,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.http.client.ClientProtocolException;
-import org.json.simple.JSONObject;
-import org.openrdf.rio.RDFFormat;
 
 /**
  * Jersey REST client generated for REST resource:ImportServices [import]<br>

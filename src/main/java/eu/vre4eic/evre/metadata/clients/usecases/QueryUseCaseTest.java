@@ -44,7 +44,7 @@ public class QueryUseCaseTest {
     public Response executeSparqlQuery(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
         //String mimetype = Utilities.fetchQueryResultMimeType(format);
 
-        WebTarget webTarget = client.target(baseURI + "/query/namespace/" + namespace).
+        WebTarget webTarget = client.target(baseURI + "/query/count/namespace/" + namespace).
                 queryParam("format", format).//mimetype
                 queryParam("query", URLEncoder.encode(queryStr, "UTF-8").
                         replaceAll("\\+", "%20"));
@@ -72,8 +72,8 @@ public class QueryUseCaseTest {
 //        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT"; //seistro 2
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI);
-        String query = "select * where {?s ?p ?o} limit 5";
-        query = "select distinct ?g where {{graph ?g {?s ?p ?o}}}";
+        String query = "select * from <http://ekt-data> {?s ?p ?o} ";
+//        query = "select distinct ?g where {{graph ?g {?s ?p ?o}}}";
 
 //        query = "PREFIX cerif:   <http://eurocris.org/ontology/cerif#>\n"
 //                + "select (concat(str(?pub), '#@#', str(?pubTitle)) as ?publication_title) ?pubDate (concat(str(?pers), '#@#', str(?persName)) as ?person_name)\n"

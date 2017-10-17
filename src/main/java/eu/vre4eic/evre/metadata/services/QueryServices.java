@@ -52,7 +52,7 @@ import org.json.simple.parser.ParseException;
 @Path("query")
 @Produces(MediaType.APPLICATION_JSON)
 public class QueryServices {
-
+    
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
     String namespace = propertiesManager.getTripleStoreNamespace();
     @Context
@@ -68,7 +68,7 @@ public class QueryServices {
      */
     public QueryServices() {
     }
-
+    
     @PostConstruct
     public void initialize() {
         blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
@@ -107,6 +107,23 @@ public class QueryServices {
         message.setToken(authToken);
         return queryExecBlazegraph(f, q, namespace, authToken, message);
     }
+    
+    @GET
+    @Path("/count")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response queryCountExecGETJSON(
+            @DefaultValue("application/json") @QueryParam("format") String f,
+            @QueryParam("query") String q,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException {
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+    }
 
     /**
      * <b>GET</b> service which executes a SPARQL query and returns the results
@@ -143,6 +160,24 @@ public class QueryServices {
         }
         message.setToken(authToken);
         return queryExecBlazegraph(f, q, namespace, authToken, message);
+    }
+    
+    @GET
+    @Path("/count/namespace/{namespace}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response queryCountExecGETJSONWithNS(
+            @PathParam("namespace") String namespace,
+            @DefaultValue("application/json") @QueryParam("format") String f,
+            @QueryParam("query") String q,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException {
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
     }
 
     /**
@@ -188,7 +223,32 @@ public class QueryServices {
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, q, namespace, authToken, message);
+            return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+        }
+    }
+    
+    @POST
+    @Path("/count")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response queryCountExecPOSTJSON(String jsonInput,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        if (jsonObject.size() != 2) {
+            message.setMessage("JSON input message should have exactly 2 arguments.");
+            message.setStatus(ResponseStatus.FAILED);
+            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            String q = (String) jsonObject.get("query");
+            String f = (String) jsonObject.get("format");
+            return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
         }
     }
 
@@ -242,10 +302,49 @@ public class QueryServices {
             return queryExecBlazegraph(f, q, namespace, authToken, message);
         }
     }
-
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/count/namespace/{namespace}")
+    public Response queryCountExecPOSTJSONWithNS(String jsonInput,
+            @PathParam("namespace") String namespace,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        if (jsonObject.size() != 2) {
+            message.setMessage("JSON input message should have exactly 2 arguments.");
+            message.setStatus(ResponseStatus.FAILED);
+            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            String q = (String) jsonObject.get("query");
+            String f = (String) jsonObject.get("format");
+            return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+        }
+    }
+    
+    private String convertToCountQuery(String query) {
+        String queryTmp = query.toLowerCase();
+        int end = queryTmp.indexOf("from");
+        if (end == -1) {
+            end = queryTmp.indexOf("where");
+        }
+        int start = queryTmp.indexOf(" ");
+        StringBuilder sb = new StringBuilder();
+        sb.append(query.substring(0, start)).append(" (count(*) as ?count) ").append(query.substring(end));
+        return sb.toString();
+    }
+    
     private Response queryExecBlazegraph(String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
 //        isTokenValid = true;
+        System.out.println(q);
         int statusInt;
         Response response = null;
         if (!isTokenValid) {
@@ -273,6 +372,6 @@ public class QueryServices {
         } else {
             return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
         }
-
+        
     }
 }
