@@ -79,31 +79,50 @@ public class QueryUseCaseTest {
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
 //        baseURI = "http://83.212.97.61:8080/EVREMetadataServices-1.0-SNAPSHOT";
-//        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT"; //seistro 2
+        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT"; //seistro 2
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI);
         String query = "select * from <http://fris-data> {?s ?p ?o} ";
-//        query = "select distinct ?g where {{graph ?g {?s ?p ?o}}}";
 
-//        query = "PREFIX cerif:   <http://eurocris.org/ontology/cerif#>\n"
-//                + "select (concat(str(?pub), '#@#', str(?pubTitle)) as ?publication_title) ?pubDate (concat(str(?pers), '#@#', str(?persName)) as ?person_name)\n"
-//                + "from <http://ekt-data>\n"
-//                + "from <http://rcuk-data>\n"
-//                + "from <http://fris-data>\n"
-//                + "from <http://epos-data>\n"
-//                + "from <http://envri-data>\n"
-//                + "where {\n"
-//                + "?pub a <http://eurocris.org/ontology/cerif#Publication>.\n"
-//                + "?pub <http://eurocris.org/ontology/cerif#has_title> ?pubTitle.\n"
-//                + "?pub <http://eurocris.org/ontology/cerif#has_publicationDate> ?pubDate.\n"
-//                + "?pub <http://eurocris.org/ontology/cerif#is_destination_of> ?pp.\n"
-//                + "?pers <http://eurocris.org/ontology/cerif#is_source_of> ?pp.\n"
-//                + "?pers a <http://eurocris.org/ontology/cerif#Person>.\n"
-//                + "?pers rdfs:label ?persName.\n"
-//                + "?persName bds:search ' Robert-C.'.\n"
-//                + "?persName bds:relevance ?score .\n"
-//                + "} ORDER BY desc(?score)";
-//        query = "SELECT * WHERE {{ ?s ?p ?o . ?s rdfs:label ?o. ?o bds:search 'Quadrelli' . }}";
+        query = "PREFIX cerif: <http://eurocris.org/ontology/cerif#>\n"
+                + "select distinct ?persName ?Service (?pers as ?uri) \n"
+                + "from <http://ekt-data> \n"
+                + "from <http://rcuk-data> \n"
+                + "from <http://fris-data> \n"
+                + "from <http://epos-data> \n"
+                + "from <http://envri-data>\n"
+                + "where {\n"
+                + "?pers cerif:is_source_of ?FLES.  \n"
+                + "?FLES cerif:has_destination ?Ser.  \n"
+                + "?FLES cerif:has_classification <http://139.91.183.70:8090/vre4eic/Classification.provenance>.  \n"
+                + "?Ser cerif:has_acronym ?Service.\n"
+                + "?pers a cerif:Person.  \n"
+                + "?pers rdfs:label ?persName. \n"
+                + "?persName bds:search ' maria'.  \n"
+                + "?persName bds:matchAllTerms \"true\".  \n"
+                + "?persName bds:relevance ?score. \n"
+                + "}  ORDER BY desc(?score) ?pers limit 100";
+
+        //        query = "select distinct ?g where {{graph ?g {?s ?p ?o}}}";
+        //        query = "PREFIX cerif:   <http://eurocris.org/ontology/cerif#>\n"
+        //                + "select (concat(str(?pub), '#@#', str(?pubTitle)) as ?publication_title) ?pubDate (concat(str(?pers), '#@#', str(?persName)) as ?person_name)\n"
+        //                + "from <http://ekt-data>\n"
+        //                + "from <http://rcuk-data>\n"
+        //                + "from <http://fris-data>\n"
+        //                + "from <http://epos-data>\n"
+        //                + "from <http://envri-data>\n"
+        //                + "where {\n"
+        //                + "?pub a <http://eurocris.org/ontology/cerif#Publication>.\n"
+        //                + "?pub <http://eurocris.org/ontology/cerif#has_title> ?pubTitle.\n"
+        //                + "?pub <http://eurocris.org/ontology/cerif#has_publicationDate> ?pubDate.\n"
+        //                + "?pub <http://eurocris.org/ontology/cerif#is_destination_of> ?pp.\n"
+        //                + "?pers <http://eurocris.org/ontology/cerif#is_source_of> ?pp.\n"
+        //                + "?pers a <http://eurocris.org/ontology/cerif#Person>.\n"
+        //                + "?pers rdfs:label ?persName.\n"
+        //                + "?persName bds:search ' Robert-C.'.\n"
+        //                + "?persName bds:relevance ?score .\n"
+        //                + "} ORDER BY desc(?score)";
+        //        query = "SELECT * WHERE {{ ?s ?p ?o . ?s rdfs:label ?o. ?o bds:search 'Quadrelli' . }}";
         //String queryEnc = URLEncoder.encode(query2, "UTF-8").replaceAll("\\+", "%20");
         // System.out.println(queryEnc);
         //1- Create a user profile with userid="id_of_user" and 2) login into e-VRE with the user credentials

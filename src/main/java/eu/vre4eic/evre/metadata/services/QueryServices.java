@@ -52,7 +52,7 @@ import org.json.simple.parser.ParseException;
 @Path("query")
 @Produces(MediaType.APPLICATION_JSON)
 public class QueryServices {
-    
+
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
     String namespace = propertiesManager.getTripleStoreNamespace();
     @Context
@@ -68,7 +68,7 @@ public class QueryServices {
      */
     public QueryServices() {
     }
-    
+
     @PostConstruct
     public void initialize() {
         blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
@@ -107,7 +107,7 @@ public class QueryServices {
         message.setToken(authToken);
         return queryExecBlazegraph(f, q, namespace, authToken, message);
     }
-    
+
     @GET
     @Path("/count")
     @Produces(MediaType.APPLICATION_JSON)
@@ -161,7 +161,7 @@ public class QueryServices {
         message.setToken(authToken);
         return queryExecBlazegraph(f, q, namespace, authToken, message);
     }
-    
+
     @GET
     @Path("/count/namespace/{namespace}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -226,7 +226,7 @@ public class QueryServices {
             return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
         }
     }
-    
+
     @POST
     @Path("/count")
     @Produces(MediaType.APPLICATION_JSON)
@@ -302,7 +302,7 @@ public class QueryServices {
             return queryExecBlazegraph(f, q, namespace, authToken, message);
         }
     }
-    
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/count/namespace/{namespace}")
@@ -328,19 +328,27 @@ public class QueryServices {
             return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
         }
     }
-    
+
     private String convertToCountQuery(String query) {
         String queryTmp = query.toLowerCase();
         int end = queryTmp.indexOf("from");
         if (end == -1) {
             end = queryTmp.indexOf("where");
         }
-        int start = queryTmp.indexOf(" ");
-        StringBuilder sb = new StringBuilder();
-        sb.append(query.substring(0, start)).append(" (count(*) as ?count) ").append(query.substring(end));
-        return sb.toString();
+        int selectStart = queryTmp.indexOf("select");
+        int distinctStart = queryTmp.indexOf("distinct");
+        StringBuilder finalQuery = new StringBuilder();
+        if (distinctStart != -1) {
+            finalQuery.append(queryTmp.substring(0, distinctStart + "distinct".length()));
+        } else {
+            finalQuery.append(queryTmp.substring(0, selectStart + "select".length()));
+        }
+        
+        
+        finalQuery.append(" (count(*) as ?count) ").append(query.substring(end));
+        return finalQuery.toString();
     }
-    
+
     private Response queryExecBlazegraph(String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
 //        isTokenValid = true;
@@ -372,6 +380,33 @@ public class QueryServices {
         } else {
             return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
         }
-        
+
     }
+
+    public static void main(String[] args) {
+
+        QueryServices service = new QueryServices();
+        String query = "PREFIX cerif: <http://eurocris.org/ontology/cerif#>\n"
+                + "select distinct ?persName ?Service (?pers as ?uri) \n"
+                + "from <http://ekt-data> \n"
+                + "from <http://rcuk-data> \n"
+                + "from <http://fris-data> \n"
+                + "from <http://epos-data> \n"
+                + "from <http://envri-data>\n"
+                + "where {\n"
+                + "?pers cerif:is_source_of ?FLES.  \n"
+                + "?FLES cerif:has_destination ?Ser.  \n"
+                + "?FLES cerif:has_classification <http://139.91.183.70:8090/vre4eic/Classification.provenance>.  \n"
+                + "?Ser cerif:has_acronym ?Service.\n"
+                + "?pers a cerif:Person.  \n"
+                + "?pers rdfs:label ?persName. \n"
+                + "?persName bds:search ' maria'.  \n"
+                + "?persName bds:matchAllTerms \"true\".  \n"
+                + "?persName bds:relevance ?score. \n"
+                + "}  ORDER BY desc(?score) ?pers limit 100";
+
+        System.out.println(service.convertToCountQuery(query));
+
+    }
+
 }
