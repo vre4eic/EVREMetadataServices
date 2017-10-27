@@ -305,6 +305,32 @@ public class QueryServices {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/namespace/{namespace}")
+    public Response multiQueryExecPOSTJSONWithNS(String jsonInput,
+            @PathParam("namespace") String namespace,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        if (jsonObject.size() != 2) {
+            message.setMessage("JSON input message should have exactly 2 arguments.");
+            message.setStatus(ResponseStatus.FAILED);
+            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            String q = (String) jsonObject.get("query");
+            String f = (String) jsonObject.get("format");
+            return queryExecBlazegraph(f, q, namespace, authToken, message);
+        }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/count/namespace/{namespace}")
     public Response queryCountExecPOSTJSONWithNS(String jsonInput,
             @PathParam("namespace") String namespace,
@@ -343,8 +369,6 @@ public class QueryServices {
         } else {
             finalQuery.append(queryTmp.substring(0, selectStart + "select".length()));
         }
-        
-        
         finalQuery.append(" (count(*) as ?count) ").append(query.substring(end));
         return finalQuery.toString();
     }

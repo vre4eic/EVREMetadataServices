@@ -58,7 +58,7 @@ public class QueryUseCaseTest {
 
     public Response executeSparqlQueryPOST(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
         //String mimetype = Utilities.fetchQueryResultMimeType(format);
-        WebTarget webTarget = client.target(baseURI).path("/query/count/namespace/" + namespace);
+        WebTarget webTarget = client.target(baseURI).path("/query/namespace/" + namespace);
         JSONObject json = new JSONObject();
         json.put("query", queryStr);
         json.put("format", "application/json");
@@ -79,18 +79,14 @@ public class QueryUseCaseTest {
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
 //        baseURI = "http://83.212.97.61:8080/EVREMetadataServices-1.0-SNAPSHOT";
-        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT"; //seistro 2
+//        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT"; //seistro 2
+        baseURI = "http://139.91.183.97:8080/EVREMetadataServices-1.0-SNAPSHOT"; //celsius
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI);
         String query = "select * from <http://fris-data> {?s ?p ?o} ";
 
         query = "PREFIX cerif: <http://eurocris.org/ontology/cerif#>\n"
-                + "select distinct ?persName ?Service (?pers as ?uri) \n"
-                + "from <http://ekt-data> \n"
-                + "from <http://rcuk-data> \n"
-                + "from <http://fris-data> \n"
-                + "from <http://epos-data> \n"
-                + "from <http://envri-data>\n"
+                + "select distinct ?persName ?Service (?pers as ?uri) from <http://ekt-data> from <http://rcuk-data> from <http://fris-data> from <http://epos-data> from <http://envri-data> \n"
                 + "where {\n"
                 + "?pers cerif:is_source_of ?FLES.  \n"
                 + "?FLES cerif:has_destination ?Ser.  \n"
@@ -98,10 +94,24 @@ public class QueryUseCaseTest {
                 + "?Ser cerif:has_acronym ?Service.\n"
                 + "?pers a cerif:Person.  \n"
                 + "?pers rdfs:label ?persName. \n"
-                + "?persName bds:search ' maria'.  \n"
+                + "?persName bds:search \" maria\".  \n"
                 + "?persName bds:matchAllTerms \"true\".  \n"
                 + "?persName bds:relevance ?score. \n"
-                + "}  ORDER BY desc(?score) ?pers limit 100";
+                + "}  ORDER BY desc(?score) ?pers";
+
+        query = "select distinct ?relation\n"
+                + "from <http://ekt-data> where {\n"
+                + "{\n"
+                + " ?target_inst a <http://eurocris.org/ontology/cerif#Person>."
+                + "    ?target_inst ?relation [a <http://eurocris.org/ontology/cerif#Project>].\n"
+                + "} UNION {\n "
+                + " ?target_inst a <http://eurocris.org/ontology/cerif#Person>."
+                + "    ?target_inst ?relation [a <http://eurocris.org/ontology/cerif#OrganisationUnit>].\n"
+                + "} UNION {\n "
+                + " ?target_inst a <http://eurocris.org/ontology/cerif#Person>."
+                + "    ?target_inst ?relation [a <http://eurocris.org/ontology/cerif#Publication>].\n"
+                + "}\n"
+                + "}";
 
         //        query = "select distinct ?g where {{graph ?g {?s ?p ?o}}}";
         //        query = "PREFIX cerif:   <http://eurocris.org/ontology/cerif#>\n"
@@ -130,12 +140,33 @@ public class QueryUseCaseTest {
 
         //3- Execute a query
         System.out.println();
-        System.out.println("3) Executing the query: " + query);
+//        System.out.println("3) Executing the query: " + query);
         String namespace = "vre4eic";
 //        Response queryResponse = test.executeSparqlQueryGET(query, namespace, "application/json", token);//QueryResultFormat.JSON);
-        Response queryResponse = test.executeSparqlQueryPOST(query, namespace, "application/json", token);//QueryResultFormat.JSON);
+        long start = System.currentTimeMillis();
 
+        Response queryResponse = test.executeSparqlQueryPOST("select distinct ?relation\n"
+                + "from <http://ekt-data> where {\n"
+                + " ?target_inst a <http://eurocris.org/ontology/cerif#Person>."
+                + "    ?target_inst ?relation [a <http://eurocris.org/ontology/cerif#Publication>].\n"
+                + "}", namespace, "application/json", token);//QueryResultFormat.JSON);
         System.out.println("Query executed, return message is: " + queryResponse.readEntity(String.class));
+
+        queryResponse = test.executeSparqlQueryPOST("select distinct ?relation\n"
+                + "from <http://ekt-data> where {\n"
+                + " ?target_inst a <http://eurocris.org/ontology/cerif#Person>."
+                + "    ?target_inst ?relation [a <http://eurocris.org/ontology/cerif#Project>].\n"
+                + "}", namespace, "application/json", token);//QueryResultFormat.JSON);
+        System.out.println("Query executed, return message is: " + queryResponse.readEntity(String.class));
+
+        queryResponse = test.executeSparqlQueryPOST("select distinct ?relation\n"
+                + "from <http://ekt-data> where {\n"
+                + " ?target_inst a <http://eurocris.org/ontology/cerif#Person>."
+                + "    ?target_inst ?relation [a <http://eurocris.org/ontology/cerif#OrganisationUnit>].\n"
+                + "}", namespace, "application/json", token);//QueryResultFormat.JSON);
+        System.out.println("Query executed, return message is: " + queryResponse.readEntity(String.class));
+
+        System.out.println("Duration:" + (System.currentTimeMillis() - start));
 
         //4- Remove the profile from e-VRE
         ns.removeUser(token, "id_of_user");
