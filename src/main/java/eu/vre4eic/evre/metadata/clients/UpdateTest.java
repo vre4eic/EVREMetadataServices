@@ -44,10 +44,11 @@ public class UpdateTest {
     public UpdateTest(String baseUri) {
         this.baseURI = baseUri;
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(baseURI).path("update");
+//        webTarget = client.target(baseURI).path("update");
     }
 
     public Response updateExecPOSTJSON(String requestEntity, String token) throws ClientErrorException {
+        
         return webTarget.request(MediaType.APPLICATION_JSON).
                 header("Authorization", token).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }

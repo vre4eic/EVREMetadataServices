@@ -25,6 +25,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import org.json.simple.parser.ParseException;
 
@@ -42,12 +43,13 @@ public class UpdateUseCaseTest {
         client.close();
     }
 
-    public Response executeUpdatePOSTJSON(String requestEntity, String token) throws ClientErrorException {
-        WebTarget webTarget = client.target(baseURI).path("update");
-        return webTarget.request(MediaType.TEXT_HTML).
-                header("Authorization", token).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+    public Response executeUpdatePOSTJSON(String update, String namespace, String token) throws ClientErrorException {
+        JSONObject json = new JSONObject();
+        json.put("query", update);
+        WebTarget webTarget = client.target(baseURI + "/update/namespace/" + namespace);
+        return webTarget.request(MediaType.APPLICATION_JSON).
+                header("Authorization", token).post(Entity.json(json.toJSONString()));
     }
-
 
     /*
      * This test class executes  the following use case:
@@ -62,21 +64,44 @@ public class UpdateUseCaseTest {
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+        
+        baseURI = "http://139.91.183.97:8080/EVREMetadataServices-1.0-SNAPSHOT";
+        
+
+//        baseURI = "http://139.91.183.97:8080/EVREMetadataServices-1.0-SNAPSHOT"; //celsius
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         UpdateUseCaseTest test = new UpdateUseCaseTest(baseURI);
-        String query = "insert data {graph <http://test2> {<http://a3> <http://p3> <http://b3>.} }";
-        JSONObject json = new JSONObject();
-        json.put("query", query);
+        String update = "insert data {graph <http://test2> {<http://a3> <http://p3> <http://b3>.} }";
 
+//        query = "WITH <http://ekt-data>\n"
+//                + "INSERT {\n"
+//                + "  ?org ?project_pub ?pub.\n"
+//                + "  ?pub ?pub_project ?org.\n"
+//                + "} WHERE {\n"
+//                + "  ?pub a <http://eurocris.org/ontology/cerif#Publication>.\n"
+//                + "  ?org a <http://eurocris.org/ontology/cerif#OrganisationUnit>.\n"
+//                + "\n"
+//                + "  ?org <http://eurocris.org/ontology/cerif#is_source_of> ?op.\n"
+//                + "  ?pub <http://eurocris.org/ontology/cerif#is_destination_of> ?op.\n"
+//                + "     \n"
+//                + "  ?op <http://eurocris.org/ontology/cerif#has_classification> ?classif.\n"
+//                + "  ?classif <http://eurocris.org/ontology/cerif#has_roleExpression> ?role.\n"
+//                + "  ?classif <http://eurocris.org/ontology/cerif#has_roleExpressionOpposite> ?role_opposite.\n"
+//                + "  Bind( IRI( concat(\"http://eurocris.org/ontology/cerif#OrganisationUnit-Publication/\",encode_for_uri(?role) )) as ?orgunit_pub ).\n"
+//                + "  Bind( IRI( concat(\"http://eurocris.org/ontology/cerif#Publication-OrganisationUnit/\",encode_for_uri(?role_opposite) )) as ?pub_orgunit ).\n"
+//                + "}";
         //1- Create a user profile with userid="id_of_user" and 2) login into e-VRE with the user credentials
         String token = ns.createUserAndLogin();
 
         //3- Execute a query
         System.out.println();
-        System.out.println("3) Executing the update query: " + query);
-        Response updateResponse = test.executeUpdatePOSTJSON(json.toJSONString(), token);
-        System.out.println("Update executed, return message is: " + updateResponse.readEntity(String.class));
+        System.out.println("3) Executing the update query: " + update);
+        Response updateResponse = test.executeUpdatePOSTJSON(update, "vre4eic", token);
+        JSONParser parser = new JSONParser();
 
+//        System.out.println(updateResponse.readEntity(String.class));
+        JSONObject message = (JSONObject) parser.parse(updateResponse.readEntity(String.class));
+        System.out.println("Update executed, return message is: " + message.get("message"));
         //4- Remove the profile from e-VRE
         ns.removeUser(token, "id_of_user");
         test.close();
