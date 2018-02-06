@@ -36,10 +36,9 @@
             <version>2.23.1</version>
         </dependency>
         <dependency>
-            <groupId>forth.ics</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>BlazegraphOps</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -51,11 +50,16 @@
             <groupId>eu.vre4eic.evre</groupId>
             <artifactId>NodeService</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.vre4eic.evre</groupId>
-            <artifactId>BlazegraphOps</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>forth.ics</groupId>
+                    <artifactId>BlazegraphOps</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>eu.vre4eic.evre</groupId>
+                    <artifactId>BlazegraphOps</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.jms</groupId>

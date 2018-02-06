@@ -92,8 +92,7 @@ public class ImportServices {
             @DefaultValue("") @QueryParam("token") String token) throws ParseException, IOException {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
-        String result;
-        int status;
+        int status = 0;
         String authToken = requestContext.getHeader("Authorization");
         if (authToken == null) {
             authToken = token;
@@ -103,6 +102,7 @@ public class ImportServices {
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
+        JSONObject jsonResp = null;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -113,21 +113,26 @@ public class ImportServices {
             status = 400;
         } else {
             String tripleStoreNamespace = this.namespace;
-            result = importFile(jsonObject, tripleStoreNamespace);
-            if (result == null) {
-                result = "Error in parsing file w.r.t. the given format.";
-                message.setStatus(ResponseStatus.FAILED);
-                status = 500;
-            } else {
-                org.json.JSONObject jsonMessage = new org.json.JSONObject(result);
-                message.setJsonMessage(jsonMessage);
+            String result = importFile(jsonObject, tripleStoreNamespace);
+            JSONParser parser = new JSONParser();
+            try {
+                jsonResp = (JSONObject) parser.parse(result);
+                message.setMessage(jsonResp.toString());
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
+            } catch (ParseException ex) {
+                message.setMessage(result);
+                message.setStatus(ResponseStatus.FAILED);
+                status = 500;
             }
             message.setMessage(result);
         }
         mdp.publish(message);
-        return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        JSONObject result = new JSONObject();
+        result.put("response_status", message.getStatus());
+        result.put("message", message.getMessage());
+        mdp.publish(message);
+        return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
     @POST
@@ -139,8 +144,8 @@ public class ImportServices {
             @DefaultValue("") @QueryParam("token") String token) throws ParseException, IOException {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
-        String result;
-        int status;
+
+        int status = 0;
         String authToken = requestContext.getHeader("Authorization");
         if (authToken == null) {
             authToken = token;
@@ -150,6 +155,7 @@ public class ImportServices {
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
+        JSONObject jsonResp = null;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -160,21 +166,26 @@ public class ImportServices {
             status = 400;
         } else {
             String tripleStoreNamespace = namespace;
-            result = importFile(jsonObject, tripleStoreNamespace);
-            if (result == null) {
-                result = "Error in parsing file w.r.t. the given format.";
-                message.setStatus(ResponseStatus.FAILED);
-                status = 500;
-            } else {
-                org.json.JSONObject jsonMessage = new org.json.JSONObject(result);
-                message.setJsonMessage(jsonMessage);
+            String result = importFile(jsonObject, tripleStoreNamespace);
+            JSONParser parser = new JSONParser();
+            try {
+                jsonResp = (JSONObject) parser.parse(result);
+                message.setMessage(jsonResp.toString());
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
+            } catch (ParseException ex) {
+                message.setMessage(result);
+                message.setStatus(ResponseStatus.FAILED);
+                status = 500;
             }
             message.setMessage(result);
         }
         mdp.publish(message);
-        return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        JSONObject result = new JSONObject();
+        result.put("response_status", message.getStatus());
+        result.put("message", message.getMessage());
+        mdp.publish(message);
+        return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**
@@ -212,11 +223,13 @@ public class ImportServices {
             authToken = token;
         }
         boolean isTokenValid = module.checkToken(authToken);
+        org.json.JSONObject jsonMessage = null;
 //        isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
         int status = 0;
+        JSONObject jsonResp = null;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -226,7 +239,7 @@ public class ImportServices {
             BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
             String line = null;
             while ((line = in.readLine()) != null) {
-                stringBuilder.append(line);
+                stringBuilder.append(line + "\n");
             }
             // Triplestore Stuff
             String tripleStoreResponse = blazegraphRepRestful.importFileData(
@@ -234,20 +247,24 @@ public class ImportServices {
                     contentType, // Content type (i.e. application/rdf+xml)
                     this.namespace, // Namespace
                     graph); // NameGraph
-            if (tripleStoreResponse == null) {
-                message.setMessage("Error in parsing file w.r.t. the given format.");
-                message.setStatus(ResponseStatus.FAILED);
-                status = 500;
-            } else {
-                message.setMessage(tripleStoreResponse);
-                org.json.JSONObject jsonMessage = new org.json.JSONObject(tripleStoreResponse);
+            JSONParser parser = new JSONParser();
+            try {
+                jsonResp = (JSONObject) parser.parse(tripleStoreResponse);
                 message.setJsonMessage(jsonMessage);
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
+            } catch (ParseException ex) {
+                message.setMessage(tripleStoreResponse);
+                message.setStatus(ResponseStatus.FAILED);
+                status = 500;
             }
         }
         mdp.publish(message);
-        return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        JSONObject result = new JSONObject();
+        result.put("response_status", message.getStatus());
+        result.put("message", message.getMessage());
+        mdp.publish(message);
+        return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
     /**
@@ -294,6 +311,7 @@ public class ImportServices {
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
+        JSONObject jsonResp = null;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -303,7 +321,7 @@ public class ImportServices {
             BufferedReader in = new BufferedReader(new InputStreamReader(incomingData));
             String line = null;
             while ((line = in.readLine()) != null) {
-                stringBuilder.append(line);
+                stringBuilder.append(line + "\n");
             }
             // Triplestore Stuff
             String tripleStoreResponse = blazegraphRepRestful.importFileData(
@@ -311,20 +329,23 @@ public class ImportServices {
                     contentType, // Content type (i.e. application/rdf+xml)
                     namespace, // Namespace
                     graph); // NameGraph
-            if (tripleStoreResponse == null) {
-                message.setMessage("Data to be imported are not valid. ");
-                message.setStatus(ResponseStatus.FAILED);
-                status = 400;
-            } else {
-//                message.setMessage(tripleStoreResponse);
-                org.json.JSONObject jsonMessage = new org.json.JSONObject(tripleStoreResponse);
-                message.setJsonMessage(jsonMessage);
+            JSONParser parser = new JSONParser();
+            try {
+                jsonResp = (JSONObject) parser.parse(tripleStoreResponse);
+                message.setMessage(jsonResp.toString());
                 message.setStatus(ResponseStatus.SUCCEED);
                 status = 200;
+            } catch (ParseException ex) {
+                message.setMessage(tripleStoreResponse);
+                message.setStatus(ResponseStatus.FAILED);
+                status = 500;
             }
         }
+        JSONObject result = new JSONObject();
+        result.put("response_status", message.getStatus().toString());
+        result.put("message", message.getMessage());
         mdp.publish(message);
-        return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
     private String importFile(JSONObject jsonObject, String tripleStoreNamespace) throws IOException {

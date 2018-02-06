@@ -40,6 +40,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -97,6 +98,7 @@ public class QueryServices {
     public Response queryExecGETJSON(
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
+            @DefaultValue("0") @QueryParam("timeout") int timeout,
             @DefaultValue("") @QueryParam("token") String token) throws IOException {
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
@@ -105,7 +107,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(f, q, namespace, authToken, message);
+        return queryExecBlazegraph(timeout, f, q, namespace, authToken, message);
     }
 
     @GET
@@ -114,6 +116,7 @@ public class QueryServices {
     public Response queryCountExecGETJSON(
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
+            @DefaultValue("0") @QueryParam("timeout") int timeout,
             @DefaultValue("") @QueryParam("token") String token) throws IOException {
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
@@ -122,7 +125,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+        return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
     }
 
     /**
@@ -151,6 +154,7 @@ public class QueryServices {
             @PathParam("namespace") String namespace,
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
+            @DefaultValue("0") @QueryParam("timeout") int timeout,
             @DefaultValue("") @QueryParam("token") String token) throws UnsupportedEncodingException, IOException {
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
@@ -159,7 +163,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(f, q, namespace, authToken, message);
+        return queryExecBlazegraph(timeout, f, q, namespace, authToken, message);
     }
 
     @GET
@@ -169,6 +173,7 @@ public class QueryServices {
             @PathParam("namespace") String namespace,
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
+            @DefaultValue("0") @QueryParam("timeout") int timeout,
             @DefaultValue("") @QueryParam("token") String token) throws IOException {
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
@@ -177,7 +182,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+        return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
     }
 
     /**
@@ -222,8 +227,14 @@ public class QueryServices {
             return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
         } else {
             String q = (String) jsonObject.get("query");
+            int timeout = 0;
+            if (jsonObject.get("timeout") == null) {
+                timeout = 0;
+            } else {
+                timeout = (int) jsonObject.get("timeout");
+            }
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+            return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
         }
     }
 
@@ -248,7 +259,13 @@ public class QueryServices {
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+            int timeout;
+            if (jsonObject.get("timeout") == null) {
+                timeout = 0;
+            } else {
+                timeout = (int) jsonObject.get("timeout");
+            }
+            return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
         }
     }
 
@@ -299,8 +316,53 @@ public class QueryServices {
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, q, namespace, authToken, message);
+            int timeout;
+            if (jsonObject.get("timeout") == null) {
+                timeout = 0;
+            } else {
+                timeout = (int) jsonObject.get("timeout");
+            }
+            return queryExecBlazegraph(timeout, f, q, namespace, authToken, message);
         }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("batch/namespace/{namespace}")
+    public Response batchQueryExecPOSTJSONWithNS(String jsonInput,
+            @PathParam("namespace") String namespace,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+        JSONArray result = new JSONArray();
+        int status = 0;
+        if (jsonObject.size() != 2) {
+            message.setMessage("JSON input message should have exactly 2 arguments.");
+            message.setStatus(ResponseStatus.FAILED);
+            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+        } else {
+            String queriesStr = (String) jsonObject.get("query");
+            JSONArray queries = (JSONArray) jsonParser.parse(queriesStr);
+            String f = (String) jsonObject.get("format");
+            for (int i = 0; i < queries.size(); i++) {
+                String query = (String) queries.get(i);
+                Response resp = blazegraphRepRestful.executeSparqlQuery(query, namespace, f);
+                status = resp.getStatus();
+                String data = resp.readEntity(String.class);
+                if (status != 200) {
+                    return Response.status(status).entity(resp.readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
+                }
+                result.add(data);
+            }
+        }
+        return Response.status(status).entity(result.toJSONString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
 //    @POST
@@ -328,7 +390,6 @@ public class QueryServices {
 //            return queryExecBlazegraph(f, q, namespace, authToken, message);
 //        }
 //    }
-
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/count/namespace/{namespace}")
@@ -351,7 +412,13 @@ public class QueryServices {
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(f, convertToCountQuery(q), namespace, authToken, message);
+            int timeout;
+            if (jsonObject.get("timeout") == null) {
+                timeout = 0;
+            } else {
+                timeout = (int) jsonObject.get("timeout");
+            }
+            return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
         }
     }
 
@@ -373,12 +440,13 @@ public class QueryServices {
         return finalQuery.toString();
     }
 
-    private Response queryExecBlazegraph(String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
+    private Response queryExecBlazegraph(int timeout, String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
 //        isTokenValid = true;
         System.out.println(q);
         int statusInt;
         Response response = null;
+        String responseData = "";
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -388,23 +456,39 @@ public class QueryServices {
             message.setStatus(ResponseStatus.FAILED);
             statusInt = 500;
         } else {
+            blazegraphRepRestful.setTimeout(timeout);
             response = blazegraphRepRestful.executeSparqlQuery(q, namespace, f);
             statusInt = response.getStatus();
-            if (statusInt == 200) {
+            responseData = response.readEntity(String.class);
+            if (responseData.contains("com.bigdata.bop.engine.QueryTimeoutException")) {
+                statusInt = 408;
+                message.setStatus(ResponseStatus.FAILED);
+                message.setMessage("The query was not finished due to a timeout error.");
+            } else if (statusInt == 200) {
                 message.setStatus(ResponseStatus.SUCCEED);
                 message.setMessage("Query was executed successfully.");
             } else {
                 message.setStatus(ResponseStatus.FAILED);
-                message.setMessage(response.readEntity(String.class));
+                message.setMessage(responseData);
             }
         }
         mdp.publish(message);
         if (statusInt == 200) {
-            return Response.status(statusInt).entity(response.readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(statusInt).entity(responseData).header("Access-Control-Allow-Origin", "*").build();
         } else {
-            return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+            JSONObject result = new JSONObject();
+            result.put("response_status", message.getStatus().toString());
+            result.put("message", message.getMessage());
+            return Response.status(statusInt).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
         }
+    }
 
+    private Response queryExecPlainBlazegraph(int timeout, String f, String q, String namespace) throws IOException, UnsupportedEncodingException {
+        Response response = null;
+        blazegraphRepRestful.setTimeout(timeout);
+        response = blazegraphRepRestful.executeSparqlQuery(q, namespace, f);
+        int statusInt = response.getStatus();
+        return Response.status(statusInt).entity(response.readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
     }
 
     public static void main(String[] args) {

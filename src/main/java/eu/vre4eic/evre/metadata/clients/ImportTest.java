@@ -109,9 +109,9 @@ public class ImportTest {
 
     public static void main(String[] args) throws IOException {
         String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
-//        baseURI = "http://139.91.183.70:8080/EVREMetadataServices";
+//        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT";
 //        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
-        String folder = "C:/RdfData";
+        String folder = "E:/RdfData";
 //        folder = "/home/rousakis/RdfData";   //seistro 2 path
         ImportTest imp = new ImportTest(baseURI);
         ////////
@@ -124,7 +124,7 @@ public class ImportTest {
 //        Response importResponse = imp.importFilePath(request.toString(), token);
         ///////
         //this service works in all cases 
-        String namespace = "ekt-data";
+        String namespace = "test";
         Response importResponse = imp.importFileData(readFileData(folder + "/cidoc_v3.2.1.rdfs"), // file
                 "application/rdf+xml", // content type
                 namespace, // namespace

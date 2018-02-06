@@ -135,7 +135,7 @@ public class UpdateServices {
             message.setStatus(ResponseStatus.FAILED);
             statusInt = 401;
         } else {
-            Response resp1 = blazegraphRepRestful.executeUpdateSparqlQuery(q, namespace);
+            Response resp1 = blazegraphRepRestful.executeSparqlUpdateQuery(q, namespace);
             statusInt = resp1.getStatus();
             if (statusInt == 200) {
                 message.setStatus(ResponseStatus.SUCCEED);

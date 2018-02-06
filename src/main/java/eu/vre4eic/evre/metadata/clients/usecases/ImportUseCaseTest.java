@@ -30,10 +30,15 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.http.client.ClientProtocolException;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openrdf.rio.RDFFormat;
+
+import java.util.Set;
+import java.util.Arrays;
+import java.util.HashSet;
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Jersey REST client generated for REST resource:ImportServices [import]<br>
@@ -92,7 +97,7 @@ public class ImportUseCaseTest {
         }
         String mimeType = format;
         Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target(restURL).queryParam("graph", namedGraph);
+        WebTarget webTarget = client.target(restURL);
         Response response = webTarget.request().header("Authorization", token).post(Entity.entity(content, mimeType));
         return response;
     }
@@ -132,9 +137,18 @@ public class ImportUseCaseTest {
     }
 
     public static void main(String[] args) throws IOException, ParseException {
+        
+        Set<String> loggers = new HashSet<>(Arrays.asList("org.apache.http", "groovyx.net.http"));
+        for (String log : loggers) {
+            Logger logger = (Logger) LoggerFactory.getLogger(log);
+            logger.setLevel(Level.INFO);
+            logger.setAdditive(false);
+        }
+        
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
+//        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT";
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         ImportUseCaseTest test = new ImportUseCaseTest(baseURI);
         ////////
@@ -143,7 +157,7 @@ public class ImportUseCaseTest {
 
         //3- Import the RDF data
         System.out.println("3) Importing RDF data into the triple store.");
-
+        String folder = "E:/RdfData/VREData/EKT RDF";
         //this service works only if the file to be imported is in the same machine with the tomcat
 //        JSONObject request = new JSONObject();
 //        request.put("filename", folder + "/cidoc_v3.2.1.rdfs");
@@ -152,18 +166,12 @@ public class ImportUseCaseTest {
 //        Response importResponse = imp.importFilePOSTJSON(request.toString(), token);
         ///////
         //this service works in all cases 
-        String namespace = "ekt-data";
-        Response importResponse = test.importFile(readFileData("C:\\RdfData\\res-cidoc_v3.2.1.rdfs"), //small dataset
-                Utils.fetchDataImportMimeType(RDFFormat.RDFXML), // content type
+        String namespace = "vre4eictest";
+        Response importResponse = test.importFile(readFileData(folder + "/organizationUnits/organizationUnits2.ntriples"), //small dataset
+                Utils.fetchDataImportMimeType(RDFFormat.NTRIPLES), // content type
                 namespace, // namespace
-                "http://cidoc_2", // namedGraph
+                "http://test", // namedGraph
                 token);
-//        Response importResponse = test.importFile(readFileFromResources("/data/LifeWatchDatabase.ttl"), //medium dataset
-//                Utils.fetchDataImportMimeType(RDFFormat.TURTLE), // content type
-//                namespace, // namespace
-//                "http://lifewatch", // namedGraph
-//                token);
-
         String responseString = importResponse.readEntity(String.class);
         System.out.println(responseString);
 //        JSONParser parser = new JSONParser();
@@ -174,7 +182,6 @@ public class ImportUseCaseTest {
 //        jsonObj.put("message", messageObj);
 //        System.out.println(jsonObj.toJSONString());
 //        test.close();
-
         //4- Remove the profile from e-VRE
         ns.removeUser(token, "id_of_user");
         test.close();
