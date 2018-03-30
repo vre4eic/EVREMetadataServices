@@ -15,10 +15,11 @@
  */
 package eu.vre4eic.evre.metadata.clients;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import gr.forth.ics.virtuoso.Utils;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -27,6 +28,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.http.client.ClientProtocolException;
+import org.slf4j.LoggerFactory;
 
 /**
  * Jersey REST client generated for REST resource:ImportServices [import]<br>
@@ -70,7 +72,8 @@ public class ImportTest {
      * @param namedGraph A String representation of the nameGraph
      * @return A response from the service.
      */
-    public Response importFileData(String content, String format, String namespace, String namedGraph, String token)
+    public Response importFileDataBlazegraph(String content, String format,
+            String namespace, String namedGraph, String token)
             throws ClientProtocolException, IOException {
         String restURL;
         // Taking into account nameSpace in the construction of the URL
@@ -90,24 +93,39 @@ public class ImportTest {
         return response;
     }
 
-    public static String readFileData(String filename) {
-        File f = new File(filename);
-        StringBuilder sb = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(f));
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            br.close();
-        } catch (Exception e) {
-            System.out.println("Exception: " + e.getMessage() + " occured .");
-            return null;
+    public Response importFileDataVirtuoso(String content, String format,
+            String namedGraph, String token)
+            throws ClientProtocolException, IOException {
+        String restURL;
+        Client client = ClientBuilder.newClient();
+        String mimeType = format;
+        // Taking into account nameGraph in the construction of the URL
+        restURL = baseURI + "/import/virtuoso";
+        WebTarget webTarget = client.target(restURL);
+        if (namedGraph != null) {
+            restURL = baseURI + "?graph=" + namedGraph;
+            webTarget = webTarget.queryParam("graph", namedGraph);
         }
-        return sb.toString();
+        Response response = webTarget.request().header("Authorization", token).post(Entity.entity(content, mimeType));
+        return response;
     }
 
     public static void main(String[] args) throws IOException {
+        Set<String> loggers = new HashSet<>(Arrays.asList(
+                "org.openrdf.rio",
+                "org.apache.http",
+                "groovyx.net.http",
+                "org.eclipse.jetty.client",
+                "org.eclipse.jetty.io",
+                "org.eclipse.jetty.http",
+                "o.e.jetty.util",
+                "o.e.j.u.component",
+                "org.openrdf.query.resultio"));
+        for (String log : loggers) {
+            ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(log);
+            logger.setLevel(ch.qos.logback.classic.Level.INFO);
+            logger.setAdditive(false);
+        }
         String baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
 //        baseURI = "http://139.91.183.70:8080/EVREMetadataServices-1.0-SNAPSHOT";
 //        baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
@@ -124,11 +142,12 @@ public class ImportTest {
 //        Response importResponse = imp.importFilePath(request.toString(), token);
         ///////
         //this service works in all cases 
-        String namespace = "test";
-        Response importResponse = imp.importFileData(readFileData(folder + "/cidoc_v3.2.1.rdfs"), // file
-                "application/rdf+xml", // content type
-                namespace, // namespace
-                "http://cidoc_2", // nameGraph
+        Response importResponse = imp.importFileDataVirtuoso(
+//                Utils.readFileData(folder + "\\VREData\\EKT RDF\\organizations_with_synthetic_geo_data\\organizationUnits2.ntriples"), // file
+                Utils.readFileData(folder + "\\VREData\\EKT RDF\\postalAddresses\\postalAddresses1.n3"), // file
+                "text/rdf+n3", // content type
+                //                namespace, // namespace
+                "http://efo2.48", // nameGraph
                 token);
         System.out.println(importResponse.readEntity(String.class));
         imp.close();

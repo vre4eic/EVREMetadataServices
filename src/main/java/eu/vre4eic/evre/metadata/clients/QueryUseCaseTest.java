@@ -34,6 +34,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import eu.vre4eic.evre.core.Common.UserRole;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import org.slf4j.LoggerFactory;
 
 public class QueryUseCaseTest {
 
@@ -62,14 +66,21 @@ public class QueryUseCaseTest {
      * @param format
      * @return The output of the query
      */
-    public Response executeSparqlQuery(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
-        //String mimetype = Utilities.fetchQueryResultMimeType(format);
-
-        WebTarget webTarget = client.target(baseURI + "/query/namespace/" + namespace).
+    public Response executeSparqlQueryVirtuoso(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
+        WebTarget webTarget = client.target(baseURI + "/query/virtuoso").
                 queryParam("format", format).//mimetype
                 queryParam("query", URLEncoder.encode(queryStr, "UTF-8").
                         replaceAll("\\+", "%20"));
-        // System.out.println("----------> " + webTarget.getUri());
+        Invocation.Builder invocationBuilder = webTarget.request().
+                header("Authorization", token);
+        Response response = invocationBuilder.get();
+        return response;
+    }
+
+    public Response executeSparqlQueryBlazegraph(String queryStr, String namespace, String format, String token) throws UnsupportedEncodingException {//QueryResultFormat format) throws UnsupportedEncodingException {
+        WebTarget webTarget = client.target(baseURI + "/query/namespace/" + namespace).
+                queryParam("format", format).//mimetype
+                queryParam("query", URLEncoder.encode(queryStr, "UTF-8").replaceAll("\\+", "%20"));
         Invocation.Builder invocationBuilder = webTarget.request().
                 header("Authorization", token);//.request(mimetype);
         Response response = invocationBuilder.get();
@@ -158,12 +169,39 @@ public class QueryUseCaseTest {
      * 
      */
     public static void main(String[] args) throws UnsupportedEncodingException, ParseException {
+        Set<String> loggers = new HashSet<>(Arrays.asList(
+                "org.openrdf.rio",
+                "org.apache.http",
+                "groovyx.net.http",
+                "org.eclipse.jetty.client",
+                "org.eclipse.jetty.io",
+                "org.eclipse.jetty.http",
+                "o.e.jetty.util",
+                "o.e.j.u.component",
+                "org.openrdf.query.resultio"));
+        for (String log : loggers) {
+            ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(log);
+            logger.setLevel(ch.qos.logback.classic.Level.INFO);
+            logger.setAdditive(false);
+        }
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
         QueryUseCaseTest test = new QueryUseCaseTest(baseURI, nSBaseURI);
-        String query = "select * where {?s ?p ?o} limit 5";
-//        query = "SELECT * WHERE {{ ?s ?p ?o . ?s rdfs:label ?o. ?o bds:search 'Quadrelli' . }}";
+        String query = "select distinct (?persName as ?name) ?Service (?pers as ?uri) ?org_0Name from <http://ekt-data> from <http://rcuk-data> from <http://fris-data> from <http://epos-data> from <http://envri-data>  where {\n"
+                + "?pers a <http://eurocris.org/ontology/cerif#Person>.\n"
+                + "?pers  <http://eurocris.org/ontology/cerif#is_source_of> ?FLES.\n"
+                + "?pers rdfs:label ?persName. \n"
+                + "?FLES <http://eurocris.org/ontology/cerif#has_destination> ?Ser.\n"
+                + "?FLES <http://eurocris.org/ontology/cerif#has_classification> <http://139.91.183.70:8090/vre4eic/Classification.provenance>.  \n"
+                + "?Ser <http://eurocris.org/ontology/cerif#has_acronym> ?Service.\n"
+                + "?pers <http://eurocris.org/ontology/cerif#Person-OrganisationUnit/is%20member%20of> ?org_0.\n"
+                + "?org_0 <http://eurocris.org/ontology/cerif#has_name> ?org_0Name. \n"
+                //                + "?persName bds:search \"maria\". \n"
+                //                + "?org_0Name bds:search \"european\".\n"
+                + "?persName bif:contains \"maria\". \n"
+                + "?org_0Name bif:contains  \"european\".\n"
+                + "} ";
 
         //String queryEnc = URLEncoder.encode(query2, "UTF-8").replaceAll("\\+", "%20");
         // System.out.println(queryEnc);
@@ -173,11 +211,12 @@ public class QueryUseCaseTest {
         //3- Execute a query
         System.out.println();
         System.out.println("3) Executing the query: " + query);
-        String namespace = "ekt-demo";
-        Response queryResponse
-                = test.executeSparqlQuery(query, namespace, "text/tab-separated-values", token);//QueryResultFormat.JSON);
+        String namespace = "vre4eic";
+        long start = System.currentTimeMillis();
+        Response queryResponse = test.executeSparqlQueryVirtuoso(query, namespace, "application/json", token);
+//        Response queryResponse = test.executeSparqlQueryBlazegraph(query, namespace, "application/json", token);
         System.out.println("Query executed, return message is: " + queryResponse.readEntity(String.class));
-
+        System.out.println("Duration: " + (System.currentTimeMillis() - start));
         //4- Remove the profile from e-VRE
         test.removeUser(nSBaseURI, token, "id_of_user");
 

@@ -15,6 +15,7 @@
  */
 package eu.vre4eic.evre.metadata.clients;
 
+import eu.vre4eic.evre.blazegraph.Utils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.ws.rs.ClientErrorException;
@@ -64,6 +65,16 @@ public class ExportTest {
         return response;
     }
 
+    public Response exportFileVirtuoso(String graph, String format, String token) throws ClientErrorException, UnsupportedEncodingException {
+        webTarget = webTarget.path("virtuoso");
+        webTarget = webTarget.queryParam("format", format).//mimetype
+                queryParam("graph", graph);
+        Invocation.Builder invocationBuilder = webTarget.request().
+                header("Authorization", token);//.request(mimetype);
+        Response response = invocationBuilder.get();
+        return response;
+    }
+
     public void close() {
         client.close();
     }
@@ -74,14 +85,16 @@ public class ExportTest {
         ExportTest exp = new ExportTest(baseURI);
         JSONObject request = new JSONObject();
         ///
-        request.put("format", "application/rdf+xml");
-        request.put("graph", "http://cidoc_2");
-        String token = "e5cfffef-4218-4993-8238-e97aa09d92f8";
+//        request.put("format", "application/rdf+xml");
+//        request.put("graph", " http://epos-data");
+//        String token = "e5cfffef-4218-4993-8238-e97aa09d92f8";
 //        Response resp = exp.exportFilePOSTJSON(request.toString(), token);
 
-        Response resp = exp.exportFileGETJSON("http://cidoc_2", "application/rdf+xml", token);
-        System.out.println(resp.readEntity(String.class));
-        System.out.println(resp.getStatus());
+//        Response resp = exp.exportFileGETJSON("http://cidoc_2", "application/rdf+xml", token);
+//        Response resp = exp.exportFileVirtuoso("http://cidoc_2", "application/rdf+xml", "test");
+//        System.out.println(resp.readEntity(String.class));
+//        System.out.println(resp.getStatus());
+        Utils.saveResponseToFile("efo248.nt", exp.exportFileVirtuoso("http://efo2.48", "text/plain", "test"));
 
     }
 

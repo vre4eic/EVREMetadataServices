@@ -44,6 +44,10 @@ public class ApplicationConfig extends Application {
         resources.add(eu.vre4eic.evre.metadata.services.InfoService.class);
         resources.add(eu.vre4eic.evre.metadata.services.QueryServices.class);
         resources.add(eu.vre4eic.evre.metadata.services.UpdateServices.class);
+        resources.add(eu.vre4eic.evre.metadata.services.virtuoso.ExportServices.class);
+        resources.add(eu.vre4eic.evre.metadata.services.virtuoso.ImportServices.class);
+        resources.add(eu.vre4eic.evre.metadata.services.virtuoso.QueryServices.class);
+        resources.add(eu.vre4eic.evre.metadata.services.virtuoso.UpdateServices.class);
     }
     
 }
