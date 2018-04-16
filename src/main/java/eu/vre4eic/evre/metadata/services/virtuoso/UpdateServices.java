@@ -17,7 +17,6 @@ package eu.vre4eic.evre.metadata.services.virtuoso;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import gr.forth.ics.virtuoso.RestVirtRep;
 import gr.forth.ics.virtuoso.SesameVirtRep;
 import eu.vre4eic.evre.core.Common;
 import eu.vre4eic.evre.core.Common.ResponseStatus;
@@ -39,7 +38,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -107,11 +105,11 @@ public class UpdateServices {
             return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
         } else {
             String q = (String) jsonObject.get("query");
-            return updateExecBlazegraph(q, authToken, message);
+            return updateExecVirtuoso(q, authToken, message);
         }
     }
 
-    private Response updateExecBlazegraph(String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException, ParseException {
+    private Response updateExecVirtuoso(String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException, ParseException {
         boolean isTokenValid = module.checkToken(authToken);
         int statusInt;
         if (!isTokenValid) {
@@ -131,7 +129,7 @@ public class UpdateServices {
             }
         }
         mdp.publish(message);
-        return Response.status(statusInt).entity(message).header("Access-Control-Allow-Origin", "*").build();
+        return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
     }
 
 }

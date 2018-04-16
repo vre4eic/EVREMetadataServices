@@ -44,6 +44,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import static eu.vre4eic.evre.metadata.services.virtuoso.QueryServices.ConvertToCountQuery;
 
 /**
  * REST Web Service
@@ -125,7 +126,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
+        return queryExecBlazegraph(timeout, f, ConvertToCountQuery(q), namespace, authToken, message);
     }
 
     /**
@@ -182,7 +183,7 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
+        return queryExecBlazegraph(timeout, f, ConvertToCountQuery(q), namespace, authToken, message);
     }
 
     /**
@@ -234,7 +235,7 @@ public class QueryServices {
                 timeout = (int) jsonObject.get("timeout");
             }
             String f = (String) jsonObject.get("format");
-            return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
+            return queryExecBlazegraph(timeout, f, ConvertToCountQuery(q), namespace, authToken, message);
         }
     }
 
@@ -265,7 +266,7 @@ public class QueryServices {
             } else {
                 timeout = (int) jsonObject.get("timeout");
             }
-            return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
+            return queryExecBlazegraph(timeout, f, ConvertToCountQuery(q), namespace, authToken, message);
         }
     }
 
@@ -418,28 +419,27 @@ public class QueryServices {
             } else {
                 timeout = (int) jsonObject.get("timeout");
             }
-            return queryExecBlazegraph(timeout, f, convertToCountQuery(q), namespace, authToken, message);
+            return queryExecBlazegraph(timeout, f, ConvertToCountQuery(q), namespace, authToken, message);
         }
     }
 
-    private String convertToCountQuery(String query) {
-        String queryTmp = query.toLowerCase();
-        int end = queryTmp.indexOf("from");
-        if (end == -1) {
-            end = queryTmp.indexOf("where");
-        }
-        int selectStart = queryTmp.indexOf("select");
-        int distinctStart = queryTmp.indexOf("distinct");
-        StringBuilder finalQuery = new StringBuilder();
-        if (distinctStart != -1) {
-            finalQuery.append(queryTmp.substring(0, distinctStart + "distinct".length()));
-        } else {
-            finalQuery.append(queryTmp.substring(0, selectStart + "select".length()));
-        }
-        finalQuery.append(" (count(*) as ?count) ").append(query.substring(end));
-        return finalQuery.toString();
-    }
-
+//    private String ConvertToCountQuery(String query) {
+//        String queryTmp = query.toLowerCase();
+//        int end = queryTmp.indexOf("from");
+//        if (end == -1) {
+//            end = queryTmp.indexOf("where");
+//        }
+//        int selectStart = queryTmp.indexOf("select");
+//        int distinctStart = queryTmp.indexOf("distinct");
+//        StringBuilder finalQuery = new StringBuilder();
+//        if (distinctStart != -1) {
+//            finalQuery.append(queryTmp.substring(0, distinctStart + "distinct".length()));
+//        } else {
+//            finalQuery.append(queryTmp.substring(0, selectStart + "select".length()));
+//        }
+//        finalQuery.append(" (count(*) as ?count) ").append(query.substring(end));
+//        return finalQuery.toString();
+//    }
     private Response queryExecBlazegraph(int timeout, String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
 //        isTokenValid = true;
@@ -512,8 +512,7 @@ public class QueryServices {
                 + "?persName bds:matchAllTerms \"true\".  \n"
                 + "?persName bds:relevance ?score. \n"
                 + "}  ORDER BY desc(?score) ?pers limit 100";
-
-        System.out.println(service.convertToCountQuery(query));
+        System.out.println(ConvertToCountQuery(query));
 
     }
 

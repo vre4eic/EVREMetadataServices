@@ -97,7 +97,7 @@ public class QueryServices {
         } catch (RepositoryException ex) {
             Logger.getLogger(QueryServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        restVirtuoso = new RestVirtRep(prop.getProperty("virtuoso.url") + ":" + prop.getProperty("virtuoso.port"));
+        restVirtuoso = new RestVirtRep(prop.getProperty("virtuoso.rest.url"));
         module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
         mdp = PublisherFactory.getMetatdaPublisher();
     }
@@ -132,7 +132,8 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecVirtuoso(timeout, f, q, authToken, message);
+//        return queryExecVirtuoso(f, q, authToken, message);
+        return queryExecVirtuoso2(timeout, f, q, authToken, message);
     }
 
     @GET
@@ -150,7 +151,8 @@ public class QueryServices {
             authToken = token;
         }
         message.setToken(authToken);
-        return queryExecVirtuoso(timeout, f, convertToCountQuery(q), authToken, message);
+//        return queryExecVirtuoso(f, ConvertToCountQuery(q), authToken, message);
+        return queryExecVirtuoso2(timeout, f, ConvertToCountQuery(q), authToken, message);
     }
 
     /**
@@ -202,13 +204,14 @@ public class QueryServices {
                 timeout = (int) jsonObject.get("timeout");
             }
             String f = (String) jsonObject.get("format");
-            return queryExecVirtuoso(timeout, f, convertToCountQuery(q), authToken, message);
+//            return queryExecVirtuoso(f, ConvertToCountQuery(q), authToken, message);
+            return queryExecVirtuoso2(timeout, f, q, authToken, message);
         }
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Path("/count")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response queryCountExecPOSTJSON(String jsonInput,
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
@@ -233,13 +236,14 @@ public class QueryServices {
             } else {
                 timeout = (int) jsonObject.get("timeout");
             }
-            return queryExecVirtuoso(timeout, f, convertToCountQuery(q), authToken, message);
+//            return queryExecVirtuoso(f, ConvertToCountQuery(q), authToken, message);
+            return queryExecVirtuoso2(timeout, f, ConvertToCountQuery(q), authToken, message);
         }
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("batch")
+    @Path("/batch")
     public Response batchQueryExecPOSTJSONWithNS(String jsonInput,
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
@@ -263,7 +267,9 @@ public class QueryServices {
             String f = (String) jsonObject.get("format");
             for (int i = 0; i < queries.size(); i++) {
                 String query = (String) queries.get(i);
-                Response resp = queryExecPlainVirtuoso(f, query);
+//                Response resp = queryExecPlainVirtuoso(f, query);
+                restVirtuoso.setTimeout(0);
+                Response resp = restVirtuoso.executeSparqlQuery(query, f);
                 status = resp.getStatus();
                 String data = resp.readEntity(String.class);
                 if (status != 200) {
@@ -275,7 +281,7 @@ public class QueryServices {
         return Response.status(status).entity(result.toJSONString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
-    private String convertToCountQuery(String query) {
+    public static String ConvertToCountQuery(String query) {
         String queryTmp = query.toLowerCase();
         int end = queryTmp.indexOf("from");
         if (end == -1) {
@@ -285,17 +291,19 @@ public class QueryServices {
         int distinctStart = queryTmp.indexOf("distinct");
         StringBuilder finalQuery = new StringBuilder();
         if (distinctStart != -1) {
-            finalQuery.append(queryTmp.substring(0, distinctStart + "distinct".length()));
+            finalQuery.append(queryTmp.substring(0, distinctStart));
+            finalQuery.append(" (count(distinct *) as ?count) ").append(query.substring(end));
         } else {
             finalQuery.append(queryTmp.substring(0, selectStart + "select".length()));
+            finalQuery.append(" (count(*) as ?count) ").append(query.substring(end));
         }
-        finalQuery.append(" (count(*) as ?count) ").append(query.substring(end));
         return finalQuery.toString();
     }
 
-    private Response queryExecVirtuoso(int timeout, String f, String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
+    private Response queryExecVirtuoso(String f, String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
 //        isTokenValid = true;
+        System.out.println("--using virtuoso sesame--");
         System.out.println(q);
         int statusInt;
         OutputStream output = null;
@@ -368,6 +376,7 @@ public class QueryServices {
     private Response queryExecVirtuoso2(int timeout, String f, String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
 //        isTokenValid = true;
+        System.out.println("--using virtuoso rest api --");
         System.out.println(q);
         int statusInt;
         Response response = null;
@@ -389,10 +398,11 @@ public class QueryServices {
         if (statusInt == 200) {
             message.setStatus(ResponseStatus.SUCCEED);
             message.setMessage("Query was executed successfully.");
-        } else {
-            message.setStatus(ResponseStatus.FAILED);
-            message.setMessage(responseData);
         }
+//        else {
+//            message.setStatus(ResponseStatus.FAILED);
+//            message.setMessage(responseData);
+//        }
         mdp.publish(message);
         if (statusInt == 200) {
             return Response.status(statusInt).entity(responseData).header("Access-Control-Allow-Origin", "*").build();
@@ -468,8 +478,7 @@ public class QueryServices {
                 + "?persName bds:relevance ?score. \n"
                 + "}  ORDER BY desc(?score) ?pers limit 100";
 
-        System.out.println(service.convertToCountQuery(query));
+        System.out.println(service.ConvertToCountQuery(query));
 
     }
-
 }
