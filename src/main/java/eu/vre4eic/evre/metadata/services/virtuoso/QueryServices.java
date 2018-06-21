@@ -403,6 +403,7 @@ public class QueryServices {
 //            message.setStatus(ResponseStatus.FAILED);
 //            message.setMessage(responseData);
 //        }
+        virtuoso.terminate();
         mdp.publish(message);
         if (statusInt == 200) {
             return Response.status(statusInt).entity(responseData).header("Access-Control-Allow-Origin", "*").build();

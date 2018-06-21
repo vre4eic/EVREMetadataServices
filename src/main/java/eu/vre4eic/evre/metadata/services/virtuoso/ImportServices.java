@@ -25,10 +25,8 @@ import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
 import gr.forth.ics.virtuoso.SesameVirtRep;
 import gr.forth.ics.virtuoso.Utils;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -148,6 +146,7 @@ public class ImportServices {
         result.put("response_status", message.getStatus());
         result.put("message", message.getMessage());
         mdp.publish(message);
+        virtuoso.terminate();
         return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 

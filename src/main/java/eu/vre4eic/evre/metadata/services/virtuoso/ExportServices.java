@@ -150,6 +150,7 @@ public class ExportServices {
             }
         }
         mdp.publish(message);
+        virtuoso.terminate();
         return Response.status(status).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
     }
 }

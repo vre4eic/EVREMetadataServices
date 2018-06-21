@@ -128,6 +128,7 @@ public class UpdateServices {
                 message.setStatus(ResponseStatus.FAILED);
             }
         }
+        virtuoso.terminate();
         mdp.publish(message);
         return Response.status(statusInt).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
     }
