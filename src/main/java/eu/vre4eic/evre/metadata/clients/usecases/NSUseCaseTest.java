@@ -62,6 +62,7 @@ public class NSUseCaseTest {
         myForm.param("name", "name_of_the_user");
         myForm.param("email", "email@_of_the_user");
         myForm.param("organization", "organization_the_user_belongs");
+        myForm.param("organizationURL", "organization_url");
         myForm.param("role", eu.vre4eic.evre.core.Common.UserRole.RESEARCHER.toString());
         myForm.param("password", "pwd_of_the_user");
 
@@ -116,7 +117,6 @@ public class NSUseCaseTest {
         Response response = invocationBuilder.get();
 
         System.out.println("removed, result message is: " + response.readEntity(String.class));
-
     }
 
 }

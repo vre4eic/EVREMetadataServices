@@ -62,8 +62,8 @@ public class QueryServices {
     @Context
     private HttpServletRequest requestContext;
     private BlazegraphRepRestful blazegraphRepRestful;
-    private AuthModule module;
-    private Publisher<MetadataMessage> mdp;
+//    private AuthModule module;
+//    private Publisher<MetadataMessage> mdp;
 
     /**
      * Creates a new instance of QueryServices
@@ -74,8 +74,8 @@ public class QueryServices {
     @PostConstruct
     public void initialize() {
         blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
-        mdp = PublisherFactory.getMetatdaPublisher();
+//        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+//        mdp = PublisherFactory.getMetatdaPublisher();
     }
 
     /**
@@ -441,8 +441,8 @@ public class QueryServices {
 //        return finalQuery.toString();
 //    }
     private Response queryExecBlazegraph(int timeout, String f, String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
-        boolean isTokenValid = module.checkToken(authToken);
-//        isTokenValid = true;
+//        boolean isTokenValid = module.checkToken(authToken);
+        boolean isTokenValid = true;
         System.out.println(q);
         int statusInt;
         Response response = null;
@@ -472,7 +472,7 @@ public class QueryServices {
                 message.setMessage(responseData);
             }
         }
-        mdp.publish(message);
+//        mdp.publish(message);
         if (statusInt == 200) {
             return Response.status(statusInt).entity(responseData).header("Access-Control-Allow-Origin", "*").build();
         } else {

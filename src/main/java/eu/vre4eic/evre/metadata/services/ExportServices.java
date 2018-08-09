@@ -59,8 +59,8 @@ public class ExportServices {
     @Context
     private HttpServletRequest requestContext;
     private BlazegraphRepRestful blazegraphRepRestful;
-    private AuthModule module;
-    private Publisher<MetadataMessage> mdp;
+//    private AuthModule module;
+//    private Publisher<MetadataMessage> mdp;
 
     /**
      * Creates a new instance of ExportServices
@@ -71,8 +71,8 @@ public class ExportServices {
     @PostConstruct
     public void initialize() {
         blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
-        mdp = PublisherFactory.getMetatdaPublisher();
+//        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+//        mdp = PublisherFactory.getMetatdaPublisher();
     }
 
     @GET
@@ -89,8 +89,8 @@ public class ExportServices {
         if (authToken == null) {
             authToken = token;
         }
-        boolean isTokenValid = module.checkToken(authToken);
-//        isTokenValid = true;
+//        boolean isTokenValid = module.checkToken(authToken);
+        boolean isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.READ);
         message.setToken(authToken);
@@ -114,7 +114,7 @@ public class ExportServices {
                 message.setMessage(response.readEntity(String.class));
             }
         }
-        mdp.publish(message);
+//        mdp.publish(message);
         if (status == 200) {
             return Response.status(status).entity(response.readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
         } else {

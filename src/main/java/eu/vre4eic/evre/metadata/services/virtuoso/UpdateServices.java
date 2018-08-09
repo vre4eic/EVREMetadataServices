@@ -24,6 +24,7 @@ import eu.vre4eic.evre.core.comm.Publisher;
 import eu.vre4eic.evre.core.comm.PublisherFactory;
 import eu.vre4eic.evre.core.messages.MetadataMessage;
 import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
+import eu.vre4eic.evre.metadata.utils.MetadataNM;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
 import java.io.IOException;
@@ -81,7 +82,7 @@ public class UpdateServices {
         } catch (RepositoryException ex) {
             Logger.getLogger(QueryServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+        module = MetadataNM.getModule();
         mdp = PublisherFactory.getMetatdaPublisher();
     }
 
@@ -102,6 +103,7 @@ public class UpdateServices {
         if (jsonObject.size() != 1) {
             message.setMessage("JSON input message should have exactly 1 argument.");
             message.setStatus(ResponseStatus.FAILED);
+            mdp.publish(message);
             return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
         } else {
             String q = (String) jsonObject.get("query");
@@ -111,6 +113,7 @@ public class UpdateServices {
 
     private Response updateExecVirtuoso(String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException, ParseException {
         boolean isTokenValid = module.checkToken(authToken);
+//        boolean isTokenValid = true;
         int statusInt;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");

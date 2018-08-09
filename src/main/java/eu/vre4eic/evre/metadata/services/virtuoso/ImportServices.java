@@ -21,6 +21,7 @@ import eu.vre4eic.evre.core.comm.Publisher;
 import eu.vre4eic.evre.core.comm.PublisherFactory;
 import eu.vre4eic.evre.core.messages.MetadataMessage;
 import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
+import eu.vre4eic.evre.metadata.utils.MetadataNM;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
 import gr.forth.ics.virtuoso.SesameVirtRep;
@@ -80,7 +81,7 @@ public class ImportServices {
         } catch (RepositoryException ex) {
             Logger.getLogger(QueryServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+        module = MetadataNM.getModule();
         mdp = PublisherFactory.getMetatdaPublisher();
     }
 
@@ -123,7 +124,7 @@ public class ImportServices {
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
         int status = 0;
-//        isTokenValid = true;
+//        boolean isTokenValid = true;
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
             message.setStatus(ResponseStatus.FAILED);
@@ -141,7 +142,6 @@ public class ImportServices {
                 status = 500;
             }
         }
-        mdp.publish(message);
         JSONObject result = new JSONObject();
         result.put("response_status", message.getStatus());
         result.put("message", message.getMessage());

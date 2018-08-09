@@ -62,8 +62,8 @@ public class ImportServices {
     @Context
     private HttpServletRequest requestContext;
     private BlazegraphRepRestful blazegraphRepRestful;
-    private AuthModule module;
-    private Publisher<MetadataMessage> mdp;
+//    private AuthModule module;
+//    private Publisher<MetadataMessage> mdp;
 
     /**
      * Creates a new instance of ImportServices
@@ -74,8 +74,8 @@ public class ImportServices {
     @PostConstruct
     public void initialize() {
         blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
-        mdp = PublisherFactory.getMetatdaPublisher();
+//        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+//        mdp = PublisherFactory.getMetatdaPublisher();
     }
 
     /**
@@ -97,8 +97,8 @@ public class ImportServices {
         if (authToken == null) {
             authToken = token;
         }
-        boolean isTokenValid = module.checkToken(authToken);
-//        isTokenValid = true;
+//        boolean isTokenValid = module.checkToken(authToken);
+        boolean isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -127,11 +127,11 @@ public class ImportServices {
             }
             message.setMessage(result);
         }
-        mdp.publish(message);
+//        mdp.publish(message);
         JSONObject result = new JSONObject();
         result.put("response_status", message.getStatus());
         result.put("message", message.getMessage());
-        mdp.publish(message);
+//        mdp.publish(message);
         return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
@@ -150,8 +150,8 @@ public class ImportServices {
         if (authToken == null) {
             authToken = token;
         }
-        boolean isTokenValid = module.checkToken(authToken);
-//        isTokenValid = true;
+//        boolean isTokenValid = module.checkToken(authToken);
+        boolean isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -180,11 +180,11 @@ public class ImportServices {
             }
             message.setMessage(result);
         }
-        mdp.publish(message);
+//        mdp.publish(message);
         JSONObject result = new JSONObject();
         result.put("response_status", message.getStatus());
         result.put("message", message.getMessage());
-        mdp.publish(message);
+//        mdp.publish(message);
         return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
@@ -222,9 +222,9 @@ public class ImportServices {
         if (authToken == null) {
             authToken = token;
         }
-        boolean isTokenValid = module.checkToken(authToken);
+//        boolean isTokenValid = module.checkToken(authToken);
         org.json.JSONObject jsonMessage = null;
-//        isTokenValid = true;
+        boolean isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -259,11 +259,11 @@ public class ImportServices {
                 status = 500;
             }
         }
-        mdp.publish(message);
+//        mdp.publish(message);
         JSONObject result = new JSONObject();
         result.put("response_status", message.getStatus());
         result.put("message", message.getMessage());
-        mdp.publish(message);
+//        mdp.publish(message);
         return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
@@ -306,8 +306,8 @@ public class ImportServices {
         if (authToken == null) {
             authToken = token;
         }
-        boolean isTokenValid = module.checkToken(authToken);
-//        isTokenValid = true;
+//        boolean isTokenValid = module.checkToken(authToken);
+        boolean isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
@@ -344,7 +344,7 @@ public class ImportServices {
         JSONObject result = new JSONObject();
         result.put("response_status", message.getStatus().toString());
         result.put("message", message.getMessage());
-        mdp.publish(message);
+//        mdp.publish(message);
         return Response.status(status).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 

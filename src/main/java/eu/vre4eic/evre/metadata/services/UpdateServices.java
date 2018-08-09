@@ -59,8 +59,8 @@ public class UpdateServices {
     @Context
     private HttpServletRequest requestContext;
     private BlazegraphRepRestful blazegraphRepRestful;
-    private AuthModule module;
-    private Publisher<MetadataMessage> mdp;
+//    private AuthModule module;
+//    private Publisher<MetadataMessage> mdp;
 
     /**
      * Creates a new instance of UpdateClasses
@@ -71,8 +71,8 @@ public class UpdateServices {
     @PostConstruct
     public void initialize() {
         blazegraphRepRestful = new BlazegraphRepRestful(propertiesManager.getTripleStoreUrl());
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
-        mdp = PublisherFactory.getMetatdaPublisher();
+//        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+//        mdp = PublisherFactory.getMetatdaPublisher();
     }
 
     @POST
@@ -126,9 +126,9 @@ public class UpdateServices {
     }
 
     private Response updateExecBlazegraph(String q, String namespace, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException, ParseException {
-        boolean isTokenValid = module.checkToken(authToken);
+//        boolean isTokenValid = module.checkToken(authToken);
         int statusInt;
-//        isTokenValid = true;
+        boolean isTokenValid = true;
         JSONObject message2 = new JSONObject();
         if (!isTokenValid) {
             message.setMessage("User not authenticated!");
@@ -148,7 +148,7 @@ public class UpdateServices {
             message2 = (JSONObject) parser.parse(message.toJSON());
             message2.put("message", updateMessage);
         }
-        mdp.publish(message);
+//        mdp.publish(message);
         if (statusInt == 200) {
             return Response.status(statusInt).entity(message2.toString()).header("Access-Control-Allow-Origin", "*").build();
         } else {

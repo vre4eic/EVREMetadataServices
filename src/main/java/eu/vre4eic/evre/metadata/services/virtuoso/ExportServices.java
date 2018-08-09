@@ -22,6 +22,7 @@ import eu.vre4eic.evre.core.comm.Publisher;
 import eu.vre4eic.evre.core.comm.PublisherFactory;
 import eu.vre4eic.evre.core.messages.MetadataMessage;
 import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
+import eu.vre4eic.evre.metadata.utils.MetadataNM;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
 import gr.forth.ics.virtuoso.SesameVirtRep;
@@ -91,7 +92,7 @@ public class ExportServices {
         } catch (RepositoryException ex) {
             Logger.getLogger(QueryServices.class.getName()).log(Level.SEVERE, null, ex);
         }
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+        module = MetadataNM.getModule();
         mdp = PublisherFactory.getMetatdaPublisher();
     }
 
@@ -110,7 +111,7 @@ public class ExportServices {
             authToken = token;
         }
         boolean isTokenValid = module.checkToken(authToken);
-        isTokenValid = true;
+//        isTokenValid = true;
         MetadataMessageImpl message = new MetadataMessageImpl();
         message.setOperation(MetadataOperationType.READ);
         message.setToken(authToken);

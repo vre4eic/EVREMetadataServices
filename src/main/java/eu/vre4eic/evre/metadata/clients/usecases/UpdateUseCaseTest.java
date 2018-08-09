@@ -43,10 +43,10 @@ public class UpdateUseCaseTest {
         client.close();
     }
 
-    public Response executeUpdatePOSTJSON(String update, String namespace, String token) throws ClientErrorException {
+    public Response executeUpdatePOSTJSON(String update, String token) throws ClientErrorException {
         JSONObject json = new JSONObject();
         json.put("query", update);
-        WebTarget webTarget = client.target(baseURI + "/update/namespace/" + namespace);
+        WebTarget webTarget = client.target(baseURI + "/update/virtuoso");
         return webTarget.request(MediaType.APPLICATION_JSON).
                 header("Authorization", token).post(Entity.json(json.toJSONString()));
     }
@@ -64,10 +64,8 @@ public class UpdateUseCaseTest {
         String nSBaseURI = "http://v4e-lab.isti.cnr.it:8080/NodeService";
         String baseURI = "http://v4e-lab.isti.cnr.it:8080/MetadataService";
         baseURI = "http://139.91.183.48:8181/EVREMetadataServices";
-        
-        baseURI = "http://139.91.183.97:8080/EVREMetadataServices-1.0-SNAPSHOT";
-        
 
+//        baseURI = "http://139.91.183.97:8080/EVREMetadataServices-1.0-SNAPSHOT";
 //        baseURI = "http://139.91.183.97:8080/EVREMetadataServices-1.0-SNAPSHOT"; //celsius
         NSUseCaseTest ns = new NSUseCaseTest(nSBaseURI);
         UpdateUseCaseTest test = new UpdateUseCaseTest(baseURI);
@@ -96,7 +94,7 @@ public class UpdateUseCaseTest {
         //3- Execute a query
         System.out.println();
         System.out.println("3) Executing the update query: " + update);
-        Response updateResponse = test.executeUpdatePOSTJSON(update, "vre4eic", token);
+        Response updateResponse = test.executeUpdatePOSTJSON(update, token);
         JSONParser parser = new JSONParser();
 
 //        System.out.println(updateResponse.readEntity(String.class));

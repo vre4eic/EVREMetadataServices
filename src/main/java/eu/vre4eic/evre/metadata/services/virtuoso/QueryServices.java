@@ -21,6 +21,7 @@ import eu.vre4eic.evre.core.comm.Publisher;
 import eu.vre4eic.evre.core.comm.PublisherFactory;
 import eu.vre4eic.evre.core.messages.MetadataMessage;
 import eu.vre4eic.evre.core.messages.impl.MetadataMessageImpl;
+import eu.vre4eic.evre.metadata.utils.MetadataNM;
 import eu.vre4eic.evre.metadata.utils.PropertiesManager;
 import eu.vre4eic.evre.nodeservice.modules.authentication.AuthModule;
 import gr.forth.ics.virtuoso.RestVirtRep;
@@ -98,7 +99,7 @@ public class QueryServices {
             Logger.getLogger(QueryServices.class.getName()).log(Level.SEVERE, null, ex);
         }
         restVirtuoso = new RestVirtRep(prop.getProperty("virtuoso.rest.url"));
-        module = AuthModule.getInstance("tcp://v4e-lab.isti.cnr.it:61616");
+        module = MetadataNM.getModule();
         mdp = PublisherFactory.getMetatdaPublisher();
     }
 
@@ -134,6 +135,25 @@ public class QueryServices {
         message.setToken(authToken);
 //        return queryExecVirtuoso(f, q, authToken, message);
         return queryExecVirtuoso2(timeout, f, q, authToken, message);
+    }
+
+    @GET
+    @Path("/sesame")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response queryExecSesameGETJSON(
+            @DefaultValue("application/json") @QueryParam("format") String f,
+            @QueryParam("query") String q,
+            @DefaultValue("") @QueryParam("token") String token) throws IOException {
+        String authToken = requestContext.getHeader("Authorization");
+        MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setOperation(MetadataOperationType.QUERY);
+        if (authToken == null) {
+            authToken = token;
+        }
+        message.setToken(authToken);
+
+        return queryExecPlainVirtuoso(f, q, authToken, message);
+//        return queryExecVirtuoso2(timeout, f, q, authToken, message);
     }
 
     @GET
@@ -301,8 +321,8 @@ public class QueryServices {
     }
 
     private Response queryExecVirtuoso(String f, String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
-        boolean isTokenValid = module.checkToken(authToken);
-//        isTokenValid = true;
+//        boolean isTokenValid = module.checkToken(authToken);
+        boolean isTokenValid = true;
         System.out.println("--using virtuoso sesame--");
         System.out.println(q);
         int statusInt;
@@ -375,7 +395,7 @@ public class QueryServices {
 
     private Response queryExecVirtuoso2(int timeout, String f, String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
-//        isTokenValid = true;
+//        boolean isTokenValid = true;
         System.out.println("--using virtuoso rest api --");
         System.out.println(q);
         int statusInt;
@@ -399,10 +419,6 @@ public class QueryServices {
             message.setStatus(ResponseStatus.SUCCEED);
             message.setMessage("Query was executed successfully.");
         }
-//        else {
-//            message.setStatus(ResponseStatus.FAILED);
-//            message.setMessage(responseData);
-//        }
         virtuoso.terminate();
         mdp.publish(message);
         if (statusInt == 200) {
@@ -415,46 +431,70 @@ public class QueryServices {
         }
     }
 
-    private Response queryExecPlainVirtuoso(String f, String q) throws IOException, UnsupportedEncodingException {
-        try {
-            TupleQuery tupleQuery = virtuoso.getCon().prepareTupleQuery(QueryLanguage.SPARQL, q);
-            OutputStream output = new OutputStream() {
-                private StringBuilder string = new StringBuilder();
+    private Response queryExecPlainVirtuoso(String f, String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
+//        boolean isTokenValid = module.checkToken(authToken);
+        boolean isTokenValid = true;
+        int statusInt;
+        System.out.println("--using sesame api --");
+        if (!isTokenValid) {
+            message.setMessage("User not authenticated!");
+            message.setStatus(ResponseStatus.FAILED);
+            statusInt = 401;
+        } else if (f == null) {
+            message.setMessage("Error in the provided format.");
+            message.setStatus(ResponseStatus.FAILED);
+            statusInt = 500;
+        } else {
+            try {
+                TupleQuery tupleQuery = virtuoso.getCon().prepareTupleQuery(QueryLanguage.SPARQL, q);
+                OutputStream output = new OutputStream() {
+                    private StringBuilder string = new StringBuilder();
 
-                @Override
-                public void write(int b) throws IOException {
-                    this.string.append((char) b);
-                }
+                    @Override
+                    public void write(int b) throws IOException {
+                        this.string.append((char) b);
+                    }
 
-                public String toString() {
-                    return this.string.toString();
+                    public String toString() {
+                        return this.string.toString();
+                    }
+                };
+                TupleQueryResultHandler writer;
+                switch (f) {
+                    case "application/sparql-results+xml":
+                        writer = new SPARQLResultsXMLWriter(output);
+                        break;
+                    case "text/csv":
+                        writer = new SPARQLResultsCSVWriter(output);
+                        break;
+                    case "text/tab-separated-values":
+                        writer = new SPARQLResultsTSVWriter(output);
+                        break;
+                    case "application/json":
+                        writer = new SPARQLResultsJSONWriter(output);
+                        break;
+                    default:
+                        String result = "Invalid results format given.";
+                        return Response.status(406).entity(result).build();
                 }
-            };
-            TupleQueryResultHandler writer;
-            switch (f) {
-                case "application/sparql-results+xml":
-                    writer = new SPARQLResultsXMLWriter(output);
-                    break;
-                case "text/csv":
-                    writer = new SPARQLResultsCSVWriter(output);
-                    break;
-                case "text/tab-separated-values":
-                    writer = new SPARQLResultsTSVWriter(output);
-                    break;
-                case "application/json":
-                    writer = new SPARQLResultsJSONWriter(output);
-                    break;
-                default:
-                    String result = "Invalid results format given.";
-                    return Response.status(406).entity(result).build();
+                tupleQuery.evaluate(writer);
+                String result = output.toString();
+                virtuoso.terminate();
+                return Response.status(200).entity(result).header("Access-Control-Allow-Origin", "*").build();
+            } catch (RepositoryException | MalformedQueryException | QueryEvaluationException | TupleQueryResultHandlerException ex) {
+                message.setStatus(ResponseStatus.FAILED);
+                message.setMessage(ex.getMessage());
+                statusInt = 500;
+                JSONObject result = new JSONObject();
+                result.put("response_status", message.getStatus().toString());
+                result.put("message", message.getMessage());
+                return Response.status(statusInt).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
             }
-            tupleQuery.evaluate(writer);
-            String result = output.toString();
-            virtuoso.terminate();
-            return Response.status(200).entity(result).header("Access-Control-Allow-Origin", "*").build();
-        } catch (RepositoryException | MalformedQueryException | QueryEvaluationException | TupleQueryResultHandlerException ex) {
-            return Response.status(500).entity(ex.getMessage()).header("Access-Control-Allow-Origin", "*").build();
         }
+        JSONObject result = new JSONObject();
+        result.put("response_status", message.getStatus().toString());
+        result.put("message", message.getMessage());
+        return Response.status(statusInt).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
     }
 
     public static void main(String[] args) {
