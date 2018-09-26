@@ -29,18 +29,19 @@ import org.json.JSONObject;
 public class InsertWorkflowTest {
 
     public static void main(String[] args) {
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb2RlU2VydmljZSIsInVzZXJJZCI6Im1hdGgifQ.JK2TzOSTAX9M-90mBOBgN_AGoashunSXnhaLTPwJZnA";
         //create a INSERTWORKFLOW metadata message
         MetadataMessageImpl mmi = new MetadataMessageImpl("description of the operation, for instance: Query on the graph yy", Common.ResponseStatus.SUCCEED);
         mmi.setOperation(Common.MetadataOperationType.INSERTWORKFLOW);
-
+        mmi.setToken(token);
         //create the workflow description
         JSONObject ob = new JSONObject();
         ob.put("wf_name", "Rous test workflow 2");
         ob.put("wf_creator", "Rous");
-        ob.put("wf_description", "Description of the rous workflow 2");
+        ob.put("wf_description", "Description of the rous workflow2");
         ob.put("user_name", "math");
         ob.put("url", "scheme://url?tttttt");
-        ob.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb2RlU2VydmljZSIsInVzZXJJZCI6Im1hdGgifQ.JK2TzOSTAX9M-90mBOBgN_AGoashunSXnhaLTPwJZnA");// this is probably useless, can be ignored and not stored
+        ob.put("token", token);// this is probably useless, can be ignored and not stored
 
         mmi.setJsonMessage(ob);
 

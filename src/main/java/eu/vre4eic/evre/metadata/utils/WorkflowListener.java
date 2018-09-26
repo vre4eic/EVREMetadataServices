@@ -104,7 +104,7 @@ public class WorkflowListener {
 //        System.out.println("Message received with operation: " + mdm.getOperation().toString());
         if (mdm.getOperation() == MetadataOperationType.INSERTWORKFLOW) {
             try {
-                WorkflowData workflowObj = new WorkflowData(mdm.getJsonMessage());
+                WorkflowData workflowObj = new WorkflowData(mdm.getJsonMessage(), mdm.getToken());
                 workflowObj.storeWorkflowData();
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());

@@ -44,7 +44,7 @@ public class WorkflowData {
     private String metadataEndpoint, token;
     private String workflowsGraph, workflowsGraphLabel;
 
-    public WorkflowData(JSONObject workflowObj) throws UnsupportedEncodingException {
+    public WorkflowData(JSONObject workflowObj, String token) throws UnsupportedEncodingException {
         this.wfName = (String) workflowObj.get("wf_name");
         this.wfCreator = (String) workflowObj.get("wf_creator");
         this.wfDescription = (String) workflowObj.get("wf_description");
@@ -55,7 +55,11 @@ public class WorkflowData {
         this.workflowsGraph = prop.getProperty("workflows.graph");
         this.workflowsGraphLabel = prop.getProperty("workflows.graph.label");
         ///
-        this.token = (String) workflowObj.get("token");
+        if (token != null) {
+            this.token = token;
+        } else {
+            this.token = (String) workflowObj.get("token");
+        }
         String username = (String) workflowObj.get("user_name");
         String nodeservice = prop.getProperty("nodeservice.endpoint");
         Client client = ClientBuilder.newClient();
@@ -207,9 +211,10 @@ public class WorkflowData {
         workflow.put("wf_description", "Description of the workflow2");
         workflow.put("user_name", "math");
         workflow.put("url", "scheme://url?path");
-        workflow.put("token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb2RlU2VydmljZSIsInVzZXJJZCI6Im1hdGgifQ.JK2TzOSTAX9M-90mBOBgN_AGoashunSXnhaLTPwJZnA");
+        String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJOb2RlU2VydmljZSIsInVzZXJJZCI6Im1hdGgifQ.JK2TzOSTAX9M-90mBOBgN_AGoashunSXnhaLTPwJZnA";
+        workflow.put("token", token);
 
-        WorkflowData workflowObj = new WorkflowData(workflow);
+        WorkflowData workflowObj = new WorkflowData(workflow, token);
         workflowObj.storeWorkflowData();
 
 //        for (String triple : workflowObj.getTriples()) {
