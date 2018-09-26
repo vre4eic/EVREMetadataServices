@@ -67,7 +67,7 @@ import org.openrdf.repository.RepositoryException;
  * @author rousakis
  */
 @Path("query/virtuoso")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 public class QueryServices {
 
     PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
@@ -120,7 +120,7 @@ public class QueryServices {
      * results and the required format. <br>
      */
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response queryExecGETJSON(
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
@@ -139,7 +139,7 @@ public class QueryServices {
 
     @GET
     @Path("/sesame")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response queryExecSesameGETJSON(
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
@@ -158,7 +158,7 @@ public class QueryServices {
 
     @GET
     @Path("/count")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response queryCountExecGETJSON(
             @DefaultValue("application/json") @QueryParam("format") String f,
             @QueryParam("query") String q,
@@ -200,6 +200,7 @@ public class QueryServices {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response queryExecPOSTJSON(String jsonInput,
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
@@ -214,7 +215,9 @@ public class QueryServices {
         if (jsonObject.size() != 2) {
             message.setMessage("JSON input message should have exactly 2 arguments.");
             message.setStatus(ResponseStatus.FAILED);
-            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(400).entity(message.toJSON()).
+                    //header("Content-Type", "UTF-8").
+                    header("Access-Control-Allow-Origin", "*").build();
         } else {
             String q = (String) jsonObject.get("query");
             int timeout = 0;
@@ -231,6 +234,7 @@ public class QueryServices {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Path("/count")
     public Response queryCountExecPOSTJSON(String jsonInput,
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
@@ -246,7 +250,9 @@ public class QueryServices {
         if (jsonObject.size() != 2) {
             message.setMessage("JSON input message should have exactly 2 arguments.");
             message.setStatus(ResponseStatus.FAILED);
-            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(400).entity(message.toJSON()).
+                    //header("Content-Type", "UTF-8").
+                    header("Access-Control-Allow-Origin", "*").build();
         } else {
             String q = (String) jsonObject.get("query");
             String f = (String) jsonObject.get("format");
@@ -263,6 +269,7 @@ public class QueryServices {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @Path("/batch")
     public Response batchQueryExecPOSTJSONWithNS(String jsonInput,
             @DefaultValue("") @QueryParam("token") String token) throws IOException, ParseException {
@@ -280,7 +287,9 @@ public class QueryServices {
         if (jsonObject.size() != 2) {
             message.setMessage("JSON input message should have exactly 2 arguments.");
             message.setStatus(ResponseStatus.FAILED);
-            return Response.status(400).entity(message.toJSON()).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(400).entity(message.toJSON()).
+                    //header("Content-Type", "UTF-8").
+                    header("Access-Control-Allow-Origin", "*").build();
         } else {
             String queriesStr = (String) jsonObject.get("query");
             JSONArray queries = (JSONArray) jsonParser.parse(queriesStr);
@@ -293,12 +302,16 @@ public class QueryServices {
                 status = resp.getStatus();
                 String data = resp.readEntity(String.class);
                 if (status != 200) {
-                    return Response.status(status).entity(resp.readEntity(String.class)).header("Access-Control-Allow-Origin", "*").build();
+                    return Response.status(status).entity(resp.readEntity(String.class)).
+                            //header("Content-Type", "UTF-8").
+                            header("Access-Control-Allow-Origin", "*").build();
                 }
                 result.add(data);
             }
         }
-        return Response.status(status).entity(result.toJSONString()).header("Access-Control-Allow-Origin", "*").build();
+        return Response.status(status).entity(result.toJSONString()).
+                //header("Content-Type", "UTF-8").
+                header("Access-Control-Allow-Origin", "*").build();
     }
 
     public static String ConvertToCountQuery(String query) {
@@ -384,12 +397,16 @@ public class QueryServices {
         }
         mdp.publish(message);
         if (statusInt == 200) {
-            return Response.status(200).entity(output.toString()).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(200).entity(output.toString()).
+                    //header("Content-Type", "UTF-8").
+                    header("Access-Control-Allow-Origin", "*").build();
         } else {
             JSONObject result = new JSONObject();
             result.put("response_status", message.getStatus().toString());
             result.put("message", message.getMessage());
-            return Response.status(statusInt).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(statusInt).entity(result.toString()).
+                    //header("Content-Type", "UTF-8").
+                    header("Access-Control-Allow-Origin", "*").build();
         }
     }
 
@@ -422,12 +439,17 @@ public class QueryServices {
         virtuoso.terminate();
         mdp.publish(message);
         if (statusInt == 200) {
-            return Response.status(statusInt).entity(responseData).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(statusInt).entity(responseData).
+                    //header("Content-Type", "UTF-8").
+                    header("Access-Control-Allow-Origin", "*").build();
         } else {
             JSONObject result = new JSONObject();
             result.put("response_status", message.getStatus().toString());
             result.put("message", message.getMessage());
-            return Response.status(statusInt).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
+            return Response.status(statusInt).entity(result.toString()).
+                    header("Access-Control-Allow-Origin", "*").
+                    //header("Content-Type", "UTF-8").
+                    build();
         }
     }
 
@@ -480,7 +502,10 @@ public class QueryServices {
                 tupleQuery.evaluate(writer);
                 String result = output.toString();
                 virtuoso.terminate();
-                return Response.status(200).entity(result).header("Access-Control-Allow-Origin", "*").build();
+                return Response.status(200).entity(result).
+                        header("Access-Control-Allow-Origin", "*").
+                        //header("Content-Type", "UTF-8").
+                        build();
             } catch (RepositoryException | MalformedQueryException | QueryEvaluationException | TupleQueryResultHandlerException ex) {
                 message.setStatus(ResponseStatus.FAILED);
                 message.setMessage(ex.getMessage());
@@ -488,13 +513,17 @@ public class QueryServices {
                 JSONObject result = new JSONObject();
                 result.put("response_status", message.getStatus().toString());
                 result.put("message", message.getMessage());
-                return Response.status(statusInt).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
+                return Response.status(statusInt).entity(result.toString()).
+                        //header("Content-Type", "UTF-8").
+                        header("Access-Control-Allow-Origin", "*").build();
             }
         }
         JSONObject result = new JSONObject();
         result.put("response_status", message.getStatus().toString());
         result.put("message", message.getMessage());
-        return Response.status(statusInt).entity(result.toString()).header("Access-Control-Allow-Origin", "*").build();
+        return Response.status(statusInt).entity(result.toString()).
+                //header("Content-Type", "UTF-8").
+                header("Access-Control-Allow-Origin", "*").build();
     }
 
     public static void main(String[] args) {

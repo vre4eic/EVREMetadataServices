@@ -16,7 +16,6 @@
 package eu.vre4eic.evre.metadata.utils;
 
 import eu.vre4eic.evre.metadata.clients.usecases.UpdateUseCaseTest;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -28,7 +27,6 @@ import java.util.Set;
 import java.util.UUID;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
