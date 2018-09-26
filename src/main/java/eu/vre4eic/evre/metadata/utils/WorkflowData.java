@@ -42,7 +42,7 @@ public class WorkflowData {
     private String wfName, wfCreator, wfDescription, wfUrl;
     private ProvInfoGeneratorService provInfo;
     private String metadataEndpoint, token;
-    private String workflowsGraph;
+    private String workflowsGraph, workflowsGraphLabel;
 
     public WorkflowData(JSONObject workflowObj) throws UnsupportedEncodingException {
         this.wfName = (String) workflowObj.get("wf_name");
@@ -53,6 +53,7 @@ public class WorkflowData {
         Properties prop = propertiesManager.getProperties();
         this.metadataEndpoint = prop.getProperty("metadata.endpoint");
         this.workflowsGraph = prop.getProperty("workflows.graph");
+        this.workflowsGraphLabel = prop.getProperty("workflows.graph.label");
         ///
         this.token = (String) workflowObj.get("token");
         String username = (String) workflowObj.get("user_name");
@@ -79,6 +80,7 @@ public class WorkflowData {
         //
 //        String workflowProvUri = vreNS + "Workflow.Provenance." + uuid;
         triples.add("<" + workflowUri + "> a <" + cerifNS + "Workflow>. \n");
+        triples.add("<" + workflowUri + "> <http://in_graph> '" + workflowsGraphLabel + "'. \n");
         triples.add("<" + workflowUri + "> <" + cerifNS + "has_URI" + "> <" + wfUrl + ">. \n");
         triples.add("<" + workflowUri + "> <http://searchable_text> \"" + wfName + " " + wfDescription + "\". \n");
         triples.add("<" + workflowUri + "> <" + cerifNS + "has_name" + "> \"" + wfName + "\". \n");
@@ -94,13 +96,14 @@ public class WorkflowData {
         //
         triples.add("<" + creatorUri + "> a <" + cerifNS + "Person" + ">. \n");
         triples.add("<" + creatorUri + "> <" + cerifNS + "has_name" + "> \"" + wfCreator + "\". \n");
+        triples.add("<" + creatorUri + "> <http://in_graph> '" + workflowsGraphLabel + "'. \n");
         triples.add("<" + creatorUri + "> rdfs:label \"" + wfCreator + "\". \n");
         //
         triples.add("<" + creatorUri + "> <" + cerifNS + "is_source_of> <" + acUUID + ">. \n");
         triples.add("<" + acUUID + "> <" + cerifNS + "has_source> <" + creatorUri + ">. \n");
         triples.add("<" + acUUID + "> <" + cerifNS + "has_destination> <" + workflowUri + ">. \n");
         triples.add("<" + acUUID + "> a <" + cerifNS + "FullLinkEntity>. \n");
-        String providedByClassifUri = provInfo.findClassifFromRoleExpr("provided");
+        String providedByClassifUri = provInfo.findClassifFromRoleExpr("has provided");
         triples.add("<" + acUUID + "> <" + cerifNS + "has_classification> <" + providedByClassifUri + ">. \n");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String curDate = format.format(new Date()) + "T00:00:00";
