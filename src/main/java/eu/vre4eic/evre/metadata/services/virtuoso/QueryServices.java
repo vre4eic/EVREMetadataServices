@@ -341,6 +341,7 @@ public class QueryServices {
         int statusInt;
         OutputStream output = null;
         String responseData = "";
+        message.setJsonMessage(new org.json.JSONObject());
         try {
             if (!isTokenValid) {
                 message.setMessage("User not authenticated!");
@@ -412,6 +413,7 @@ public class QueryServices {
 
     private Response queryExecVirtuoso2(int timeout, String f, String q, String authToken, MetadataMessageImpl message) throws IOException, UnsupportedEncodingException {
         boolean isTokenValid = module.checkToken(authToken);
+        message.setJsonMessage(new org.json.JSONObject());
 //        boolean isTokenValid = true;
         System.out.println("--using virtuoso rest api --");
         System.out.println(q);

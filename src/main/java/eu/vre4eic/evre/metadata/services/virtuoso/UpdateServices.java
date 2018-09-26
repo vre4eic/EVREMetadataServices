@@ -95,6 +95,7 @@ public class UpdateServices {
         JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInput);
         String authToken = requestContext.getHeader("Authorization");
         MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setJsonMessage(new org.json.JSONObject());
         message.setOperation(Common.MetadataOperationType.UPDATE);
         if (authToken == null) {
             authToken = token;

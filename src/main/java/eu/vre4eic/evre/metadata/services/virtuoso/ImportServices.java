@@ -121,6 +121,7 @@ public class ImportServices {
         }
         boolean isTokenValid = module.checkToken(authToken);
         MetadataMessageImpl message = new MetadataMessageImpl();
+        message.setJsonMessage(new org.json.JSONObject());
         message.setOperation(MetadataOperationType.INSERT);
         message.setToken(authToken);
         int status = 0;
