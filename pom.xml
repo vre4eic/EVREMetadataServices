@@ -36,14 +36,18 @@
             <version>2.23.1</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <!--<groupId>${project.groupId}</groupId>-->
+            <groupId>forth.ics</groupId>
             <artifactId>BlazegraphOps</artifactId>
-            <version>${project.version}</version>
+            <version>1.0-SNAPSHOT</version>
+            <!--<version>${project.version}</version>-->
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <!--<groupId>${project.groupId}</groupId>-->
+            <groupId>forth.ics</groupId>
             <artifactId>VirtuosoOpsImpl</artifactId>
-            <version>${project.version}</version>
+            <version>1.0-SNAPSHOT</version>
+            <!--<version>${project.version}</version>-->
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -56,7 +60,7 @@
             <artifactId>NodeService</artifactId>
             <!--<version>0.0.1-SNAPSHOT</version>-->
             <version>0.0.3-SNAPSHOT</version>
-            <exclusions>
+<!--            <exclusions>
                 <exclusion>
                     <groupId>forth.ics</groupId>
                     <artifactId>BlazegraphOps</artifactId>
@@ -65,7 +69,7 @@
                     <groupId>eu.vre4eic.evre</groupId>
                     <artifactId>BlazegraphOps</artifactId>
                 </exclusion>
-            </exclusions>
+            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>javax.jms</groupId>
