@@ -36,11 +36,11 @@ public class InsertWorkflowTest {
         mmi.setToken(token);
         //create the workflow description
         JSONObject ob = new JSONObject();
-        ob.put("wf_name", "Rous test workflow 2");
-        ob.put("wf_creator", "Rous");
-        ob.put("wf_description", "Description of the rous workflow2");
+        ob.put("wf_name", "Final Review WF");
+        ob.put("wf_creator", "Maria Th");
+        ob.put("wf_description", "This is the demo workflow created during the review");
         ob.put("user_name", "math");
-        ob.put("url", "scheme://url?tttttt");
+        ob.put("url", "/Users/maria/VRE4EIC_demo_1/FR WF.evreflow");
         ob.put("token", token);// this is probably useless, can be ignored and not stored
 
         mmi.setJsonMessage(ob);

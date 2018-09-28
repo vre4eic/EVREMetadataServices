@@ -17,6 +17,7 @@ package eu.vre4eic.evre.metadata.utils;
 
 import eu.vre4eic.evre.metadata.clients.usecases.UpdateUseCaseTest;
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -48,7 +49,7 @@ public class WorkflowData {
         this.wfName = (String) workflowObj.get("wf_name");
         this.wfCreator = (String) workflowObj.get("wf_creator");
         this.wfDescription = (String) workflowObj.get("wf_description");
-        this.wfUrl = (String) workflowObj.get("url");
+        this.wfUrl = URLEncoder.encode((String) workflowObj.get("url"), "UTF-8");
         PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
         Properties prop = propertiesManager.getProperties();
         this.metadataEndpoint = prop.getProperty("metadata.endpoint");
