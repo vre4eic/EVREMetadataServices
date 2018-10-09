@@ -50,6 +50,42 @@
             <!--<version>${project.version}</version>-->
         </dependency>
         <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.3</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-repository-api</artifactId>
+            <version>4.1.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-queryresultio-sparqljson</artifactId>
+            <version>4.1.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-queryresultio-sparqlxml</artifactId>
+            <version>4.1.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.openrdf.sesame</groupId>
+            <artifactId>sesame-queryresultio-text</artifactId>
+            <version>4.1.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -60,7 +96,7 @@
             <artifactId>NodeService</artifactId>
             <!--<version>0.0.1-SNAPSHOT</version>-->
             <version>0.0.3-SNAPSHOT</version>
-<!--            <exclusions>
+            <!--            <exclusions>
                 <exclusion>
                     <groupId>forth.ics</groupId>
                     <artifactId>BlazegraphOps</artifactId>
@@ -147,6 +183,14 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.7.4</version>
         </dependency>
+        
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
