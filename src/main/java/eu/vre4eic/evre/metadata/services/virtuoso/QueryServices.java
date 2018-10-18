@@ -95,6 +95,7 @@ public class QueryServices {
                     Integer.parseInt(prop.getProperty("virtuoso.port")),
                     prop.getProperty("virtuoso.username"),
                     prop.getProperty("virtuoso.password"));
+            
         } catch (RepositoryException ex) {
             Logger.getLogger(QueryServices.class.getName()).log(Level.SEVERE, null, ex);
         }

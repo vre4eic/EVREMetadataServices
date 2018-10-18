@@ -197,6 +197,24 @@
             <version>1.1.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>gr.forth.ics</groupId>
+            <artifactId>virtsesame</artifactId>
+            <version>2.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>gr.forth.ics</groupId>
+            <artifactId>virtjdbc3</artifactId>
+            <version>7-20140918</version>
+        </dependency>     
+        
+        <dependency>
+            <groupId>gr.forth.ics</groupId>
+            <artifactId>virtjdbc4</artifactId>
+            <version>7-20140918</version>
+        </dependency>                      
+
     </dependencies>
 
     <build>
