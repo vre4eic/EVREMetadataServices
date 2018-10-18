@@ -34,6 +34,7 @@ public class MetadataMessagePublishTest {
         MetadataMessage mdm = new MetadataMessageImpl(" description", ResponseStatus.SUCCEED)
                 .setToken("rous")
                 .setOperation(MetadataOperationType.QUERY);
+        
 
         try {
             //publish the message
