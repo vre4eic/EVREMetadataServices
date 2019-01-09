@@ -49,7 +49,8 @@ public class WorkflowData {
         this.wfName = (String) workflowObj.get("wf_name");
         this.wfCreator = (String) workflowObj.get("wf_creator");
         this.wfDescription = (String) workflowObj.get("wf_description");
-        this.wfUrl = URLEncoder.encode((String) workflowObj.get("url"), "UTF-8");
+//        this.wfUrl = URLEncoder.encode((String) workflowObj.get("url"), "UTF-8");
+        this.wfUrl = (String) workflowObj.get("url");
         PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
         Properties prop = propertiesManager.getProperties();
         this.metadataEndpoint = prop.getProperty("metadata.endpoint");
@@ -86,7 +87,7 @@ public class WorkflowData {
 //        String workflowProvUri = vreNS + "Workflow.Provenance." + uuid;
         triples.add("<" + workflowUri + "> a <" + cerifNS + "Workflow>. \n");
         triples.add("<" + workflowUri + "> <http://in_graph> '" + workflowsGraphLabel + "'. \n");
-        triples.add("<" + workflowUri + "> <" + cerifNS + "has_URI" + "> <" + wfUrl + ">. \n");
+        triples.add("<" + workflowUri + "> <" + cerifNS + "has_URI" + "> '" + wfUrl + "'. \n");
         triples.add("<" + workflowUri + "> <http://searchable_text> \"" + wfName + " " + wfDescription + "\". \n");
         triples.add("<" + workflowUri + "> <" + cerifNS + "has_name" + "> \"" + wfName + "\". \n");
         triples.add("<" + workflowUri + "> rdfs:label \"" + wfName + "\". \n");

@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import javax.ws.rs.core.Response;
@@ -30,6 +33,7 @@ public class ProvInfoGeneratorService {
     private static final String CERIFPrefix = "http://eurocris.org/ontology/cerif#";
     private static final String VREClassifications = "http://vre/classifications";
     private static final String VREUsersProvInfo = "http://vre/users";
+    private String workflowsGraph, workflowsGraphLabel;
     //////////
     private String emailString;
     private String personName;
@@ -44,6 +48,10 @@ public class ProvInfoGeneratorService {
     private final String orgUnitUri;
 
     public ProvInfoGeneratorService(String personName, String emailString, String roleString, String orgName, String orgUrl, String endpoint, String authorizationToken) throws UnsupportedEncodingException {
+        PropertiesManager propertiesManager = PropertiesManager.getPropertiesManager();
+        Properties prop = propertiesManager.getProperties();
+        this.workflowsGraph = prop.getProperty("workflows.graph");
+        this.workflowsGraphLabel = prop.getProperty("workflows.graph.label");
         this.personName = personName;
         this.emailString = emailString;
         this.roleString = roleString;
@@ -52,27 +60,35 @@ public class ProvInfoGeneratorService {
         this.authorizationToken = authorizationToken;
         this.endpoint = endpoint;
         this.personUri = VREPrefix + "Person." + URLEncoder.encode(emailString, "UTF-8");
-        this.orgUnitUri = VREPrefix + "OrgUnit." + URLEncoder.encode(orgUrl, "UTF-8");
+        int start = orgUrl.indexOf("//");
+        if (start > 0) {
+            this.orgUnitUri = VREPrefix + "Organisation." + orgUrl.substring(start + 2);
+        } else {
+            this.orgUnitUri = VREPrefix + "Organisation." + orgUrl;
+        }
         this.eAddressUri = VREPrefix + "EAddress." + URLEncoder.encode(emailString, "UTF-8");
     }
 
-    public Set<String> personTriples() {
-        Set<String> triples = new LinkedHashSet<>();
+    public List<String> personTriples() {
+        List<String> triples = new ArrayList<>();
         triples.add("<" + personUri + "> a <" + CERIFPrefix + "Person>. \n");
-        triples.add("<" + personUri + "> <" + CERIFPrefix + "has_name> \"" + personName + "\". \n");
-        triples.add("<" + personUri + "> rdfs:label \"" + personName + "\". \n");
+        triples.add("<" + personUri + "> <" + CERIFPrefix + "has_name> \"" + personName + "\"^^<http://www.w3.org/2001/XMLSchema#string>. \n");
+        triples.add("<" + personUri + "> rdfs:label \"" + personName + "\"^^<http://www.w3.org/2001/XMLSchema#string>. \n");
+        triples.add("<" + personUri + "> <http://in_graph> \"" + workflowsGraphLabel + "\". \n");
         triples.add("<" + eAddressUri + "> a <" + CERIFPrefix + "ElectronicAddress>. \n");
-        triples.add("<" + eAddressUri + "> rdfs:label \"" + emailString + "\". \n");
-        triples.add("<" + eAddressUri + "> <" + CERIFPrefix + "has_URI> \"" + emailString + "\". \n");
+        triples.add("<" + eAddressUri + "> rdfs:label \"" + emailString + "\"^^<http://www.w3.org/2001/XMLSchema#string>. \n");
+        triples.add("<" + eAddressUri + "> <" + CERIFPrefix + "has_URI> \"" + emailString + "\"^^<http://www.w3.org/2001/XMLSchema#string>. \n");
+        triples.add("<" + eAddressUri + "> <http://in_graph> \"" + workflowsGraphLabel + "\". \n");
         return triples;
     }
 
-    public Set<String> orgTriples() {
-        Set<String> triples = new LinkedHashSet<>();
+    public List<String> orgTriples() {
+        List<String> triples = new ArrayList<>();
         triples.add("<" + orgUnitUri + "> a <" + CERIFPrefix + "OrganisationUnit>. \n");
-        triples.add("<" + orgUnitUri + "> <" + CERIFPrefix + "has_name> \"" + orgUnitName + "\". \n");
-        triples.add("<" + orgUnitUri + "> rdfs:label \"" + orgUnitName + "\". \n");
-        triples.add("<" + orgUnitUri + "> <" + CERIFPrefix + "has_URI> \"" + orgUnitUri + "\". \n");
+        triples.add("<" + orgUnitUri + "> <http://in_graph> \"" + workflowsGraphLabel + "\". \n");
+        triples.add("<" + orgUnitUri + "> <" + CERIFPrefix + "has_name> \"" + orgUnitName + "\"^^<http://www.w3.org/2001/XMLSchema#string>. \n");
+        triples.add("<" + orgUnitUri + "> rdfs:label \"" + orgUnitName + "\"^^<http://www.w3.org/2001/XMLSchema#string>. \n");
+        triples.add("<" + orgUnitUri + "> <" + CERIFPrefix + "has_URI> \"" + orgUnitUri + "\"^^<http://www.w3.org/2001/XMLSchema#string>. \n");
         return triples;
     }
 
@@ -151,7 +167,7 @@ public class ProvInfoGeneratorService {
     }
 
     public String createProvTriplesInsertQuery(String dstGraph) throws IOException, ParseException {
-        Set<String> triples = orgTriples();
+        List<String> triples = orgTriples();
         triples.addAll(personTriples());
         triples.addAll(generateTriples());
         StringBuilder query = new StringBuilder();

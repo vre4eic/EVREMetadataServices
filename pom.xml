@@ -36,18 +36,14 @@
             <version>2.23.1</version>
         </dependency>
         <dependency>
-            <!--<groupId>${project.groupId}</groupId>-->
             <groupId>forth.ics</groupId>
             <artifactId>BlazegraphOps</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <!--<version>${project.version}</version>-->
         </dependency>
         <dependency>
-            <!--<groupId>${project.groupId}</groupId>-->
             <groupId>forth.ics</groupId>
             <artifactId>VirtuosoOpsImpl</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <!--<version>${project.version}</version>-->
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -58,18 +54,7 @@
         <dependency>
             <groupId>eu.vre4eic.evre</groupId>
             <artifactId>NodeService</artifactId>
-            <!--<version>0.0.1-SNAPSHOT</version>-->
             <version>0.0.3-SNAPSHOT</version>
-<!--            <exclusions>
-                <exclusion>
-                    <groupId>forth.ics</groupId>
-                    <artifactId>BlazegraphOps</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>eu.vre4eic.evre</groupId>
-                    <artifactId>BlazegraphOps</artifactId>
-                </exclusion>
-            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>javax.jms</groupId>
@@ -133,7 +118,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.7.4</version>
+            <version>2.7.9.5</version>
         </dependency>
 
         <dependency>
